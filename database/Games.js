@@ -20,6 +20,10 @@ const gameSchema = mongoose.Schema({
   date: { type: Date, default: Date.now }
 });
 
+const Players = mongoose.Schema({
+  _id: Number,
+  Matches: [ Number ]
+})
 
 const Game = mongoose.model('Game', gameSchema);
 
@@ -28,30 +32,15 @@ const removeOne = async (serverId) => {
   }
 
 
-const save = async ({server_steam_id, match_id, players, game_time, building_state, radiant_score, dire_score, radiant_lead, last_update_time, average_mmr, game_mode, sort_score, delay, spectators}) => {
-  await Game.deleteOne({server_steam_id}, function(err) {
-    console.log('collection removed')
-  })
-  return await Game.create({
-    server_steam_id,
-    match_id,
-    players,
-    game_time,
-    building_state,
-    radiant_score,
-    dire_score,
-    radiant_lead,
-    last_update_time,
-    average_mmr,
-    game_mode,
-    sort_score,
-    delay,
-    spectators
-  })
-  .catch(err => {
-    console.log('duplicate')
-  })
-}
+const save = async data => {
+  const { match_id } = data;
+
+  return Game.findOneAndUpdate({ match_id }, data, {
+    upsert: true,
+    new: true,
+    setDefaultsOnInsert: true,
+  });
+};
 
 const fetch = async (maxRecords = 25) => {
   return await Game.find().sort('-date').exec();
