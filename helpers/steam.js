@@ -7,4 +7,10 @@ const getGames = async () => {
   .catch(err => console.log(err, 'error at getGames function'));
 }
 
+const getLiveStats = async (serverId) => {
+  return await rp(`https://api.steampowered.com/IDOTA2MatchStats_570/GetRealtimeStats/v1?key=${KEY}&server_steam_id=${serverId}`)
+  .catch(err => console.log(err, 'error at getLiveStats function'));
+}
+
 module.exports.getGames = getGames;
+module.exports.getLiveStats = getLiveStats;
