@@ -20,7 +20,7 @@ h6 {
 }
 
 .proPlayer {
-  color: green;
+  color: purple;
   font-weight: 700;
 }
 
@@ -36,10 +36,7 @@ h6 {
   text-overflow: ellipsis;
 }
 
-.container {
-  display: flex;
-  border: 5px solid lightblue;
-}
+
 .GameList {
   display: flex;
   flex-direction: row;
@@ -51,14 +48,106 @@ h6 {
   margin: auto;
 }
 
-.feed {
-  flex-direction: row;
-  font-size: 18px;
-  flex-wrap: wrap;
-  border: black dotted;
-  margin: 5px;
-  padding: 10px;
-  background-color: #1C232E;
+/* .feed {
+  display: block;
+  /* flex-direction: row; */
+  /* font-size: 18px; */
+  /* flex-wrap: wrap; */
+  /* border: black dotted; */
+  /* margin: 5px; */
+  /* padding: 10px; */
+  /* background-color: #1C232E; */
   /* color: #255,255,255,0.6; */
-  color: rgb(145, 174, 174)
+  /* color: rgb(145, 174, 174) */
+/* } */
+
+
+.liveMatch:nth-child(-n+5) {
+  display: flex;
+  width: auto;
+  color: green;
+  justify-content: flex-start;
 }
+.liveMatch:nth-last-child(-n+5) {
+  display: flex;
+  width: auto;
+  color: red;
+  justify-content: flex-end;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.radiantPortrait {
+  display: block;
+  /* float: left; */
+  width: 100px;
+  height: auto;
+}
+.direPortrait {
+  display: block;
+  /* float: right; */
+  width: 100px;
+  height: auto;
+}
+
+.container {
+  display: flex;
+  border: 5px solid lightblue;
+}
+
+.feedContainer {
+  padding: 30px;
+  border: solid black 2px;
+}
+
+.feed {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.grid1 { grid-area: 1 / 1 / 2 / 2; }
+
+.grid2 { grid-area: 1 / 2 / 2 / 3; }
+
+.grid3 { grid-area: 2 / 1 / 3 / 2; }
+
+.grid4 { grid-area: 2 / 2 / 3 / 3; }
+
+.grid5 { grid-area: 3 / 1 / 4 / 2; }
+
+.grid6 { grid-area: 3 / 2 / 4 / 3; }
+
+.grid7 { grid-area: 4 / 1 / 5 / 2; }
+
+.grid8 { grid-area: 4 / 2 / 5 / 3; }
+
+.grid9 { grid-area: 5 / 1 / 6 / 2; }
+
+.grid10 { grid-area: 5 / 2 / 6 / 3; }
+
+
+/* #grid1 { grid-area: 1 / 1 / 2 / 2; }
+#grid2 { grid-area: 2 / 1 / 3 / 2; }
+#grid3 { grid-area: 3 / 1 / 4 / 2; }
+#grid4 { grid-area: 4 / 1 / 5 / 2; }
+#grid5 { grid-area: 5 / 1 / 6 / 2; }
+#grid6 { grid-area: 1 / 2 / 2 / 3; }
+#grid7 { grid-area: 2 / 2 / 3 / 3; }
+#grid8 { grid-area: 3 / 2 / 4 / 3; }
+#grid9 { grid-area: 4 / 2 / 5 / 3; }
+#grid10 { grid-area: 5 / 2 / 6 / 3; } */
+
+/* div[name="radiant"] {
+  display: flex;
+  justify-content: flex-start;
+  color: green;
+}
+
+div[name="dire"] {
+  color: red;
+} */

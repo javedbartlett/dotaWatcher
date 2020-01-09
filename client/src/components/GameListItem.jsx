@@ -1,5 +1,5 @@
 import React from 'react';
-import heroesList from '../heroList.js';
+import { heroesList, localizedList } from '../heroList.js';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 
@@ -15,11 +15,41 @@ const colors = [
   'Green',
   'Brown',
 ];
+// `http://cdn.dota2.com/apps/dota2/images/heroes/${heroesList[data.hero_id].split(' ').join('_').toLowerCase()}_full.png`
+// {heroesList[data.hero_id].split(' ').join('_').toLowerCase()}
 
+// localizedList[data.hero_id].replace("npc_dota_hero_", "")
 const GameListItem = props => (
+  <div className="feedContainer">
   <div className="feed">
     {/* {console.log(props.data.game_time)} */}
-    <ul>
+    {props.data.players.map((data, i) => (
+      <div key={i} className="liveMatch">
+        <div className="liveMatchInfo"></div>
+        <div name={i < 5 ? 'radiant' : 'dire'} className={`grid${i+1}`}>
+          <div className={i < 5 ? 'radiantPortrait' : 'direPortrait'} >
+            <img src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[data.hero_id].replace("npc_dota_hero_", "")}_full.png`}></img>
+            </div>
+          <div className="liveMatchPlayerName">
+          {props.players[data.account_id] ?
+          (<div className="proPlayer"> {props.players[data.account_id]}</div>)
+          : (data.name.substring(0, 5))} <div>{heroesList[data.hero_id]} </div>
+            </div>
+          <div className="liveMatchPlayerScore">score</div>
+          <div className="liveMatchPlayerLevel">{data.level}</div>
+
+        </div>
+      </div>
+    ))}
+          <div>{props.data.server_steam_id.toString()}</div>
+  </div>
+  </div>
+);
+
+export default GameListItem;
+
+
+{/* <ul>
       <li className="feed-list-item">
         <div>
           <span className="data">
@@ -44,7 +74,7 @@ const GameListItem = props => (
                   {props.players[data.account_id]}
                 </span>
               ) : (
-                data.name.substring(0,5)
+                data.name.substring(0, 5)
               )}
               ,<span> </span>
               {heroesList[data.hero_id]
@@ -52,7 +82,13 @@ const GameListItem = props => (
                 : 'Picking Hero'}{' '}
               <ul>
                 <li>
-              Level {data.level} <div>{data.net_worth > 1000 ? (data.net_worth/1000).toFixed(1) + "K" : data.net_worth + "g"} - {data.kill_count}/{data.death_count}/{data.assists_count}</div>
+                  Level {data.level}{' '}
+                  <div>
+                    {data.net_worth > 1000
+                      ? (data.net_worth / 1000).toFixed(1) + 'K'
+                      : data.net_worth + 'g'}{' '}
+                    - {data.kill_count}/{data.death_count}/{data.assists_count}
+                  </div>
                 </li>
               </ul>
             </li>
@@ -72,8 +108,4 @@ const GameListItem = props => (
           </div>
         </div>
       </li>
-    </ul>
-  </div>
-);
-
-export default GameListItem;
+    </ul> */}
