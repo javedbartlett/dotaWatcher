@@ -16,7 +16,10 @@ class App extends React.Component {
   async loadGames() {
     const response = await fetch("/api/games");
     const myJson = await response.json();
-    this.setState({games: myJson});
+    const sortedJson =
+    myJson.sort((a, b) => (a.spectators > b.spectators) ? -1 : 1)
+    this.setState({games: sortedJson});
+    console.log(this.state.games);
   }
 
   async loadPlayers() {
@@ -33,8 +36,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Dota Player Tracker</h1>
+        <h1 className="title">Dota Player Tracker <h6>by Jav</h6> </h1>
+        <div className="container">
         <GameList players={this.state.players} data={this.state.games} />
+        </div>
       </div>
     );
   }

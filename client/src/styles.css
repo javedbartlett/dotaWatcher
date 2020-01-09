@@ -2,10 +2,25 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
+  background: #1C232E;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h6 {
+  display: inline;
+}
+.title {
+  background-color: #ED3B1D;
+  padding: 8px;
+  display: inline-block;
+  color: white;
+  margin: auto;
 }
 
 .proPlayer {
-  color: purple;
+  color: green;
   font-weight: 700;
 }
 
@@ -13,6 +28,37 @@ body {
   font-weight: 700;
 }
 
+
 .data {
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container {
+  display: flex;
+  border: 5px solid lightblue;
+}
+.GameList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: rgb(50, 62, 82);
+  border: 3px solid #f1f1f1;
+  /* width: 380px; */
+  /* height: 390px; */
+  margin: auto;
+}
+
+.feed {
+  flex-direction: row;
+  font-size: 18px;
+  flex-wrap: wrap;
+  border: black dotted;
+  margin: 5px;
+  padding: 10px;
+  background-color: #1C232E;
+  /* color: #255,255,255,0.6; */
+  color: rgb(145, 174, 174)
 }

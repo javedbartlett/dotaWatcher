@@ -1,7 +1,7 @@
 import React from 'react';
 import heroesList from '../heroList.js';
 import moment from 'moment';
-import momentDurationFormatSetup from "moment-duration-format";
+import momentDurationFormatSetup from 'moment-duration-format';
 
 const colors = [
   'Blue',
@@ -11,53 +11,66 @@ const colors = [
   'Orange',
   'Pink',
   'Grey',
-  'Light Blue',
-  'Dark Green',
+  'Lt Blue',
+  'Green',
   'Brown',
 ];
 
 const GameListItem = props => (
   <div className="feed">
+    {/* {console.log(props.data.game_time)} */}
     <ul>
       <li className="feed-list-item">
-        Players:
-        <ul className="players"> {props.data.players.map((data, i) =>(
-          <li className="playerName" key={i}>
-            {i == 5 ?
-            <div className="vs">VS</div>
-            : ""}
-            {props.players[data.account_id] ?
-            <span className="proPlayer"> {props.players[data.account_id]} </span>
-            :
-            colors[i]},
-            <span> </span>
-            {heroesList[data.hero_id] ? heroesList[data.hero_id] : "Picking Hero"}</li>
-        ))}
-          </ul>
-        <div className="steamId"
-        // onClick={props.blogClickHandler}
+        <div>
+          <span className="data">
+            {' '}
+            {!props.data.average_mmr
+              ? 'Tournament Game'
+              : `Avg MMR:  ${props.data.average_mmr}`}
+          </span>
+        </div>
+        <span className="data">
+          {props.data.radiant_score} - {props.data.dire_score} /{' '}
+          {moment.duration(props.data.game_time, 'seconds').format('mm:ss')}
+        </span>
+        <ul className="players">
+          {' '}
+          {props.data.players.map((data, i) => (
+            <li className="playerName" key={i}>
+              {i == 5 ? <div className="vs">VS</div> : ''}
+              {props.players[data.account_id] ? (
+                <span className="proPlayer">
+                  {' '}
+                  {props.players[data.account_id]}
+                </span>
+              ) : (
+                data.name.substring(0,5)
+              )}
+              ,<span> </span>
+              {heroesList[data.hero_id]
+                ? heroesList[data.hero_id]
+                : 'Picking Hero'}{' '}
+              <ul>
+                <li>
+              Level {data.level} <div>{data.net_worth > 1000 ? (data.net_worth/1000).toFixed(1) + "K" : data.net_worth + "g"} - {data.kill_count}/{data.death_count}/{data.assists_count}</div>
+                </li>
+              </ul>
+            </li>
+          ))}
+        </ul>
+        <div
+          className="steamId"
+          // onClick={props.blogClickHandler}
         >
           <div className="console">
-        Console: <span className="data"> watch_server {props.data.server_steam_id}</span>
-        </div>
-        <div className="mmr">
-          MMR Average: <span className="data">{props.data.average_mmr}</span>
-        </div>
-        <div className="rad-score">
-          Radiant: <span className="data">{props.data.radiant_score} Kills </span>
-        </div>
-        <div className="dire-score">
-          Dire: <span className="data">{props.data.dire_score} Kills </span>
-        </div>
-        <div className="spectators">
-          Spectators: <span className="data">{props.data.spectators}</span>
-        </div>
-        <div className="time">
-          Time: <span className="data">{moment.duration(props.data.game_time, "seconds").format("mm:ss")
-          }</span>
-        </div>
-        <div>-----------------------------------------------------------------------------</div>
+            <span className="data">
+              watch_server {props.data.server_steam_id.toString()}
+            </span>
           </div>
+          <div className="spectators">
+            Spectators: <span className="data">{props.data.spectators}</span>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
