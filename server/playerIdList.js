@@ -70,7 +70,7 @@ const playerIdList = {
   91369376: "Meracle",
   34505203: "MinD_ContRoL",
   412019774:"Miracle (Smurf 2)",
-  179760194: "Moonmeander (Smurf 2)",
+  179760194: "Moonmeander (2)",
   86811043: "Monkeys-forever",
   84429681:"Moo",
   113457795: "Moon",
@@ -107,6 +107,7 @@ const playerIdList = {
   86700461: "W33ha",
   89117038: "Yapzor",
   108452107:"Yawar",
+  94296097: "xNova",
   73562326: "Zai",
   50828662: "Zfreek",
 

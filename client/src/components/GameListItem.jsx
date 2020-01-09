@@ -21,28 +21,50 @@ const colors = [
 // localizedList[data.hero_id].replace("npc_dota_hero_", "")
 const GameListItem = props => (
   <div className="feedContainer">
-  <div className="feed">
-    {/* {console.log(props.data.game_time)} */}
-    {props.data.players.map((data, i) => (
-      <div key={i} className="liveMatch">
-        <div className="liveMatchInfo"></div>
-        <div name={i < 5 ? 'radiant' : 'dire'} className={`grid${i+1}`}>
-          <div className={i < 5 ? 'radiantPortrait' : 'direPortrait'} >
-            <img src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[data.hero_id].replace("npc_dota_hero_", "")}_full.png`}></img>
+    <div className="feed">
+      {/* {console.log(props.data.game_time)} */}
+      {props.data.players.map((data, i) => (
+        <div key={i} className="liveMatch" id={`grid${i + 1}`}>
+          <div name={i < 5 ? 'radiant' : 'dire'}>
+            <div className={i < 5 ? 'radiantPortrait' : 'direPortrait'}>
+            {heroesList[data.hero_id]
+                ? <img src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[data.hero_id].replace('npc_dota_hero_', '')}_vert.jpg`}/> : <img src="https://i.imgur.com/gpnPQUK.jpg"/>}
             </div>
-          <div className="liveMatchPlayerName">
-          {props.players[data.account_id] ?
-          (<div className="proPlayer"> {props.players[data.account_id]}</div>)
-          : (data.name.substring(0, 5))} <div>{heroesList[data.hero_id]} </div>
+            <div className="liveMatchPlayerName">
+              {props.players[data.account_id] ? (
+                <div className="proPlayer">
+                  {' '}
+                  {props.players[data.account_id]}
+                </div>
+              ) : (
+                <div className="normalPlayer">{data.name.substring(0, 15)} </div>
+              )}
+              <span className="heroName">
+              {heroesList[data.hero_id]
+                ? heroesList[data.hero_id]
+                : 'Picking Hero'} </span>
+            <div className="liveMatchPlayerScore">
+              {data.kill_count}/{data.death_count}/{data.assists_count}
             </div>
-          <div className="liveMatchPlayerScore">score</div>
-          <div className="liveMatchPlayerLevel">{data.level}</div>
+            <span className="liveMatchPlayerLevel"> Level {data.level}</span>
+            <div>{data.net_worth > 1000
+                      ? (data.net_worth / 1000).toFixed(1) + 'K'
+                      : data.net_worth + 'g'}</div>
 
+            </div>
+          </div>
         </div>
+      ))}
+      <div className="time" id="grid13">
+        {moment.duration(props.data.game_time, 'seconds').format('mm:ss')}
       </div>
-    ))}
-          <div>{props.data.server_steam_id.toString()}</div>
-  </div>
+      <div id="grid16">
+      <div>watch_server</div>
+      <div>{props.data.server_steam_id.toString()}</div>
+      </div>
+            <span id="grid12">Spectators: {props.data.spectators}</span>
+      <span id="grid11">VS</span>
+    </div>
   </div>
 );
 
