@@ -18,7 +18,7 @@ const colors = [
 
 const GameListItem = props => (
   <div className="feed">
-    {/* {console.log(props.data.players[0])} */}
+    {/* {console.log(props.data.game_time)} */}
     <ul>
       <li className="feed-list-item">
         <div>

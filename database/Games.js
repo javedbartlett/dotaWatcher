@@ -55,7 +55,8 @@ const saveMatches = async data => {
     upsert: true,
     new: true,
     setDefaultsOnInsert: true,
-  });
+  })
+  .catch(err => console.log('err with findOneAndUpdate - saveMatches'))
 };
 
 const savePlayers = async data => {
@@ -65,11 +66,13 @@ const savePlayers = async data => {
     upsert: true,
     new: true,
     setDefaultsOnInsert: true,
-  });
+  })
+  .catch(err => console.log('err with findOneAndUpdate - savePlayers'))
 }
 
 const fetch = async (maxRecords = 25) => {
-  return await Game.find().sort('-date').exec();
+  return await Game.find().sort('-date').exec()
+  .catch(err => console.log('err with Game.find - fetch'))
 };
 
 module.exports.saveMatches = saveMatches;
