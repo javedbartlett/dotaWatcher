@@ -20,6 +20,7 @@
     "css-loader": "^3.4.1",
     "express": "^4.17.1",
     "json-bigint": "^0.3.0",
+    "lodash": "^4.17.15",
     "lodash.merge": "^4.6.2",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",

@@ -2,6 +2,7 @@ import React from 'react';
 import heroesList from '../heroList.js';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
+import _ from 'lodash'
 
 const colors = [
   'Blue',
@@ -44,7 +45,7 @@ const GameListItem = props => (
                   {props.players[data.account_id]}
                 </span>
               ) : (
-                data.name.substring(0,5)
+                _.escape(data.name.substring(0,5))
               )}
               ,<span> </span>
               {heroesList[data.hero_id]
