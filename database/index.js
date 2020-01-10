@@ -16,10 +16,10 @@ const db = mongoose.connect(mongoUri, {
 })
 
 mongoose.connection.on("connected", function(){
-  console.log("mongoose database connected with " + mongodbUrl);
+  console.log("mongoose database connected with " + mongoUri);
 });
 mongoose.connection.on("error", function(err){
-  console.log("Unable to connect with " +mongodbUrl + "error are"+ err);
+  console.log("Unable to connect with " +mongoUri + "error are"+ err);
 });
 
 module.exports = db;
