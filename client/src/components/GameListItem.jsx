@@ -29,7 +29,7 @@ const GameListItem = props => (
           <div name={i < 5 ? 'radiant' : 'dire'}>
             <div className={i < 5 ? 'radiantPortrait' : 'direPortrait'}>
             {heroesList[data.hero_id]
-                ? <img src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[data.hero_id].replace('npc_dota_hero_', '')}_vert.jpg`}/> : <img src="https://i.imgur.com/gpnPQUK.jpg"/>}
+                ? <img src={`https://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[data.hero_id].replace('npc_dota_hero_', '')}_vert.jpg`}/> : <img src="https://i.imgur.com/gpnPQUK.jpg"/>}
             </div>
             <div className="liveMatchPlayerName">
               {props.players[data.account_id] ? (
