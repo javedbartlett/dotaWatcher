@@ -42,8 +42,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="title">Dota Player Tracker
-        <span className="subTitle"> by Jav</span> </h1>
+        <h1 className="title">Dota Player Tracker</h1>
         <div className="container">
         <GameList players={this.state.players} data={this.state.games} />
         </div>
