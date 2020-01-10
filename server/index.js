@@ -22,6 +22,8 @@ const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static(__dirname + '/../dist'));
+app.use(favicon(__dirname + '/../dist', 'favicon.ico')))
+
 
 app.get('/api/games', async (req, res) => {
   const games = await fetch();
