@@ -104,11 +104,7 @@ export default GameListItem;
                   {props.players[data.account_id]}
                 </span>
               ) : (
-<<<<<<< HEAD
-                _.escape(data.name.substring(0,5))
-=======
                 data.name.substring(0, 5)
->>>>>>> 35eaf3236fdcc9b8c40a4462707b9fae144f6a06
               )}
               ,<span> </span>
               {heroesList[data.hero_id]
