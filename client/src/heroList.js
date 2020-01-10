@@ -1712,5 +1712,6 @@ const heroes = [
 ]
 
 const heroesList = heroes.map(hero => hero.localized_name)
+const localizedList = heroes.map(hero => hero.name)
 
-export default heroesList;
+export { heroesList, localizedList };

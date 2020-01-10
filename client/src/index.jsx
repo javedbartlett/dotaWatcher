@@ -13,6 +13,16 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.loadGames()
+    this.loadPlayers();
+    this.interval = setInterval(this.loadgames, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   async loadGames() {
     const response = await fetch("/api/games");
     const myJson = await response.json();
@@ -28,15 +38,12 @@ class App extends React.Component {
     this.setState({players: myJson});
   }
 
-  componentDidMount() {
-    this.loadGames();
-    this.loadPlayers();
-  }
 
   render() {
     return (
       <div>
-        <h1 className="title">Dota Player Tracker <h6>by Jav</h6> </h1>
+        <h1 className="title">Dota Player Tracker
+        <span className="subTitle"> by Jav</span> </h1>
         <div className="container">
         <GameList players={this.state.players} data={this.state.games} />
         </div>
