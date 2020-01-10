@@ -1,12 +1,25 @@
 const mongoose = require('mongoose');
-let mongoUri = 'mongodb://javedb:porky123@ds361768.mlab.com:61768/heroku_fqp98kd5'
 
+let mongoUri
+
+if (process.env.MONGODB_URI) {
+  mongoUri = process.env.MONGODB_URI;
+} else {
+  mongoUri = 'mongodb://localhost/matches'
+}
 
 const db = mongoose.connect(mongoUri, {
-  // useUnifiedTopology: true,
-  // useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 })
+
+mongoose.connection.on("connected", function(){
+  console.log("mongoose database connected with " + mongodbUrl);
+});
+mongoose.connection.on("error", function(err){
+  console.log("Unable to connect with " +mongodbUrl + "error are"+ err);
+});
 
 module.exports = db;
