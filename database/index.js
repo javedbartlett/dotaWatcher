@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 
-const mongoUri = 'mongodb://localhost/matches';
+let mongoUri;
+
+if (process.env.PORT) {
+  mongoUri = 'mongodb://heroku_fqp98kd5:porky123@ds361768.mlab.com:61768/heroku_fqp98kd5'
+} else {
+  mongoUri = 'mongodb://localhost/matches'
+}
+
 const db = mongoose.connect(mongoUri, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
