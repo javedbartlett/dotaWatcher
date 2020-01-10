@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const request = require('request');
@@ -6,6 +7,7 @@ const rp = require('request-promise-native');
 const db = require('../database/index.js');
 const JSONbig = require('json-bigint');
 const merge = require('lodash.merge');
+const favicon = require('serve-favicon');
 
 
 const {
@@ -22,6 +24,7 @@ const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static(__dirname + '/../dist'));
+app.use(favicon(path.join(__dirname, '../dist', 'Favicon.ico')));
 
 app.get('/api/games', async (req, res) => {
   const games = await fetch();
