@@ -69,7 +69,7 @@ const GameListItem = props => (
             <div>{!props.data.average_mmr
               ? 'Tournament Game'
               : `Avg MMR:  ${props.data.average_mmr}`}</div>
-              {console.log(props.data.game_state)}
+              {/* {console.log(props.data.game_state)} */}
               </div>
       <span id="grid11">VS</span>
     </div>

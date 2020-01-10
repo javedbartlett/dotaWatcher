@@ -29,7 +29,6 @@ class App extends React.Component {
     const sortedJson =
     myJson.sort((a, b) => (a.spectators > b.spectators) ? -1 : 1)
     this.setState({games: sortedJson});
-    console.log(this.state.games);
   }
 
   async loadPlayers() {
