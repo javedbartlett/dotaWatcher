@@ -6,6 +6,8 @@ const rp = require('request-promise-native');
 const db = require('../database/index.js');
 const JSONbig = require('json-bigint');
 const merge = require('lodash.merge');
+const favicon = require('serve-favicon')
+
 
 
 const {
