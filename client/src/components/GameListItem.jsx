@@ -16,8 +16,6 @@ const colors = [
   'Green',
   'Brown',
 ];
-// `http://cdn.dota2.com/apps/dota2/images/heroes/${heroesList[data.hero_id].split(' ').join('_').toLowerCase()}_full.png`
-// {heroesList[data.hero_id].split(' ').join('_').toLowerCase()}
 
 // localizedList[data.hero_id].replace("npc_dota_hero_", "")
 const GameListItem = props => (
