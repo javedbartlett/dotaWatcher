@@ -4,8 +4,10 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "nodemon ./server/index.js",
-    "build": "webpack --watch --mode=\"development\"",
+    "start": "node ./server/index.js",
+    "start-dev": "nodemon ./server/index.js",
+    "build": "webpack -d",
+    "build-dev": "webpack --watch --mode=\"development\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
