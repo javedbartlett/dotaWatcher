@@ -56,7 +56,7 @@ app.get('/api/update', async (req, res) => {
           const serverId = game.server_steam_id.toString();
           const liveStats = await getLiveStats(serverId);
           const liveStatsJson = JSONbig.parse(liveStats);
-          if (liveStats) {
+          if (liveStatsJson.teams && game.players) {
           for (let i = 0; i <= 10; i++) {
             if (i < 5) {
               await merge(game.players[i], liveStatsJson.teams[0].players[i]);
