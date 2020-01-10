@@ -22,15 +22,17 @@ body {
 }
 
 .proPlayer {
-  color: purple;
-  font-weight: 800;
+  color: whitesmoke;
+  font-weight: 700;
 }
+
+
 
 .GameList {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: rgb(50, 62, 82);
+  background-color: rgb(57, 71, 96);
   border: 3px solid #f1f1f1;
   /* width: 380px; */
   /* height: 390px; */
@@ -79,14 +81,16 @@ img {
   display: inline-block;
   /* float: right; */
   width: 100px;
-  height: auto;
+  height: 115.73px;
+
 }
 
 .direPortrait img {
   display: inline-block;
   float: right;
   width: 100px;
-  height: auto;
+  height: 115.73px;
+
 }
 
 .container {
@@ -95,7 +99,7 @@ img {
 }
 
 .feedContainer {
-  padding: 30px;
+  padding: 7px;
 }
 
 .feed {
@@ -136,7 +140,7 @@ img {
   }
   #grid11 {
     grid-area: 2 / 2 / 7 / 3;
-    margin-top: 250%;
+    margin-top: 220%;
     margin-left: 20%;
     font-weight: 700;
     font-size: 30px;
@@ -145,7 +149,7 @@ img {
   #grid12 {
     grid-area: 1 / 1 / 2 / 2;
     justify-content: center;
-    color: rgb(0, 0, 0);
+    color: #658D8C;
     margin-top: 90px;
     padding-left: 20px;
     font-weight: 500;
@@ -211,3 +215,14 @@ div[name="dire"] .liveMatchPlayerName {
 /* div[name="dire"] {
   color: red;
 } */
+
+.time {
+  font-size: 30px;
+  color: rgb(119, 159, 158);
+  text-align: center;
+
+}
+.scoreboard {
+  font-size: 20px;
+  text-align: center;
+}

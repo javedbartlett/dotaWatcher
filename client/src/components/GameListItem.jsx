@@ -37,7 +37,7 @@ const GameListItem = props => (
                   {props.players[data.account_id]}
                 </div>
               ) : (
-                <div className="normalPlayer">{data.name.substring(0, 15)} </div>
+                <div className="normalPlayer">{data.name.substring(0, 16)} </div>
               )}
               <span className="heroName">
               {heroesList[data.hero_id]
@@ -49,7 +49,7 @@ const GameListItem = props => (
             <span className="liveMatchPlayerLevel"> Level {data.level}</span>
             <div>{data.net_worth > 1000
                       ? (data.net_worth / 1000).toFixed(1) + 'K'
-                      : data.net_worth + 'g'}</div>
+                      : data.net_worth + 'g'} - CS {data.lh_count}/{data.denies_count}</div>
 
             </div>
           </div>
@@ -57,12 +57,19 @@ const GameListItem = props => (
       ))}
       <div className="time" id="grid13">
         {moment.duration(props.data.game_time, 'seconds').format('mm:ss')}
+        <div className="scoreboard">{props.data.radiant_score}/{props.data.dire_score}</div>
       </div>
       <div id="grid16">
       <div>watch_server</div>
       <div>{props.data.server_steam_id.toString()}</div>
       </div>
-            <span id="grid12">Spectators: {props.data.spectators}</span>
+            <div id="grid12">
+              <div>Spectators: {props.data.spectators}</div>
+            <div>{!props.data.average_mmr
+              ? 'Tournament Game'
+              : `Avg MMR:  ${props.data.average_mmr}`}</div>
+              {console.log(props.data.game_state)}
+              </div>
       <span id="grid11">VS</span>
     </div>
   </div>

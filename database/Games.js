@@ -7,6 +7,7 @@ const gameSchema = mongoose.Schema({
   match_id: { type: Number, unique: true },
   players: [],
   game_time: Number,
+  game_state: Number,
   building_state: Number,
   radiant_score: Number,
   dire_score: Number,
