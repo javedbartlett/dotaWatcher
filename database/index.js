@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
+let mongoUri = 'mongodb://javedb:porky123@ds361768.mlab.com:61768/heroku_fqp98kd5'
 
-let mongoUri;
-
-if (process.env.PORT) {
-  mongoUri = 'mongodb://heroku_fqp98kd5:porky123@ds361768.mlab.com:61768/heroku_fqp98kd5'
-} else {
-  mongoUri = 'mongodb://localhost/matches'
-}
 
 const db = mongoose.connect(mongoUri, {
   useUnifiedTopology: true,
