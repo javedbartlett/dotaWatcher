@@ -2,7 +2,7 @@
   "name": "dota",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "index.js",
   "scripts": {
     "start": "node ./server/index.js",
     "start-dev": "nodemon ./server/index.js",
