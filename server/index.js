@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const request = require('request');
@@ -24,7 +25,8 @@ const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static(__dirname + '/../dist'));
-app.use(favicon(__dirname + '/../dist', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, '../dist', 'Favicon.ico')))
+
 
 
 app.get('/api/games', async (req, res) => {
