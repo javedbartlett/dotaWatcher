@@ -104,8 +104,8 @@ app.get('/api/update', async (req, res) => {
 const update = async () => {
   console.log('updating')
   // await removeAll()
-  await rp(`http://localhost:${process.env.PORT}/api/update`)
-  .catch(err => console.log('error from rp http://localhost:3222/api/update'));
+  await rp(`https://localhost:${process.env.PORT}/api/update`)
+  .catch(err => console.log('error from rp /api/update'));
 }
 setInterval(removeAll, 300000);
 setInterval(update, 10000);
