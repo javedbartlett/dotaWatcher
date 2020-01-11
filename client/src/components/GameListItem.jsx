@@ -18,32 +18,34 @@ const colors = [
   'Brown',
 ];
 
-function time2TimeAgo(ts) {
-  // This function computes the delta between the
-  // provided timestamp and the current time, then test
-  // the delta for predefined ranges.
+function timeSince(timeStamp) {
+  timeStamp = new Date(timeStamp)
+  var now = new Date(),
+    secondsPast = (now.getTime() - timeStamp) / 1000;
 
-  var d=new Date();  // Gets the current time
-  var nowTs = Math.floor(d.getTime()/1000); // getTime() returns milliseconds, and we need seconds, hence the Math.floor and division by 1000
-  var seconds = nowTs-ts;
-
-  // more that two days
-  if (seconds > 2*24*3600) {
-     return "a few days ago";
+  if (secondsPast <= 1) {
+     'now';
   }
-  // a day
-  if (seconds > 24*3600) {
-     return "yesterday";
+  if (secondsPast < 60) {
+    return parseInt(secondsPast) + ' seconds ago';
   }
-
-  if (seconds > 3600) {
-     return "a few hours ago";
+  if (secondsPast <= 61) {
+    return parseInt(secondsPast / 60) + ' minute and ' + parseInt(secondsPast % 60) + ' seconds ago';
   }
-  if (seconds > 1800) {
-     return "Half an hour ago";
+  if (secondsPast < 120) {
+    return parseInt(secondsPast / 60) + ' minute and ' + parseInt(secondsPast % 60) + ' seconds ago';
   }
-  if (seconds > 60) {
-     return Math.floor(seconds/60) + " minutes ago";
+  if (secondsPast < 3600) {
+    return parseInt(secondsPast / 60) + ' minutes ago';
+  }
+  if (secondsPast <= 86400) {
+    return parseInt(secondsPast / 3600) + 'h';
+  }
+  if (secondsPast > 86400) {
+    day = timeStamp.getDate();
+    month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ", "");
+    year = timeStamp.getFullYear() == now.getFullYear() ? "" : " " + timeStamp.getFullYear();
+    return day + " " + month + year;
   }
 }
 
@@ -93,7 +95,7 @@ const GameListItem = props => (
       <div>{props.data.server_steam_id.toString()}</div>
       </div>
             <div id="grid12">
-            <div id="lastUpdate">Last Update: {moment(props.data.updatedAt).format('LT')} </div>
+            <div id="lastUpdate">Last Update: {timeSince(props.data.updatedAt)} </div>
               <div>Spectators: {props.data.spectators}</div>
             <div>{!props.data.average_mmr
               ? 'Tournament Game'

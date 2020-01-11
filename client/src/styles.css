@@ -113,6 +113,7 @@ img {
   grid-row-gap: 0px;
   background-color: #1C232E;
   grid-template-columns: min-content auto;
+  /* grid-template-columns: 1fr 1fr 1fr; */
   }
 
 
@@ -239,6 +240,5 @@ div[name="dire"] .liveMatchPlayerName {
 }
 
 #lastUpdate {
-  white-space: nowrap;
   vertical-align: top;
 }
