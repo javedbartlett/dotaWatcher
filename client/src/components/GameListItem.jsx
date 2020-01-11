@@ -63,10 +63,12 @@ const GameListItem = props => (
       <div>{props.data.server_steam_id.toString()}</div>
       </div>
             <div id="grid12">
+            <div id="lastUpdate">Last Update: {moment(props.data.updatedAt).startOf('hour').fromNow()} </div>
               <div>Spectators: {props.data.spectators}</div>
             <div>{!props.data.average_mmr
               ? 'Tournament Game'
               : `Avg MMR:  ${props.data.average_mmr}`}</div>
+
               {/* {console.log(props.data.game_state)} */}
               </div>
       <span id="grid11">VS</span>

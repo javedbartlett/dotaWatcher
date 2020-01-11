@@ -18,21 +18,10 @@ const gameSchema = mongoose.Schema({
   sort_score: Number,
   delay: Number,
   spectators: Number,
-  date: { type: Date, default: Date.now }
-});
 
-// get original response
-  // iterate through original response
-    // for each iteration
-      //do an API call using server_id
-        // if response
-          // iterate through players
-            // merge players array in new response to players array in old
-
-
-
-// New API call to steam
-  // merge response with old data
+}
+,{timestamps: true }
+);
 
 const playerSchema = mongoose.Schema({
   player_id: Number,
@@ -46,7 +35,7 @@ const removeAll = async () => {
   await Game.remove({}, err => console.log('Game DB wiped'))
   }
 const removeOne = async (serverId) => {
-  await Game.remove(serverId, err => console.log('Game DB wiped'))
+  await Game.deleteOne(serverId, err => console.log('RemoveOne worked!!!'))
   }
 
 const saveMatches = async data => {

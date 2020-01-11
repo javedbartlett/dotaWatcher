@@ -83,6 +83,7 @@ app.get('/api/update', async (req, res) => {
             sort_score: game.sort_score,
             delay: game.delay,
             spectators: game.spectators,
+
           });
         } else {
           removeOne({"server_steam_id": serverId})
