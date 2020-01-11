@@ -56,7 +56,7 @@ const GameListItem = props => (
       ))}
       <div className="time" id="grid13">
         {moment.duration(props.data.game_time, 'seconds').format('mm:ss')}
-        <div className="scoreboard">{props.data.radiant_score}/{props.data.dire_score}</div>
+        <div className="scoreboard">{props.data.radiant_score} -{props.data.dire_score}</div>
       </div>
       <div id="grid16">
       <div>watch_server</div>
