@@ -2,7 +2,8 @@ import React from 'react';
 import { heroesList, localizedList } from '../heroList.js';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
-import _ from 'lodash'
+import _ from 'lodash';
+import escape from 'lodash.escape';
 
 const colors = [
   'Blue',
@@ -65,7 +66,7 @@ const GameListItem = props => (
                   {props.players[data.account_id]}
                 </div>
               ) : (
-                <div className="normalPlayer">{data.name.substring(0, 16)} </div>
+                <div className="normalPlayer">{escape(data.name).substring(0, 14)} </div>
               )}
               <span className="heroName">
               {heroesList[data.hero_id]
@@ -133,7 +134,7 @@ export default GameListItem;
                   {props.players[data.account_id]}
                 </span>
               ) : (
-                data.name.substring(0, 5)
+                data.name.substring(0, 15)
               )}
               ,<span> </span>
               {heroesList[data.hero_id]

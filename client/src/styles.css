@@ -78,12 +78,14 @@ img {
   /* float: left; */
   width: 100px;
   height: auto;
+  z-index: 10;
 }
 .direPortrait {
   display: inline-block;
   /* float: right; */
   width: 100px;
   height: 115.73px;
+  z-index: 10;
 
 }
 
