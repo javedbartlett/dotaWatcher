@@ -33,6 +33,7 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   background-color: rgb(57, 71, 96);
+  margin: auto;
   /* border: 3px solid #f1f1f1; */
   /* width: 380px; */
   /* height: 390px; */
@@ -228,7 +229,9 @@ div[name="dire"] .liveMatchPlayerName {
 }
 
 .notice {
+  display: inline-block;
   color: rgb(125, 138, 138);
   padding-left: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 30  px;
+  margin: auto;
 }
