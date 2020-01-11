@@ -11,12 +11,13 @@ class App extends React.Component {
       games: [],
       players:{},
     };
+    this.loadGames = this.loadGames.bind(this);
   }
 
   componentDidMount() {
     this.loadGames()
     this.loadPlayers();
-    this.interval = setInterval(this.loadgames, 5000);
+    this.interval = setInterval(() => { this.loadGames() }, 5000);
   }
 
   componentWillUnmount() {
