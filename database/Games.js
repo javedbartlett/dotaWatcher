@@ -62,7 +62,7 @@ const savePlayers = async data => {
 
 const fetch = async (maxRecords = 25) => {
   var d = new Date();
-  d.setMinutes(d.getMinutes()-5);
+  d.setMinutes(d.getMinutes()-2);
   return await Game.find({updatedAt: {$gte: d}}).sort('-date').exec()
   .catch(err => console.log('err with Game.find - fetch'))
 };
