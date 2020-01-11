@@ -226,3 +226,9 @@ div[name="dire"] .liveMatchPlayerName {
   font-size: 20px;
   text-align: center;
 }
+
+.notice {
+  color: rgb(125, 138, 138);
+  padding-left: 10px;
+  padding-bottom: 30px;
+}

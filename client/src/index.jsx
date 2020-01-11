@@ -42,6 +42,7 @@ class App extends React.Component {
     return (
       <div>
         <h1 className="title">Dota Player Tracker</h1>
+        <h5 className="notice">*Games auto-update (no need to refresh page)</h5>
         <div className="container">
         <GameList players={this.state.players} data={this.state.games} />
         </div>
