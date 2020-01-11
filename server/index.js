@@ -102,7 +102,7 @@ const update = async () => {
   await rp(`http://localhost:${process.env.PORT||'3222'}/api/update`)
   .catch(err => console.log('error from rp /api/update'));
 }
-setInterval(removeAll, 600000);
+// setInterval(removeAll, 600000);
 setInterval(update, 10000);
 const port = process.env.PORT || 3222;
 app.listen(port, () => console.log(`listening on port ${port}`));
