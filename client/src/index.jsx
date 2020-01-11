@@ -16,7 +16,7 @@ class App extends React.Component {
   componentDidMount() {
     this.loadGames()
     this.loadPlayers();
-    this.interval = setInterval(this.loadgames, 5000);
+    this.interval = setInterval(() => { this.loadGames() }, 2000);
   }
 
   componentWillUnmount() {
