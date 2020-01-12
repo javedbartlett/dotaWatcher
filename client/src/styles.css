@@ -24,6 +24,11 @@ body {
 .proPlayer {
   color: whitesmoke;
   font-weight: 700;
+  width: min-content;
+}
+
+.proPlayer:hover {
+  cursor: pointer;
 }
 
 .GameList {
