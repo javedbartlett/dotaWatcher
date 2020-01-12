@@ -10,10 +10,10 @@ function timeSince(timeStamp) {
     return parseInt(secondsPast) + ' seconds ago';
   }
   if (secondsPast <= 61) {
-    return parseInt(secondsPast / 60) + ' minute and ' + parseInt(secondsPast % 60) + ' seconds ago';
+    return parseInt(secondsPast / 60) + ' minute and ' + parseInt(secondsPast % 60) + ' second ago - game has probably ended';
   }
   if (secondsPast < 120) {
-    return parseInt(secondsPast / 60) + ' minute and ' + parseInt(secondsPast % 60) + ' seconds ago';
+    return parseInt(secondsPast / 60) + ' minute and ' + parseInt(secondsPast % 60) + ' seconds ago - game has probably ended';
   }
   if (secondsPast < 3600) {
     return parseInt(secondsPast / 60) + ' minutes ago';
