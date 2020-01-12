@@ -62,7 +62,7 @@ const playerIdList = {
   84853828: "Kingrd",
   184950344: "Kuku",
   82262664: "Kuroky",
-  59463394: "Leostyle",
+  59463394: "Leostyle <3",
   12231202: "Limmp",
   117311875: "Luki (Pango Spammer)",
   95430068: "Madara (Peru)",
