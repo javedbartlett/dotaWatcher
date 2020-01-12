@@ -95,7 +95,6 @@ const GameListItem = props => (
       <div>{props.data.server_steam_id.toString()}</div>
       </div>
             <div id="grid12">
-            <div id="lastUpdate">Last Update: {timeSince(props.data.updatedAt)} </div>
               <div>Spectators: {props.data.spectators}</div>
             <div>{!props.data.average_mmr
               ? 'Tournament Game'
@@ -104,6 +103,7 @@ const GameListItem = props => (
               {/* {console.log(props.data.game_state)} */}
               </div>
       <span id="grid11">VS</span>
+      <span id="grid15">Last Update: {timeSince(props.data.updatedAt)} </span>
     </div>
   </div>
 );
