@@ -2,6 +2,7 @@ import React from 'react';
 import GameListItem from './GameListItem.jsx'
 
 const GameList = props => (
+  <div className="container">
   <div className="GameList">
     {props.data.map((data, i) => (
       <GameListItem
@@ -11,6 +12,7 @@ const GameList = props => (
       players={props.players}
       />
     ))}
+  </div>
   </div>
 );
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GameList from './components/GameList';
+import Header from './components/Header';
 import "./styles.css";
 import "@babel/polyfill";
 
@@ -41,11 +42,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="title">Dota Player Tracker</h1>
-        <h5 className="notice">*Games auto-update (no need to refresh page)</h5>
-        <div className="container">
+        <Header/>
         <GameList players={this.state.players} data={this.state.games} />
-        </div>
       </div>
     );
   }
