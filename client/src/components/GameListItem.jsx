@@ -4,6 +4,12 @@ import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 import _ from 'lodash';
 import escape from 'lodash.escape';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const colors = [
   'Blue',
@@ -63,12 +69,12 @@ const GameListItem = props => (
             </div>
             <div className="liveMatchPlayerName">
               {props.players[data.account_id] ? (
-                <div className="proPlayer">
+                <div className="proPlayer" id={data.accountid}>
                   {' '}
                   {props.players[data.account_id]}
                 </div>
               ) : (
-                <div className="normalPlayer">{escape(data.name).substring(0, 14)} </div>
+                <div className="normalPlayer" id={data.accountid}>{escape(data.name).substring(0, 14)} </div>
               )}
               <span className="heroName">
               {heroesList[data.hero_id]
