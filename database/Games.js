@@ -97,8 +97,6 @@ const fetchHeroHistory = async (heroId) => {
   return games.reverse();
 }
 
-fetchHeroHistory(42)
-
 module.exports.saveMatches = saveMatches;
 module.exports.savePlayers = savePlayers;
 module.exports.fetch = fetch;
