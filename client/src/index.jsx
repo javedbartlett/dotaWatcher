@@ -54,7 +54,7 @@ const Player = (props) => {
           <h1 className="historyHeader">{props.players[id]}</h1>
           </div>
           <div className="heroImageContainer">
-            <img src={`${player.image}`}/>
+            {/* <img src={`${player.image}`}/> */}
           </div>
           <div className="siteLink" >
             <a href={`https://www.dotabuff.com/players/${id}`}>Dotabuff</a><span> • </span>
