@@ -36,11 +36,14 @@ app.get('/api/games', async (req, res) => {
 app.get('/api/playerImage/:id', async (req, res) => {
   const id = JSON.parse(req.params.id)
   const playerName = playerIdList[id]
-  const resp = await axios.get(`https://www.dotabuff.com/esports/players/${id}`)
-  .catch(err => console.log('err=========>>>>>>>>', err))
-  const $ = cheerio.load(resp.data)
-  const image = $('.img-player').attr('src')
-  res.send(image);
+await axios.get(`https://www.dotabuff.com/esports/players/${id}`)
+  .then((resp) => {
+    const $ = cheerio.load(resp.data)
+    const image = $('.img-player').attr('src')
+    res.send(image);
+  })
+  .catch((err) => res.send('https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg'))
+
 })
 
 app.get('/api/playersList', async (req, res) => {
