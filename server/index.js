@@ -13,11 +13,12 @@ const {
   fetch,
   removeAll,
   removeOne,
+  fetchHistory,
 } = require('../database/Games.js');
 const { getGames, getLiveStats } = require('../helpers/steam.js');
 const { playerIdList } = require('./playerIdList.js');
 
-app.use(express.static(__dirname + '/../dist'));
+  app.use(express.static(__dirname + '/../dist'));
 app.use(favicon(path.join(__dirname, '../dist', 'Favicon.ico')))
 
 app.get('/api/games', async (req, res) => {
@@ -25,8 +26,15 @@ app.get('/api/games', async (req, res) => {
   res.status(200).send(games);
 });
 
-app.get('/api/players', async (req, res) => {
+app.get('/api/playersList', async (req, res) => {
   res.status(200).send(playerIdList);
+});
+
+app.get('/api/players/:id', async (req, res) => {
+  const id = JSON.parse(req.params.id);
+  const games = await fetchHistory(id);
+  console.log(games);
+  res.send(games);
 });
 
 app.get('/api/update', async (req, res) => {
@@ -53,7 +61,7 @@ app.get('/api/update', async (req, res) => {
           const serverId = game.server_steam_id.toString();
           const liveStats = await getLiveStats(serverId);
           const liveStatsJson = JSONbig.parse(liveStats);
-          if (liveStatsJson.teams && game.players) {
+          if (liveStatsJson.teams[0] && game.players) {
           for (let i = 0; i <= 10; i++) {
             if (i < 5) {
               await merge(game.players[i], liveStatsJson.teams[0].players[i]);
@@ -101,5 +109,10 @@ const update = async () => {
 }
 // setInterval(removeAll, 600000);
 setInterval(update, 10000);
+
+app.get('/*', (req,res) =>{
+  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+});
+
 const port = process.env.PORT || 3222;
 app.listen(port, () => console.log(`listening on port ${port}`));

@@ -13,8 +13,11 @@ body {
   background-color: #ED3B1D;
   padding: 8px;
   display: inline-block;
-  color: white;
   margin: auto;
+}
+.title > a {
+  text-decoration: none;
+  color: white;
 }
 
 .subTitle {
@@ -194,13 +197,21 @@ div[name="dire"] .liveMatchPlayerName {
   justify-content: left;
   padding: 2px;
 }
-.proPlayer {
+.proPlayer > a {
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-decoration: none;
+  text-decoration: none;
+  color: white;
 }
 .normalPlayer {
   white-space: nowrap;
 }
+
+/* a {
+  text-decoration: none;
+  color: white;
+} */
 
 .time {
   font-size: 30px;
@@ -250,4 +261,55 @@ div[name="dire"] .liveMatchPlayerName {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.heroName {
+  white-space: nowrap;
+}
+
+.historyId {
+  color: white;
+  /* text-align: center; */
+}
+
+.historyHeaderContainer {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.siteLink > a{
+  color: white;
+}
+
+.siteLink {
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.historyHeader {
+  display: block;
+  font-family: 'Montserrat';
+  text-align: center;
+  color: white;
+  background-color: #2E3740;
+  font-size: 30px;
+  padding-left: 10px;
+  margin: 20px 0px 20px;
+  width: 80%;
+}
+
+.historyGamesContainer {
+  justify-content: center;
+  text-align: center;
+}
+
+.matchHistoryTitle {
+  font-size: 30px;
+  color: #658D8C;
+  padding: 10px
 }

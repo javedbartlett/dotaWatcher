@@ -67,8 +67,15 @@ const fetch = async (maxRecords = 25) => {
   .catch(err => console.log('err with Game.find - fetch'))
 };
 
+const fetchHistory = async (playerId) => {
+  return await Game.find({"players.account_id": playerId}).exec()
+  .catch(err => console.log(err))
+}
+
 module.exports.saveMatches = saveMatches;
 module.exports.savePlayers = savePlayers;
 module.exports.fetch = fetch;
+module.exports.fetchHistory = fetchHistory;
 module.exports.removeAll = removeAll;
-module.exports.removeAll = removeOne;
+module.exports.removeOne = removeOne;
+
