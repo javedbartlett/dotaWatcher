@@ -14,6 +14,7 @@ const {
   removeAll,
   removeOne,
   fetchHistory,
+  fetchHeroHistory,
 } = require('../database/Games.js');
 const { getGames, getLiveStats } = require('../helpers/steam.js');
 const { playerIdList } = require('./playerIdList.js');
@@ -33,6 +34,12 @@ app.get('/api/playersList', async (req, res) => {
 app.get('/api/players/:id', async (req, res) => {
   const id = JSON.parse(req.params.id);
   const games = await fetchHistory(id);
+  console.log(games);
+  res.send(games);
+});
+app.get('/api/heroes/:id', async (req, res) => {
+  const id = JSON.parse(req.params.id);
+  const games = await fetchHeroHistory(id);
   console.log(games);
   res.send(games);
 });

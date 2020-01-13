@@ -32,6 +32,7 @@ body {
 
 .proPlayer:hover {
   cursor: pointer;
+  text-shadow: 0 0 2px white;
 }
 
 .GameList {
@@ -313,3 +314,21 @@ a {
   color: #658D8C;
   padding: 10px
 }
+
+.heroImageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.heroImageContainer > img {
+  width: auto;
+  height: auto;
+}
+
+video {
+  height: 350px;
+  width: auto;
+}
+
+/* a:hover { text-shadow: 0 0 5px white; } */
+img:hover { text-shadow: 0 0 50px white; }

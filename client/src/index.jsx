@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import GameList from './components/GameList';
 import Header from './components/Header';
+import { heroesList, localizedList } from './heroList.js';
 import './styles.css';
 import axios from 'axios';
 import '@babel/polyfill';
@@ -36,7 +37,44 @@ const Player = (props) => {
             <a href={`https://stratz.com/en-us/player/${id}`}>STRATZ </a>
             </div>
           <div className="historyGamesContainer">
-            <div className="matchHistoryTitle">Match History</div>
+            <div className="matchHistoryTitle">Match History <br/>(Under Construction :P)</div>
+          {games.data && games.data.map((game, i) => <div className="historyId" key={i}>{game.match_id}</div>)}
+          </div>
+        </div>
+    );
+}
+
+const Heroes = (props) => {
+  let { id } = useParams();
+  // let { fromNotifications } = props.match;
+  const [games, setGames] = useState([]);
+  console.log(useParams());
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios(`/api/heroes/${id}`);
+      setGames(response);
+    }
+    fetchData();
+  }, []);
+    return (
+        <div className="historyContainer">
+          <div className="historyHeaderContainer">
+          <h1 className="historyHeader">{heroesList[id]}</h1>
+          </div>
+          <div className="heroImageContainer">
+            {/* <video autoPlay poster="true" loop muted>
+              <source src="https://stratz.com/chaos-knight.da3d3642.webm" type="video/webm" />
+              </video> */}
+            <img src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_full.png`}/>
+          </div>
+          <div className="siteLink" >
+            <a href={`https://www.opendota.com/heroes/${id}`}>OpenDota</a> <span> • </span>
+            <a href={`https://stratz.com/en-us/heroes/${id}`}>STRATZ </a>
+            </div>
+            <div></div>
+          <div className="historyGamesContainer">
+            <div className="matchHistoryTitle">Match History <br/>(Under Construction :P)</div>
           {games.data && games.data.map((game, i) => <div className="historyId" key={i}>{game.match_id}</div>)}
           </div>
         </div>
@@ -93,6 +131,9 @@ class App extends React.Component {
           </Route>
           <Route exact path="/players/:id">
             <Player players={this.state.players} />
+          </Route>
+          <Route exact path="/heroes/:id">
+            <Heroes players={this.state.players} />
           </Route>
         </Switch>
         </Router>
