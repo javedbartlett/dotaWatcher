@@ -34,12 +34,20 @@ function timeSince2(timeStamp) {
   var now = new Date(),
     secondsPast = (now.getTime() - timeStamp) / 1000;
 
-  if (secondsPast < 3600) {
+  if (secondsPast < 2100) {
     return ' (in progress)';
+  }
+
+  if (secondsPast < 3600) {
+    return parseInt(secondsPast / 60) + ' minutes ago';
+  }
+  if (secondsPast < 7200) {
+    return '1 hour ago';
   }
   if (secondsPast <= 86400) {
     return parseInt(secondsPast / 3600) + ' hours ago';
   }
+
   if (secondsPast > 86400) {
     let day = timeStamp.getDate();
     let month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ", "");
