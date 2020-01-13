@@ -65,7 +65,7 @@ const Player = (props) => {
             <div className="matchHistoryTitle">Match History</div>
           {player.data && player.data.map((game, i) => <div className="historyId" key={i}>
               <img className="minimapIcon" src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/>
-            {game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>)}
+            <span className="historyStats">{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></div>)}
           </div>
         </div>
     );
