@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('./index.js')
+const { playerIdList } = require('../server/playerIdList.js');
 
 const gameSchema = mongoose.Schema({
   // TODO: your schema here!
@@ -71,11 +72,34 @@ const fetchHistory = async (playerId) => {
   return await Game.find({"players.account_id": playerId}).exec()
   .catch(err => console.log(err))
 }
+const fetchHeroHistory = async (heroId) => {
+  const games = await Game.find({"players.hero_id": heroId}).exec()
+  .catch(err => console.log(err))
+
+  // for (let i=0; i < games.length; i++) {
+  //   const game = games[i]
+  //   const playersInTheGame = game.players.map(player => { player.accountid } )
+
+  //     console.log(playersInTheGame)
+
+  //     // const proInTheGame =
+  //     //     playersInTheGame.filter(player =>
+  //     //       Object.keys(playerIdList)
+  //     //         .map(p => +p)
+  //     //         .includes(player),
+  //     //     ).length > 0;
+
+  // }
+
+  return games;
+}
+
+fetchHeroHistory(42)
 
 module.exports.saveMatches = saveMatches;
 module.exports.savePlayers = savePlayers;
 module.exports.fetch = fetch;
 module.exports.fetchHistory = fetchHistory;
+module.exports.fetchHeroHistory = fetchHeroHistory;
 module.exports.removeAll = removeAll;
 module.exports.removeOne = removeOne;
-
