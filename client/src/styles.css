@@ -405,7 +405,7 @@ video {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   padding: 12px 16px;
   z-index: 5;
-  width: 50%;
+  width: 100%;
   color: white;
 }
 .dropDownContentPlayer {
@@ -416,7 +416,7 @@ video {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   padding: 12px 16px;
   z-index: 5;
-  width: 50%;
+  width: 100%;
   color: white;
 
 }
@@ -434,3 +434,6 @@ video {
   display: flex;
   justify-content: center;
 }
+
+.dropDownContentPlayer:hover {background-color: #222C2C}
+.dropDownContentHero:hover {background-color: #222C2C}

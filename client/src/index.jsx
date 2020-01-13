@@ -154,6 +154,7 @@ class Search extends React.Component {
       <div className="searchBoxContainer">
         <input
           className="searchBox"
+          placeholder="Search for a Player or Hero"
           type="text"
           value={this.state.value}
           onChange={this.handleInputChange.bind(this)}
