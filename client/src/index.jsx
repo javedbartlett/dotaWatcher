@@ -2,11 +2,12 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import GameList from './components/GameList';
 import Header from './components/Header';
-import { heroesList, localizedList, newHeroes } from './heroList.js';
+import { heroesList, localizedList, newHeroes, heroSearchList, heroSearchList2 } from './heroList.js';
 import './styles.css';
 import axios from 'axios';
 import { timeSince2 } from './timeSince.js';
 import cheerio from 'cheerio';
+import _ from 'lodash';
 import '@babel/polyfill';
 import {
   BrowserRouter as Router,
@@ -103,14 +104,83 @@ const Heroes = (props) => {
     );
 }
 
-const SearchBar = (props) => {
+// const SearchBar = (props) => {
 
-  return (
-    <div className="searchBoxContainer">
-    <input className="searchBox" placeholder="Search for player or hero" type="textbox" />
-    </div>
-  )
+//   return (
+//     <div className="searchBoxContainer">
+//     <input className="searchBox" placeholder="Search for player or hero" type="textbox" />
+//     </div>
+//   )
+// }
+
+class Search extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: '',
+      heroes: [],
+      players: [],
+    };
+  }
+
+  handlePlayerSearchInputChange(query){
+    let vals = Object.values(this.props.players);
+    // console.log(vals)
+    this.setState({ players: query.length > 1 ? vals.filter(val => val.toLowerCase().indexOf(query.toLowerCase()) !== -1) :""})
+  }
+
+
+  handleHeroSearchInputChange(query){
+    let valsUnfiltered = Object.values(heroSearchList);
+    let vals = valsUnfiltered.filter(val => val !== undefined)
+
+     this.setState({ heroes: query.length > 1 ? vals.filter(val => val.toLowerCase().indexOf(query.toLowerCase()) !== -1) :""})
+  }
+
+  handleInputChange(e) {
+    this.handlePlayerSearchInputChange(e.target.value);
+    this.handleHeroSearchInputChange(e.target.value)
+    this.setState({
+      value: e.target.value
+    });
+  }
+
+  render() {
+    // console.log(this.props.players)
+    let playerSearchList = _.invert(this.props.players)
+    return (
+      <div className="mainInnerContainer">
+      <div className="searchBoxContainer">
+        <input
+          className="searchBox"
+          type="text"
+          value={this.state.value}
+          onChange={this.handleInputChange.bind(this)}
+        />
+
+      </div>
+      <div className="dropDownOutercontainer">
+      <div className="dropDownContainer">
+      <div className="dropDown">
+        {this.state.heroes && this.state.heroes.map((hero, i) => (
+          <Link key={i} to={`heroes/${heroSearchList2[hero]}`}>
+          <span className="dropDownContentHero">{hero}</span>
+          </Link>
+        ))}
+        {this.state.players && this.state.players.map((player, i) => (
+          <Link key={i} to={`players/${playerSearchList[player]}`}>
+          <div className="dropDownContentPlayer">{player}</div>
+          </Link>
+        ))}
+        </div>
+        </div>
+        </div>
+      </div>
+    );
+  }
 }
+
 
 class App extends React.Component {
   constructor(props) {
@@ -154,9 +224,9 @@ class App extends React.Component {
     return (
       <Router>
         <Header />
-        <SearchBar />
         <Switch>
           <Route exact path="/">
+            <Search players={this.state.players} />
             <GameList players={this.state.players} data={this.state.games} />
           </Route>
           <Route exact path="/players/:id">
