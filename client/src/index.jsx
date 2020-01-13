@@ -2,7 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import GameList from './components/GameList';
 import Header from './components/Header';
-import { heroesList, localizedList } from './heroList.js';
+import { heroesList, localizedList, newHeroes } from './heroList.js';
 import './styles.css';
 import axios from 'axios';
 import { timeSince2 } from './timeSince.js';
@@ -17,34 +17,17 @@ import {
   useParams,
 } from "react-router-dom";
 
+
 const Player = (props) => {
   let { id } = useParams();
-  // const [games, setGames] = useState([]);
-  // const [ imageUrl, setImageUrl ] = useState("");
   const [player, setPlayerData] = useState({ data: null, image: null });
-
-
-  // useEffect(() => {
-  //   async function getImage () {
-  //     const response = await axios(`api/playerImage/${id}`)
-  //     await setGames(response);
-  //   }
-  //   getImage();
-  // }, [])
-
   useEffect(() => {
-    // async function fetchData() {
-    //   const response = await axios(`/api/players/${id}`);
-    //   await setGames(response);
-    //   const response2 = await axios(`api/playerImage/${id}`)
-    //   await setGames(response);
-    // }
+
     const fetchData = async () => {
       const response1 = await axios(`/api/players/${id}`);
       const response2 = await axios(`/api/playerImage/${id}`)
       setPlayerData({ data: response1.data, image: response2.data });
     };
-
 
     fetchData();
   }, []);
@@ -64,7 +47,8 @@ const Player = (props) => {
           <div className="historyGamesContainer">
             <div className="matchHistoryTitle">Match History</div>
           {player.data && player.data.map((game, i) => <div className="historyId" key={i}>
-              <img className="minimapIcon" src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/>
+              <img className="minimapIcon" src={ (game.players.find(player => player.account_id === +id).hero_id == 128 || game.players.find(player => player.account_id === +id).hero_id == 126) ?
+              newHeroes[game.players.find(player => player.account_id === +id).hero_id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/>
             <span className="historyStats">{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></div>)}
           </div>
         </div>
@@ -73,7 +57,7 @@ const Player = (props) => {
 
 const Heroes = (props) => {
   let { id } = useParams();
-  // let { fromNotifications } = props.match;
+
   const [games, setGames] = useState([]);
 
   useEffect(() => {
@@ -103,8 +87,8 @@ const Heroes = (props) => {
             <div className="matchHistoryTitle">Match History</div>
             <div className="introMessage">{heroesList[id]} has been picked by pros {games.data && games.data.length} times in the last 2 weeks</div>
           {games.data && games.data.map((game, i) => <div className="historyId" key={i}>
-          <img className="minimapIcon" src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_icon.png`}/>{"  "}
-            {game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>)}
+          <img className="minimapIcon" src={ (id == 128 || id == 126) ? newHeroes[id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_icon.png`}/>{"  "}
+          <span className="historyStats">{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></div>)}
           </div>
         </div>
     );

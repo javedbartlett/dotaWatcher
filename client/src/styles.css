@@ -273,6 +273,7 @@ div[name="dire"] .liveMatchPlayerName {
   color: white;
   text-align: top;
   padding: 10x 0 10px;
+
 }
 
 .historyHeaderContainer {
@@ -359,4 +360,8 @@ video {
 .minimapIcon {
   height: 35px;
   width: auto;
+}
+
+.historyStats {
+  vertical-align: super;
 }
