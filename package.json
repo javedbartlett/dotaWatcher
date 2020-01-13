@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.1",
     "express": "^4.17.1",
     "json-bigint": "^0.3.0",
     "lodash.escape": "^4.0.1",

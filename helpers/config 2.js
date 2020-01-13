@@ -1,0 +1,3 @@
+module.exports = {
+  KEY: '53A90D3D99C019505A9F77E99B4B299F'
+};
