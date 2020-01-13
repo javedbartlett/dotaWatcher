@@ -29,6 +29,12 @@ app.use(cors())
 app.use(express.static(__dirname + '/../dist'));
 app.use(favicon(path.join(__dirname, '../dist', 'Favicon.ico')))
 
+const dist = express.static('dist');
+
+app.use('/players/:id', dist)
+app.use('/heroes/:id', dist)
+
+
 app.get('/api/games', async (req, res) => {
   const games = await fetch();
   res.status(200).send(games);
@@ -73,7 +79,6 @@ app.get('/api/saveImage/:id', async (req, res) => {
   }
 
 })
-
 
 app.get('/api/playersList', async (req, res) => {
   res.status(200).send(playerIdList);
@@ -164,9 +169,9 @@ const update = async () => {
 // setInterval(removeAll, 600000);
 setInterval(update, 10000);
 
-app.get('/*', (req,res) =>{
-  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
-});
+// app.get('/*', (req,res) =>{
+//   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+// });
 
 const port = process.env.PORT || 3222;
 app.listen(port, () => console.log(`listening on port ${port}`));
