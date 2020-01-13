@@ -1,12 +1,16 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const axios = require('axios');
+const cheerio = require('cheerio');
 const request = require('request');
+const fs = require('fs');
 const rp = require('request-promise-native');
 const db = require('../database/index.js');
 const JSONbig = require('json-bigint');
 const merge = require('lodash.merge');
-const favicon = require('serve-favicon')
+const favicon = require('serve-favicon');
+const cors = require('cors');
 const {
   saveMatches,
   savePlayers,
@@ -19,13 +23,25 @@ const {
 const { getGames, getLiveStats } = require('../helpers/steam.js');
 const { playerIdList } = require('./playerIdList.js');
 
-  app.use(express.static(__dirname + '/../dist'));
+app.use(cors())
+
+app.use(express.static(__dirname + '/../dist'));
 app.use(favicon(path.join(__dirname, '../dist', 'Favicon.ico')))
 
 app.get('/api/games', async (req, res) => {
   const games = await fetch();
   res.status(200).send(games);
 });
+
+app.get('/api/playerImage/:id', async (req, res) => {
+  const id = JSON.parse(req.params.id)
+  const playerName = playerIdList[id]
+  const resp = await axios.get(`https://www.dotabuff.com/esports/players/${id}`)
+  .catch(err => console.log('err=========>>>>>>>>', err))
+  const $ = cheerio.load(resp.data)
+  const image = $('.img-player').attr('src')
+  res.send(image);
+})
 
 app.get('/api/playersList', async (req, res) => {
   res.status(200).send(playerIdList);
@@ -34,7 +50,6 @@ app.get('/api/playersList', async (req, res) => {
 app.get('/api/players/:id', async (req, res) => {
   const id = JSON.parse(req.params.id);
   const games = await fetchHistory(id);
-  console.log(games);
   res.send(games);
 });
 app.get('/api/heroes/:id', async (req, res) => {

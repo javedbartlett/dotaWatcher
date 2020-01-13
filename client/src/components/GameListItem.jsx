@@ -4,7 +4,7 @@ import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 import _ from 'lodash';
 import escape from 'lodash.escape';
-import timeSince from '../timeSince.js';
+import { timeSince } from '../timeSince.js';
 import { Link } from 'react-router-dom';
 
 const colors = [
