@@ -40,7 +40,7 @@ await axios.get(`https://www.dotabuff.com/esports/players/${id}`)
   .then((resp) => {
     const $ = cheerio.load(resp.data)
     const image = $('.img-player').attr('src')
-    res.send(image);
+    res.send('https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg');
   })
   .catch((err) => res.send('https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg'))
 
