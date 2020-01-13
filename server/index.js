@@ -20,6 +20,7 @@ const {
   fetchHistory,
   fetchHeroHistory,
 } = require('../database/Games.js');
+const { saveImage } = require('../database/Games.js');
 const { getGames, getLiveStats } = require('../helpers/steam.js');
 const { playerIdList } = require('./playerIdList.js');
 
@@ -36,15 +37,30 @@ app.get('/api/games', async (req, res) => {
 app.get('/api/playerImage/:id', async (req, res) => {
   const id = JSON.parse(req.params.id)
   const playerName = playerIdList[id]
-await axios.get(`https://www.dotabuff.com/esports/players/${id}`)
+await axios.get(`https://liquipedia.net/dota2/${playerName}`)
   .then((resp) => {
     const $ = cheerio.load(resp.data)
     const image = $('.img-player').attr('src')
-    res.send('https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg');
+    res.send('');
   })
   .catch((err) => res.send('https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg'))
 
 })
+
+app.get('/api/saveImage/:id', async (req, res) => {
+  const id = JSON.parse(req.params.id)
+  const playerName = playerIdList[id]
+await axios.get(`https://liquipedia.net/dota2/${playerName}`)
+  .then((resp) => {
+    const $ = cheerio.load(resp.data)
+    const image = "https://liquipedia.net/" + $('.image img').attr('src')
+    saveImage(image, id)
+    res.send('saved?');
+  })
+  .catch((err) => res.send('error... shit!'))
+
+})
+
 
 app.get('/api/playersList', async (req, res) => {
   res.status(200).send(playerIdList);
