@@ -269,8 +269,10 @@ div[name="dire"] .liveMatchPlayerName {
 }
 
 .historyId {
+  display: block;
   color: white;
-  /* text-align: center; */
+  text-align: top;
+  padding: 10x 0 10px;
 }
 
 .historyHeaderContainer {
