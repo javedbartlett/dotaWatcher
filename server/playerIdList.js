@@ -64,7 +64,7 @@ const playerIdList = {
   82262664: "Kuroky",
   59463394: "Leostyle",
   12231202: "Limmp",
-  117311875: "Luki (Pango Spammer)",
+  // 117311875: "Luki (Pango Spammer)",
   // 95430068: "Madara (Peru)",
   178366364: "MagE-",
   171981096: "MagicaL",
