@@ -22,7 +22,6 @@ const Player = (props) => {
   let { id } = useParams();
   const [player, setPlayerData] = useState({ data: null, image: null });
   useEffect(() => {
-
     const fetchData = async () => {
       const response1 = await axios(`/api/players/${id}`);
       const response2 = await axios(`/api/saveImage/${id}`)

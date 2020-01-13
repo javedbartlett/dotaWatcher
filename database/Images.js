@@ -3,7 +3,6 @@ const db = require('./index.js');
 const fs = require('fs');
 const path = require('path');
 const download = require('image-downloader')
-// const fsp = require("fs/promises");
 const { promisify } = require('util')
 
 const readFileAsync = promisify(fs.readFile)
@@ -18,9 +17,7 @@ const imagesSchema = new Schema({
 
 const Images = mongoose.model('Images', imagesSchema);
 
-
 const saveImage = async (imgPath, accountId) => {
-
   const options = {
     url: imgPath,
     dest: path.resolve(__dirname + '/imgTest/image.jpg'),
@@ -28,7 +25,7 @@ const saveImage = async (imgPath, accountId) => {
   async function downloadIMG() {
     try {
       const { filename, image } = await download.image(options)
-      console.log(filename) // => /path/to/dest/image.jpg
+      console.log(filename)
     } catch (e) {
       console.error('ERROR WITH DOWNLOAD THING', e)
     }
@@ -39,7 +36,6 @@ const saveImage = async (imgPath, accountId) => {
 
   const doesDocumentExist = await Images.find({"_id": accountId}).exec()
   if (!doesDocumentExist.length) {
-    console.log('yo')
     try {
       console.log('saving image to db')
       const imageData = await readFileAsync(path.resolve(__dirname + '/imgTest/image.jpg'));
@@ -61,12 +57,7 @@ const saveImage = async (imgPath, accountId) => {
 const imageFetch = async (accountId) => {
   return await Images.find({"_id": accountId}).exec()
 }
-// const test = async () => {
-//   const someData = await Images.find({"_id": 88271237}).exec()
-//   console.log(someData)
-// }
 
-// test()
 
 module.exports.saveImage = saveImage;
 module.exports.imageFetch = imageFetch;
