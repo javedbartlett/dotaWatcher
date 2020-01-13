@@ -25,7 +25,7 @@ const Player = (props) => {
 
     const fetchData = async () => {
       const response1 = await axios(`/api/players/${id}`);
-      const response2 = await axios(`/api/playerImage/${id}`)
+      const response2 = await axios(`/api/saveImage/${id}`)
       setPlayerData({ data: response1.data, image: response2.data });
     };
 
@@ -36,8 +36,10 @@ const Player = (props) => {
           <div className="historyHeaderContainer">
           <h1 className="historyHeader">{props.players[id]}</h1>
           </div>
-          <div className="heroImageContainer">
+          <div className="playerImageContainer">
             {/* <img src={`${player.image}`}/> */}
+            {player.image ? <img src={`data:image/jpeg;base64,${player.image && player.image}`}/> : ""}
+            {/* {player.image && console.log(player.image[0].img.data.data)} */}
           </div>
           <div className="siteLink" >
             <a href={`https://www.dotabuff.com/players/${id}`}>Dotabuff</a><span> • </span>

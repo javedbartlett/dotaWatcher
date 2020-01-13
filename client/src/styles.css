@@ -329,6 +329,16 @@ a {
   height: auto;
 }
 
+.playerImageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.playerImageContainer > img {
+  height: 400px;
+  width: auto;
+}
+
 video {
   height: 350px;
   width: auto;

@@ -1,24 +1,72 @@
 const mongoose = require('mongoose');
 const db = require('./index.js');
+const fs = require('fs');
+const path = require('path');
+const download = require('image-downloader')
+// const fsp = require("fs/promises");
+const { promisify } = require('util')
+
+const readFileAsync = promisify(fs.readFile)
+const writeFileAsync = promisify(fs.writeFile)
+
+let Schema = mongoose.Schema;
 
 const imagesSchema = new Schema({
-  _id: Number
+  _id: Number,
   img: { data: Buffer, contentType: String },
 });
 
-const A = mongoose.model('A', schema);
+const Images = mongoose.model('Images', imagesSchema);
 
 
-const saveImage = (imgPath, accountId) => {
-  var a = new A;
+const saveImage = async (imgPath, accountId) => {
 
-  a.img.data = fs.readFileSync(imgPath);
-  a.img.contentType = 'image/png';
-  a._id = accountId;
-  a.save(function (err, a) {
-    if (err) throw err;
-    console.log('saved img to mongo');
+  const options = {
+    url: imgPath,
+    dest: path.resolve(__dirname + '/imgTest/image.jpg'),
+  }
+  async function downloadIMG() {
+    try {
+      const { filename, image } = await download.image(options)
+      console.log(filename) // => /path/to/dest/image.jpg
+    } catch (e) {
+      console.error('ERROR WITH DOWNLOAD THING', e)
+    }
+  }
+  await downloadIMG()
 
+  var a = new Images;
+
+  const doesDocumentExist = await Images.find({"_id": accountId}).exec()
+  if (!doesDocumentExist.length) {
+    console.log('yo')
+    try {
+      console.log('saving image to db')
+      const imageData = await readFileAsync(path.resolve(__dirname + '/imgTest/image.jpg'));
+      a.img.data = imageData;
+      a.img.contentType = 'image/jpg';
+      a._id = accountId;
+      await a.save()
+      .then(a => {
+        return a;
+      })
+      .catch(err => console.log(err))
+    } catch(err) {
+      console.log(err);
+    }
+  }
+  return a;
 }
 
-module.exports.saveImage = removeOne;
+const imageFetch = async (accountId) => {
+  return await Images.find({"_id": accountId}).exec()
+}
+// const test = async () => {
+//   const someData = await Images.find({"_id": 88271237}).exec()
+//   console.log(someData)
+// }
+
+// test()
+
+module.exports.saveImage = saveImage;
+module.exports.imageFetch = imageFetch;
