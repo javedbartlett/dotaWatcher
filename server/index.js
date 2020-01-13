@@ -20,7 +20,7 @@ const {
   fetchHistory,
   fetchHeroHistory,
 } = require('../database/Games.js');
-const { saveImage } = require('../database/Games.js');
+const { saveImage, imageFetch } = require('../database/Images.js');
 const { getGames, getLiveStats } = require('../helpers/steam.js');
 const { playerIdList } = require('./playerIdList.js');
 
@@ -49,15 +49,28 @@ await axios.get(`https://liquipedia.net/dota2/${playerName}`)
 
 app.get('/api/saveImage/:id', async (req, res) => {
   const id = JSON.parse(req.params.id)
-  const playerName = playerIdList[id]
-await axios.get(`https://liquipedia.net/dota2/${playerName}`)
-  .then((resp) => {
+  const imageData = await imageFetch(id);
+  if (!imageData.length) {
+    console.log('Scraping....')
+    const playerName = playerIdList[id]
+    const resp = await axios.get(`https://liquipedia.net/dota2/${playerName}`)
     const $ = cheerio.load(resp.data)
     const image = "https://liquipedia.net/" + $('.image img').attr('src')
-    saveImage(image, id)
-    res.send('saved?');
-  })
-  .catch((err) => res.send('error... shit!'))
+    const imageResult = await saveImage(image, id)
+    .catch((err) => {
+      console.log('error with cheerio thing')
+      res.send(err)
+    })
+    console.log('result',imageResult)
+    // const imageBase64 = imageResult[0].img.data.toString('base64').toString('base64');
+    const imageBase64 = imageResult.img.data.toString('base64');
+    // console.log('image base64 here', imageBase64);
+    res.send(imageBase64)
+  } else {
+    const imageBase64 = imageData[0].img.data.toString('base64');
+    // console.log('image here', imageBase64);
+    res.send(imageBase64);
+  }
 
 })
 
