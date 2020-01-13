@@ -1679,7 +1679,7 @@ const heroes = [
   },
       {
       "id": 127,
-      "name": "placeholder"
+      "name": "placeholder",
   },
   {
       "id": 128,
@@ -1717,8 +1717,16 @@ const newHeroes = {
   }
 
 
+let heroSearchList = {};
+heroes.forEach(hero => {
+  heroSearchList[hero.id] = hero.localized_name;
+});
+
+let heroSearchList2 = {};
+heroes.forEach(hero => {
+  heroSearchList2[hero.localized_name] = hero.id;
+});
 
 const heroesList = heroes.map(hero => hero.localized_name)
 const localizedList = heroes.map(hero => hero.name)
-
-export { heroesList, localizedList, newHeroes };
+export { heroesList, localizedList, newHeroes, heroSearchList, heroSearchList2 };

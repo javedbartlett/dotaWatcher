@@ -64,14 +64,14 @@ img {
   display: inline-block;
   width: 100px;
   height: auto;
-  z-index: 10;
+  z-index: 4;
 }
 
 .direPortrait {
   display: inline-block;
   width: 100px;
   height: 115.73px;
-  z-index: 10;
+  z-index: 4;
 }
 
 .direPortrait img {
@@ -389,4 +389,48 @@ video {
   display: flex;
   flex-direction: column;
   justify-content: left;
+}
+
+.dropdown {
+  vertical-align: bottom;
+  position: relative;
+  display: inline-block;
+}
+
+.dropDownContentHero {
+  display: block;
+  /* position: fixed; */
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 5;
+  width: 50%;
+  color: white;
+}
+.dropDownContentPlayer {
+  display: block;
+  /* position: fixed; */
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 5;
+  width: 50%;
+  color: white;
+
+}
+
+.dropDownContainer {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 5;
+  color: white;
+}
+
+.dropDownOutercontainer {
+  display: flex;
+  justify-content: center;
 }
