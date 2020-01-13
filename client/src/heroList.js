@@ -1711,7 +1711,14 @@ const heroes = [
   }
 ]
 
+const newHeroes = {
+    126: 'https://gamepedia.cursecdn.com/dota2_gamepedia/0/02/Void_Spirit_minimap_icon.png?version=600d4ddcb1336639dbd672abf0cd5cea',
+    128: 'https://gamepedia.cursecdn.com/dota2_gamepedia/e/e1/Snapfire_minimap_icon.png?version=6367834aa982d5c24937df65f03cf2ec'
+  }
+
+
+
 const heroesList = heroes.map(hero => hero.localized_name)
 const localizedList = heroes.map(hero => hero.name)
 
-export { heroesList, localizedList };
+export { heroesList, localizedList, newHeroes };
