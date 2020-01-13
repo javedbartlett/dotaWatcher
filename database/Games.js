@@ -69,11 +69,14 @@ const fetch = async (maxRecords = 25) => {
 };
 
 const fetchHistory = async (playerId) => {
-  return await Game.find({"players.account_id": playerId}).exec()
+  const games = await Game.find({"players.account_id": playerId}).exec()
   .catch(err => console.log(err))
+
+  return games.reverse();
 }
 const fetchHeroHistory = async (heroId) => {
-  const games = await Game.find({"players.hero_id": heroId}).exec()
+  const games = await Game.find({$and:[{"players.hero_id": heroId},
+  {"createdAt":{$gt:new Date(Date.now() - 336*60*60 * 1000)}}]}).exec()
   .catch(err => console.log(err))
 
   // for (let i=0; i < games.length; i++) {
@@ -91,7 +94,7 @@ const fetchHeroHistory = async (heroId) => {
 
   // }
 
-  return games;
+  return games.reverse();
 }
 
 fetchHeroHistory(42)

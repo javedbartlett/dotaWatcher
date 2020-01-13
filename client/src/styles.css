@@ -241,7 +241,7 @@ div[name="dire"] .liveMatchPlayerName {
   background-color: #2E3740;
   font-size: 30px;
   padding-left: 10px;
-  margin: 20px 0px 20px;
+  margin: 0px 0px 20px;
 }
 
 
@@ -330,5 +330,31 @@ video {
   width: auto;
 }
 
-/* a:hover { text-shadow: 0 0 5px white; } */
-img:hover { text-shadow: 0 0 50px white; }
+.searchBox {
+  width: 20%;
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 25px;
+}
+
+.searchBox::placeholder {
+ font-size: 20px;
+ vertical-align: middle;
+}
+
+.searchBoxContainer {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 10px;
+}
+
+.introMessage {
+  padding: 0 0 10px;
+  color: white;
+}
+
+.minimapIcon {
+  height: 35px;
+  width: auto;
+}

@@ -5,6 +5,8 @@ import Header from './components/Header';
 import { heroesList, localizedList } from './heroList.js';
 import './styles.css';
 import axios from 'axios';
+import { timeSince2 } from './timeSince.js';
+import cheerio from 'cheerio';
 import '@babel/polyfill';
 import {
   BrowserRouter as Router,
@@ -17,13 +19,33 @@ import {
 
 const Player = (props) => {
   let { id } = useParams();
-  const [games, setGames] = useState([]);
+  // const [games, setGames] = useState([]);
+  // const [ imageUrl, setImageUrl ] = useState("");
+  const [player, setPlayerData] = useState({ data: null, image: null });
+
+
+  // useEffect(() => {
+  //   async function getImage () {
+  //     const response = await axios(`api/playerImage/${id}`)
+  //     await setGames(response);
+  //   }
+  //   getImage();
+  // }, [])
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await axios(`/api/players/${id}`);
-      setGames(response);
-    }
+    // async function fetchData() {
+    //   const response = await axios(`/api/players/${id}`);
+    //   await setGames(response);
+    //   const response2 = await axios(`api/playerImage/${id}`)
+    //   await setGames(response);
+    // }
+    const fetchData = async () => {
+      const response1 = await axios(`/api/players/${id}`);
+      const response2 = await axios(`/api/playerImage/${id}`)
+      setPlayerData({ data: response1.data, image: response2.data });
+    };
+
+
     fetchData();
   }, []);
     return (
@@ -31,14 +53,18 @@ const Player = (props) => {
           <div className="historyHeaderContainer">
           <h1 className="historyHeader">{props.players[id]}</h1>
           </div>
+          <div className="heroImageContainer">
+            <img src={`${player.image}`}/>
+          </div>
           <div className="siteLink" >
             <a href={`https://www.dotabuff.com/players/${id}`}>Dotabuff</a><span> • </span>
             <a href={`https://www.opendota.com/players/${id}`}>OpenDota</a> <span> • </span>
             <a href={`https://stratz.com/en-us/player/${id}`}>STRATZ </a>
             </div>
           <div className="historyGamesContainer">
-            <div className="matchHistoryTitle">Match History <br/>(Under Construction :P)</div>
-          {games.data && games.data.map((game, i) => <div className="historyId" key={i}>{game.match_id}</div>)}
+            <div className="matchHistoryTitle">Match History</div>
+          {player.data && player.data.map((game, i) => <div className="historyId" key={i}>
+            {game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>)}
           </div>
         </div>
     );
@@ -48,12 +74,14 @@ const Heroes = (props) => {
   let { id } = useParams();
   // let { fromNotifications } = props.match;
   const [games, setGames] = useState([]);
-  console.log(useParams());
 
   useEffect(() => {
     async function fetchData() {
       const response = await axios(`/api/heroes/${id}`);
-      setGames(response);
+      await setGames(response);
+      games.sort((a, b) =>
+      a.updatedAt > b.updatedAt ? -1 : 1,
+    );
     }
     fetchData();
   }, []);
@@ -63,9 +91,6 @@ const Heroes = (props) => {
           <h1 className="historyHeader">{heroesList[id]}</h1>
           </div>
           <div className="heroImageContainer">
-            {/* <video autoPlay poster="true" loop muted>
-              <source src="https://stratz.com/chaos-knight.da3d3642.webm" type="video/webm" />
-              </video> */}
             <img src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_full.png`}/>
           </div>
           <div className="siteLink" >
@@ -74,11 +99,23 @@ const Heroes = (props) => {
             </div>
             <div></div>
           <div className="historyGamesContainer">
-            <div className="matchHistoryTitle">Match History <br/>(Under Construction :P)</div>
-          {games.data && games.data.map((game, i) => <div className="historyId" key={i}>{game.match_id}</div>)}
+            <div className="matchHistoryTitle">Match History</div>
+            <div className="introMessage">{heroesList[id]} has been picked by pros {games.data && games.data.length} times in the last 2 weeks</div>
+          {games.data && games.data.map((game, i) => <div className="historyId" key={i}>
+          <img className="minimapIcon" src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_icon.png`}/>{"  "}
+            {game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>)}
           </div>
         </div>
     );
+}
+
+const SearchBar = (props) => {
+
+  return (
+    <div className="searchBoxContainer">
+    <input className="searchBox" placeholder="Search for player or hero" type="textbox" />
+    </div>
+  )
 }
 
 
@@ -112,7 +149,6 @@ class App extends React.Component {
       a.spectators > b.spectators ? -1 : 1,
     );
     this.setState({ games: sortedJson });
-    console.log('updating')
   }
 
   async loadPlayers() {
@@ -125,6 +161,7 @@ class App extends React.Component {
     return (
       <Router>
         <Header />
+        <SearchBar />
         <Switch>
           <Route exact path="/">
             <GameList players={this.state.players} data={this.state.games} />
