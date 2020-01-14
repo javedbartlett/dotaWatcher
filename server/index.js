@@ -92,8 +92,17 @@ app.get('/api/players/:id', async (req, res) => {
 app.get('/api/heroes/:id', async (req, res) => {
   const id = JSON.parse(req.params.id);
   const games = await fetchHeroHistory(id);
-  console.log(games);
-  res.send(games);
+  // res.send(games)
+  const gamesToSend = games.reduce((gameArr, game) => {
+    const playerId = game.players.filter(p => p.hero_id === +req.params.id)[0].account_id;
+    if (playerIdList[playerId]) {
+      gameArr.push(game);
+    }
+
+    return gameArr;
+  }, []);
+  console.log(gamesToSend);
+  res.send(gamesToSend);
 });
 
 app.get('/api/update', async (req, res) => {

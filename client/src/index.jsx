@@ -94,9 +94,11 @@ const Heroes = (props) => {
             <div className="introMessage">{heroesList[id]} has been picked by pros {games.data && games.data.length} times in the last 2 weeks</div>
             <div className="minimapOuterContainer">
             <div className="minimapContainer">
-          {games.data && games.data.map((game, i) => <div className="historyId" key={i}>
+          {games.data && games.data.map((game, i) =>
+          <div className="historyId" key={i}>
           <img className="minimapIcon" src={ (id == 128 || id == 126) ? newHeroes[id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_icon.png`}/>{"  "}
-          <span className="historyStats">{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></div>)}
+          <span className="historyStats">{props.players[game.players.find(p => p.hero_id === +id).account_id]}{" "}•{" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></div>)}
+
           </div>
           </div>
           </div>
