@@ -458,7 +458,7 @@ video {
 
 .nameAndAgainst {
   text-align: left;
-  white-space: normal;
+  /* white-space: nowrap; */
 }
 
 .minimapIconDiv{
