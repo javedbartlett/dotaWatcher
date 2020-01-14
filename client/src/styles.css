@@ -366,7 +366,11 @@ video {
 }
 
 .historyStats {
+  /* display: flex; */
+  display: inline-block;
   vertical-align: super;
+  justify-content: left;
+  /* align-self: flex-start; */
 }
 
 .historyId {
@@ -376,6 +380,7 @@ video {
   padding: 10x 0 10px;
   margin: 10px 0 10px;
   align-self: flex-start;
+  font-size: 15px;
 }
 
 .minimapOuterContainer {
@@ -389,7 +394,7 @@ video {
   display: flex;
   flex-direction: column;
   justify-content: left;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   position: relative;
 }
 
@@ -447,6 +452,15 @@ video {
   color: red;
 }
 
-/* .historyDetails {
-  font-size: 12px;
-} */
+.historyDetails {
+  text-align: left;
+}
+
+.nameAndAgainst {
+  text-align: left;
+  white-space: normal;
+}
+
+.minimapIconDiv{
+  display: inline-block;
+}

@@ -78,24 +78,18 @@ const fetchHeroHistory = async (heroId) => {
   const games = await Game.find({$and:[{"players.hero_id": heroId},
   {"createdAt":{$gt:new Date(Date.now() - 336*60*60 * 1000)}}]}).exec()
   .catch(err => console.log(err))
-
-  // for (let i=0; i < games.length; i++) {
-  //   const game = games[i]
-  //   const playersInTheGame = game.players.map(player => { player.accountid } )
-
-  //     console.log(playersInTheGame)
-
-  //     // const proInTheGame =
-  //     //     playersInTheGame.filter(player =>
-  //     //       Object.keys(playerIdList)
-  //     //         .map(p => +p)
-  //     //         .includes(player),
-  //     //     ).length > 0;
-
-  // }
-
   return games.reverse();
 }
+
+// get win/loss function (set interval 30 seconds)
+// fetchGames
+ // iterate over games
+ // if !game.radiant_win.length
+  // const moreDetails = GetMatchDetails(game.matchID)  -> Make getMatchDetails in helpers
+  // if (moreDetails.length)
+   // Game.findOneAndUpdate{match_id, {radiant_win: moreDetails.radiant_win}}
+
+
 
 module.exports.saveMatches = saveMatches;
 module.exports.savePlayers = savePlayers;

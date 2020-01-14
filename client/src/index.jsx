@@ -57,14 +57,16 @@ const Player = (props) => {
           const playedWith = game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== heroIdOfPlayer).map(p => props.players[p.account_id]).join(', ');
           const playedAgainst = game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== heroIdOfPlayer).map(p => props.players[p.account_id]).join(', ');
           return (<div className="historyId" key={i}>
-              <img className="minimapIcon" src={ (game.players.find(player => player.account_id === +id).hero_id == 128 || game.players.find(player => player.account_id === +id).hero_id == 126) ?
-              newHeroes[game.players.find(player => player.account_id === +id).hero_id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/>
+              <div className="minimapIconDiv"><img className="minimapIcon" src={ (game.players.find(player => player.account_id === +id).hero_id == 128 || game.players.find(player => player.account_id === +id).hero_id == 126) ?
+              newHeroes[game.players.find(player => player.account_id === +id).hero_id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/></div>
 
-            <span className="historyStats">
-            {props.players[game.players.find(p => p.hero_id === +heroIdOfPlayer).account_id]}{playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span>
-            {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span>
+            <div className="historyStats">
+            <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +heroIdOfPlayer).account_id]}{playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span>
+            {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
 
-              {" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></div>)})}
+            <div className="historyDetails">{" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
+              </div></div>
+              )})}
           </div>
           </div>
           </div>
@@ -117,12 +119,13 @@ const Heroes = (props) => {
             {/* {setProOfHero(game.players.find(p => p.hero_id === +id).team)}
              */}
           <img className="minimapIcon" src={ (id == 128 || id == 126) ? newHeroes[id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_icon.png`}/>{"  "}
-          <span className="historyStats">{props.players[game.players.find(p => p.hero_id === +id).account_id]}{playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span>
-          {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span>
+          <div className="historyStats">
+          <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +id).account_id]}{playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span>
+          {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
 
-          <span className="historyDetails">{" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></span>
+          <div className="historyDetails">{" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
+          </div></div>
 
-          </div>
           )})}
 
 
