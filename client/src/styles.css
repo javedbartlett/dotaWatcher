@@ -439,3 +439,14 @@ video {
 
 .dropDownContentPlayer:hover {background-color: #222C2C}
 .dropDownContentHero:hover {background-color: #222C2C}
+
+.playedWith {
+  color: green;
+}
+.playedAgainst {
+  color: red;
+}
+
+/* .historyDetails {
+  font-size: 12px;
+} */

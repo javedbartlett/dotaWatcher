@@ -50,10 +50,21 @@ const Player = (props) => {
             <div className="matchHistoryTitle">Match History</div>
             <div className="minimapOuterContainer">
             <div className="minimapContainer">
-          {player.data && player.data.map((game, i) => <div className="historyId" key={i}>
+          {player.data && player.data.map((game, i) => {
+          const heroIdOfPlayer = game.players.find(p => p.account_id === +id).hero_id;
+          const teamOfPro = game.players.find(p => p.hero_id === +heroIdOfPlayer).team;
+          const otherTeam = teamOfPro === 2 ? 3 : 2;
+          const playedWith = game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== heroIdOfPlayer).map(p => props.players[p.account_id]).join(', ');
+          const playedAgainst = game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== heroIdOfPlayer).map(p => props.players[p.account_id]).join(', ');
+          return (<div className="historyId" key={i}>
               <img className="minimapIcon" src={ (game.players.find(player => player.account_id === +id).hero_id == 128 || game.players.find(player => player.account_id === +id).hero_id == 126) ?
               newHeroes[game.players.find(player => player.account_id === +id).hero_id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/>
-            <span className="historyStats">{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></div>)}
+
+            <span className="historyStats">
+            {props.players[game.players.find(p => p.hero_id === +heroIdOfPlayer).account_id]}{playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span>
+            {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span>
+
+              {" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></div>)})}
           </div>
           </div>
           </div>
@@ -65,17 +76,19 @@ const Heroes = (props) => {
   let { id } = useParams();
 
   const [games, setGames] = useState([]);
+  // const [proOfHero, setProOfHero] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
       const response = await axios(`/api/heroes/${id}`);
       await setGames(response);
       games.sort((a, b) =>
-      a.updatedAt > b.updatedAt ? -1 : 1,
+      a.createdAt > b.createdAt ? -1 : 1,
     );
     }
     fetchData();
   }, []);
+
     return (
         <div className="historyContainer">
           <div className="historyHeaderContainer">
@@ -94,11 +107,26 @@ const Heroes = (props) => {
             <div className="introMessage">{heroesList[id]} has been picked by pros {games.data && games.data.length} times in the last 2 weeks</div>
             <div className="minimapOuterContainer">
             <div className="minimapContainer">
-          {games.data && games.data.map((game, i) =>
+          {games.data && games.data.map((game, i) => {
+            const teamOfPro = game.players.find(p => p.hero_id === +id).team;
+            const otherTeam = teamOfPro === 2 ? 3 : 2;
+            const playedWith = game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', ');
+            const playedAgainst = game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', ');
+            return (
           <div className="historyId" key={i}>
+            {/* {setProOfHero(game.players.find(p => p.hero_id === +id).team)}
+             */}
           <img className="minimapIcon" src={ (id == 128 || id == 126) ? newHeroes[id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_icon.png`}/>{"  "}
-          <span className="historyStats">{props.players[game.players.find(p => p.hero_id === +id).account_id]}{" "}•{" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></div>)}
+          <span className="historyStats">{props.players[game.players.find(p => p.hero_id === +id).account_id]}{playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span>
+          {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span>
 
+          <span className="historyDetails">{" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</span></span>
+
+          </div>
+          )})}
+
+
+          {/* { " played with ".concat(game.players.filter(p => p.team === 2 && props.players[p.account_id] && p.hero_id !== +id)) } */}
           </div>
           </div>
           </div>
