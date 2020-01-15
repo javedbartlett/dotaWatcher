@@ -134,6 +134,7 @@ const playerIdList = {
   94296097: "xNova",
   73562326: "Zai",
   50828662: "Zfreek",
+  100175472: "Ztok",
 
 }
 
