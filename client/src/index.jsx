@@ -64,7 +64,14 @@ const Player = (props) => {
             <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +heroIdOfPlayer).account_id]}{playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span>
             {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
 
-            <div className="historyDetails">{" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
+            <div className="historyDetails">{" "}
+
+            <span className="playerDetailLink"><a href={`https://www.dotabuff.com/matches  /${game.match_id}`}>Dotabuff</a></span>
+            {" "}•{" "}
+          <span className="playerDetailLink"><a href={`https://www.opendota.com/matches/${game.match_id}`}>OpenDota</a></span>
+          {" "}•{" "}
+          <span className="playerDetailLink"><a href={`https://stratz.com/en-us/matches/${game.match_id}`}>Stratz</a></span>
+            {" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
               </div></div>
               )})}
           </div>
@@ -123,7 +130,14 @@ const Heroes = (props) => {
           <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +id).account_id]}{playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span>
           {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
 
-          <div className="historyDetails">{" "}{game.match_id}{" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
+          <div className="historyDetails">{" "}
+          <span className="playerDetailLink"><a href={`https://www.dotabuff.com/matches/${game.match_id}`}>Dotabuff</a></span>
+          {" "}•{" "}
+          <span className="playerDetailLink"><a href={`https://www.opendota.com/matches/${game.match_id}`}>OpenDota</a></span>
+          {" "}•{" "}
+          <span className="playerDetailLink"><a href={`https://stratz.com/en-us/matches/${game.match_id}`}>Stratz</a></span>
+
+          {" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
           </div> </div></div>
 
           )})}
