@@ -81,7 +81,7 @@ const playerIdList = {
   86953414: "Maybe Next Time",
   91369376: "Meracle",
   34505203: "MinD_ContRoL",
-  412019774:"Miracle",
+  412019774:"Miracle-",
   76173488: "MJW",
   102823997: "MJW",
   179760194: "Moonmeander",
