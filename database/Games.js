@@ -89,7 +89,7 @@ const fetchHeroHistory = async (heroId) => {
   // if (moreDetails.length)
    // Game.findOneAndUpdate{match_id, {radiant_win: moreDetails.radiant_win}}
 
-
+// maybe fetchGames lastupdated between 15 mins - 60 mins after first round.
 
 module.exports.saveMatches = saveMatches;
 module.exports.savePlayers = savePlayers;

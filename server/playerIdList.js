@@ -60,6 +60,7 @@ const playerIdList = {
   25907144: "Cr1t",
   114619230: "Crystallize",
   108376607: "Cty",
+  112531417: "ddz",
   85805514: "DeMoN",
   70388657: "Dendi",
   102099826: "DJ",
