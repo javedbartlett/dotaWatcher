@@ -137,7 +137,7 @@ const playerIdList = {
   184950344: "Kuku",
   49317728: "Kyle",
   82262664: "Kuroky",
-  59463394: "Leostyle",
+  59463394: "LeoStyle-",
   106809101: "Lil",
   12231202: "Limmp",
   156379523: "Limmp 2",
