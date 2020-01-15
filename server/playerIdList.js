@@ -75,7 +75,7 @@ const playerIdList = {
   // 95430068: "Madara (Peru)",
   178366364: "MagE-",
   171981096: "MagicaL",
-  3940262: "March_(Park_Tae-won)",
+  3940262: "March",
   315657960: "Mason",
   116102145: "MATUMBAMAN",
   86953414: "Maybe Next Time",
