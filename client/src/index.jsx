@@ -66,7 +66,7 @@ const Player = (props) => {
 
             <div className="historyDetails">{" "}
 
-            <span className="playerDetailLink"><a href={`https://www.dotabuff.com/matches  /${game.match_id}`}>Dotabuff</a></span>
+            <span className="playerDetailLink"><a href={`https://www.dotabuff.com/matches/${game.match_id}`}>Dotabuff</a></span>
             {" "}•{" "}
           <span className="playerDetailLink"><a href={`https://www.opendota.com/matches/${game.match_id}`}>OpenDota</a></span>
           {" "}•{" "}
