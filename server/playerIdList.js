@@ -96,7 +96,7 @@ const playerIdList = {
   94786276: "Nine",
   106573901: "Noone",
   357571132: "Paparazi",
-  28070572: "papita",
+  28070572: "Papita",
   6922000: "Pieliedie",
   86727555: "PPD",
   87278757: "Puppey",
