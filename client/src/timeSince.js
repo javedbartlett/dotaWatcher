@@ -18,10 +18,10 @@ function timeSince(timeStamp) {
   if (secondsPast < 3600) {
     return parseInt(secondsPast / 60) + ' minutes ago';
   }
-  if (secondsPast <= 86400) {
+  if (secondsPast <= 172800) {
     return parseInt(secondsPast / 3600) + ' hours ago';
   }
-  if (secondsPast > 86400) {
+  if (secondsPast > 172800) {
     let day = timeStamp.getDate();
     let month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ", "");
     let year = timeStamp.getFullYear() == now.getFullYear() ? "" : " " + timeStamp.getFullYear();
@@ -44,11 +44,11 @@ function timeSince2(timeStamp) {
   if (secondsPast < 7200) {
     return '1 hour ago';
   }
-  if (secondsPast <= 86400) {
+  if (secondsPast <= 172800) {
     return parseInt(secondsPast / 3600) + ' hours ago';
   }
 
-  if (secondsPast > 86400) {
+  if (secondsPast > 172800) {
     let day = timeStamp.getDate();
     let month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ", "");
     let year = timeStamp.getFullYear() == now.getFullYear() ? "" : " " + timeStamp.getFullYear();
