@@ -31,7 +31,7 @@ const playerIdList = {
   110880087: "Arteezy 4",
   88719902: "bOne7",
   42989814: "BabyKnight",
-  91735466: "User:Wockeez/Badman",
+  91735466: "Badman",
   59752811: "Bloody Nine",
   207829314: "BoBoKa",
   77490514: "Boxi",
