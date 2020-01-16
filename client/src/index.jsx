@@ -9,6 +9,8 @@ import { timeSince2 } from './timeSince.js';
 import cheerio from 'cheerio';
 import _ from 'lodash';
 import '@babel/polyfill';
+import ReactGA from 'react-ga';
+import createHistory from 'history/createBrowserHistory'
 import Footer from './components/Footer.jsx';
 import {
   BrowserRouter as Router,
@@ -18,6 +20,14 @@ import {
   useRouteMatch,
   useParams,
 } from "react-router-dom";
+
+ReactGA.initialize('UA-156051540-1')
+
+const history = createHistory()
+history.listen(location => {
+	ReactGA.set({ page: location.pathname })
+	ReactGA.pageview(location.pathname)
+})
 
 
 const Player = (props) => {
@@ -240,7 +250,10 @@ class App extends React.Component {
     };
   }
 
+
+
   componentDidMount() {
+    ReactGA.pageview(window.location.pathname)
     this.loadGames();
     this.loadPlayers();
     this.interval = setInterval(() => {
@@ -271,7 +284,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <Header />
         <Switch>
           <Route exact path="/">
@@ -290,5 +303,6 @@ class App extends React.Component {
     );
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('app'));
