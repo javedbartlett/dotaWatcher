@@ -13,7 +13,7 @@ import ReactGA from 'react-ga';
 import createHistory from 'history/createBrowserHistory'
 import Footer from './components/Footer.jsx';
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
   Link,
