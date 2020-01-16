@@ -9,6 +9,7 @@ import { timeSince2 } from './timeSince.js';
 import cheerio from 'cheerio';
 import _ from 'lodash';
 import '@babel/polyfill';
+import Footer from './components/Footer.jsx';
 import {
   BrowserRouter as Router,
   Switch,
@@ -284,6 +285,7 @@ class App extends React.Component {
             <Heroes players={this.state.players} />
           </Route>
         </Switch>
+        <Footer />
         </Router>
     );
   }

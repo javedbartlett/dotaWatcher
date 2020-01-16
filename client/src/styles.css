@@ -480,3 +480,20 @@ video {
   /* margin-bottom: 1; */
   vertical-align: top;
 }
+
+.footerInnerContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.discordLogo {
+  padding-right: 10px;
+  height: 80px;
+  width: auto;
+}
+
+.questions {
+  display: inline-flex;
+  color: rgb(174, 174, 174);
+  align-self: center;
+}
