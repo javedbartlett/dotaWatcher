@@ -277,6 +277,7 @@ class App extends React.Component {
           <Route exact path="/">
             <Search players={this.state.players} />
             <GameList players={this.state.players} data={this.state.games} />
+            <Footer />
           </Route>
           <Route exact path="/players/:id">
             <Player players={this.state.players} />
@@ -285,7 +286,6 @@ class App extends React.Component {
             <Heroes players={this.state.players} />
           </Route>
         </Switch>
-        <Footer />
         </Router>
     );
   }
