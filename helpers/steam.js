@@ -3,13 +3,20 @@ const rp = require('request-promise-native');
 const KEY = process.env.TOKEN || require('./config.js').KEY;
 
 const getGames = async () => {
-  return await rp(`https://api.steampowered.com/IDOTA2Match_570/GetTopLiveGame/v1?key=${KEY}&partner=0`)
-  .catch(err => console.log('error at getGames rp'));
+  try { return await rp(`https://api.steampowered.com/IDOTA2Match_570/GetTopLiveGame/v1?key=${KEY}&partner=0`)
+}
+  catch(err ) {
+    console.log('error at getGames rp');
+  }
 }
 
 const getLiveStats = async (serverId) => {
-  return await rp(`https://api.steampowered.com/IDOTA2MatchStats_570/GetRealtimeStats/v1?key=${KEY}&server_steam_id=${serverId}`)
-  .catch(err => console.log('error at getLiveStats rp'));
+  try {
+    return await rp(`https://api.steampowered.com/IDOTA2MatchStats_570/GetRealtimeStats/v1?key=${KEY}&server_steam_id=${serverId}`)
+  }
+  catch(err) {
+    console.log(err,'error at getLiveStats rp')
+  }
 }
 
 module.exports.getGames = getGames;

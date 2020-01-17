@@ -55,7 +55,8 @@ await axios.get(`https://liquipedia.net/dota2/${playerName}`)
 
 app.get('/api/saveImage/:id', async (req, res) => {
   const id = JSON.parse(req.params.id)
-  const imageData = await imageFetch(id);
+  const imageData = await imageFetch(id)
+  .catch(err => console.log('error at image fetch'))
   if (!imageData.length) {
     console.log('Scraping....')
     const playerName = playerIdList[id]
@@ -86,12 +87,14 @@ app.get('/api/playersList', async (req, res) => {
 
 app.get('/api/players/:id', async (req, res) => {
   const id = JSON.parse(req.params.id);
-  const games = await fetchHistory(id);
+  const games = await fetchHistory(id)
+  .catch(err => console.log('error from fetch history'))
   res.send(games);
 });
 app.get('/api/heroes/:id', async (req, res) => {
   const id = JSON.parse(req.params.id);
-  const games = await fetchHeroHistory(id);
+  const games = await fetchHeroHistory(id)
+  .catch(err => console.log('error from fetch history heroes/:id'))
   const gamesToSend = games.reduce((gameArr, game) => {
     const playerId = game.players.filter(p => p.hero_id === +req.params.id)[0].account_id;
     if (playerIdList[playerId]) {
@@ -125,7 +128,8 @@ app.get('/api/update', async (req, res) => {
           ).length > 0;
         if (proInTheGame) {
           const serverId = game.server_steam_id.toString();
-          const liveStats = await getLiveStats(serverId);
+          const liveStats = await getLiveStats(serverId)
+          if (liveStats) {
           const liveStatsJson = JSONbig.parse(liveStats);
           if (liveStatsJson.teams.length && game.players) {
           for (let i = 0; i <= 10; i++) {
@@ -159,6 +163,7 @@ app.get('/api/update', async (req, res) => {
         } else {
           removeOne({"server_steam_id": serverId})
         }
+      }
         }
       }
     }
@@ -171,7 +176,7 @@ const update = async () => {
   console.log('updating')
   // await removeAll()
   await rp(`http://localhost:${process.env.PORT||'3222'}/api/update`)
-  .catch(err => console.log('error from rp /api/update'));
+  .catch(err => console.log('error from rp /api/update'))
 }
 // setInterval(removeAll, 600000);
 setInterval(update, 10000);
