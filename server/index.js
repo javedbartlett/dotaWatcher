@@ -113,8 +113,7 @@ app.get('/api/update', async (req, res) => {
   if (dataJson.game_list) {
     for (let i = 0; i < dataJson.game_list.length; i++) {
       const game = dataJson.game_list[i];
-    if (game.average_mmr > 0) {
-      if (game.players) {
+    if (game.average_mmr > 0 && game.players) {
         const playersInTheGame = game.players
           .map(player => player.account_id)
           .filter(id => id);
@@ -165,7 +164,7 @@ app.get('/api/update', async (req, res) => {
         }
       }
         }
-      }
+
     }
     }
     res.end();
