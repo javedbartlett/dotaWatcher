@@ -18,6 +18,20 @@ const getLiveStats = async (serverId) => {
     console.log(err,'error at getLiveStats rp')
   }
 }
+const getMatchDetails = async (matchId) => {
+  try {
+    let match = await rp(`http://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/v1?key=${KEY}&match_id=${matchId}`)
+    let parsedMatch = JSON.parse(match);
+    // console.log(parsedMatch.result.radiant_win)
+    return parsedMatch.result.radiant_win;
+  }
+  catch(err) {
+    console.log(err,'error at getMatchDetails rp')
+  }
+
+}
+
 
 module.exports.getGames = getGames;
 module.exports.getLiveStats = getLiveStats;
+module.exports.getMatchDetails = getMatchDetails;
