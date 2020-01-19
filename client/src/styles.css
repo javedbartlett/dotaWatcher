@@ -272,6 +272,11 @@ div[name="dire"] .liveMatchPlayerName {
 a {
   text-decoration: none;
 }
+a:hover {
+  text-decoration: none;
+  text-shadow: 0 0 2px white;
+}
+
 
 .siteLink > a{
   color: white;
@@ -548,4 +553,13 @@ video {
   height: 35px;
   width: auto;
   /* padding-right: 7px; */
+}
+
+.nameAndAgainst a {
+color: white;
+}
+
+.nameAndAgainst a:hover {
+  cursor: pointer;
+  text-shadow: 0 0 2px white;
 }

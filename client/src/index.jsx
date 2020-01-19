@@ -65,8 +65,9 @@ const Player = (props) => {
           const heroIdOfPlayer = game.players.find(p => p.account_id === +id).hero_id;
           const teamOfPro = game.players.find(p => p.hero_id === +heroIdOfPlayer).team;
           const otherTeam = teamOfPro === 2 ? 3 : 2;
-          const playedWith = game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== heroIdOfPlayer).map(p => props.players[p.account_id]).join(', ');
-          const playedAgainst = game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== heroIdOfPlayer).map(p => props.players[p.account_id]).join(', ');
+          const playedWith = game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]);
+          const playedAgainst = game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]);
+
           let winOrLose = ""
           if (teamOfPro === 2) {
             if (game.radiant_win === true) {
@@ -80,7 +81,9 @@ const Player = (props) => {
               winOrLose = "lost"
             } else if (game.radiant_win === false) {
               winOrLose = "won"
-            } else winOrLose = "TBD"
+            } else if (game.radiant_win === undefined) {
+              winOrLose = "TBD"
+            }
           }
           return (<div className="historyId" key={i}>
               <div className="minimapIconDiv"><img className={
@@ -92,8 +95,10 @@ const Player = (props) => {
             {" "}<div className="historyStats">
             <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +heroIdOfPlayer).account_id]}
               {winOrLose === "won" ? <span className="won"> {winOrLose}</span> : <span className="lost"> {winOrLose}</span> }
-            {playedWith ? <span className="with"> with </span>:"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span>
-            {playedAgainst ? <span className="against"> against </span>:"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
+            {playedWith.join(',') ? <span className="with"> with </span>:"" }<span className="playedWith">{ playedWith ? playedWith: ""}</span>
+            {playedAgainst.join(',') ? <span className="against"> against </span>:"" }<span className="playedAgainst">{playedAgainst ?
+            playedAgainst.map(player => <span>{player} </span>)
+            : ""}</span></div>
 
             <div className="historyDetails">{" "}
 
@@ -144,14 +149,14 @@ const Heroes = (props) => {
             <div></div>
           <div className="historyGamesContainer">
             <div className="matchHistoryTitle">Match History</div>
-            <div className="introMessage">{heroesList[id]} has been picked by pros {games.data && games.data.length} times in the last 2 weeks</div>
+            <div className="introMessage"> {heroesList[id]} has been picked by pros {games.data && games.data.length} times in the last 2 weeks</div>
             <div className="minimapOuterContainer">
             <div className="minimapContainer">
           {games.data && games.data.map((game, i) => {
             const teamOfPro = game.players.find(p => p.hero_id === +id).team;
             const otherTeam = teamOfPro === 2 ? 3 : 2;
-            const playedWith = game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', ');
-            const playedAgainst = game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', ');
+            const playedWith = game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]);
+            const playedAgainst = game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]);
             let winOrLose = ""
             if (teamOfPro === 2) {
               if (game.radiant_win === true) {
@@ -165,8 +170,11 @@ const Heroes = (props) => {
                 winOrLose = "lost"
               } else if (game.radiant_win === false) {
                 winOrLose = "won"
-              } else winOrLose = "TBD"
+              } else if (game.radiant_win === undefined) {
+                winOrLose = "TBD"
+              }
             }
+            const playerId = game.players.find(p => p.hero_id === +id).account_id
             // console.log(typeof teamOfPro)
             return (
           <div className="historyId" key={i}>
@@ -177,13 +185,18 @@ const Heroes = (props) => {
             winOrLose === "lost" ? "minimapIconLose" : "minimapIcon"}
           src={ (id == 128 || id == 126) ? newHeroes[id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_icon.png`}/>{"  "}
           <div className="historyStats">
-          <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +id).account_id]}
+          <div className="nameAndAgainst"><Link to={"/players/" + playerId}> {props.players[playerId]} </Link>
 
           {winOrLose === "won" ? <span className="won"> {winOrLose}</span> : <span className="lost"> {winOrLose}</span> }
 
-          {playedWith ? <span className="with"> with </span> :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span>
+          {playedWith.join(',') ? <span className="with"> with </span> :"" }
+          <span className="playedWith">{playedWith ?
+            playedWith.map(player => <Link to={"/players/" + props.invertedPlayers[player]}><span>{player} </span></Link>)
+            : ""}</span>
 
-          {playedAgainst ? <span className="against"> against </span> :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
+          {playedAgainst.join(',') ? <span className="against"> against </span> :"" }<span className="playedAgainst">{playedAgainst ?
+            playedAgainst.map(player => <Link to={"/players/" + props.invertedPlayers[player]}><span>{player} </span></Link>)
+            : ""}</span></div>
 
           <div className="historyDetails">{" "}
           <span className="playerDetailLink"><a href={`https://www.dotabuff.com/matches/${game.match_id}`}>Dotabuff</a></span>
@@ -205,15 +218,6 @@ const Heroes = (props) => {
         </div>
     );
 }
-
-// const SearchBar = (props) => {
-
-//   return (
-//     <div className="searchBoxContainer">
-//     <input className="searchBox" placeholder="Search for player or hero" type="textbox" />
-//     </div>
-//   )
-// }
 
 class Search extends React.Component {
   constructor(props) {
@@ -337,10 +341,10 @@ class App extends React.Component {
             <Footer />
           </Route>
           <Route exact path="/players/:id">
-            <Player players={this.state.players} />
+            <Player players={this.state.players} invertedPlayers = {_.invert(this.state.players)} />
           </Route>
           <Route exact path="/heroes/:id">
-            <Heroes players={this.state.players} />
+            <Heroes players={this.state.players} invertedPlayers = {_.invert(this.state.players)} />
           </Route>
         </Switch>
         </Router>
