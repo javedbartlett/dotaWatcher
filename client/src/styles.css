@@ -481,6 +481,18 @@ video {
   justify-content: center;
 }
 
+.footerOuterContainer:nth-child(1) {
+  display: flex;
+  justify-content: center;
+}
+
+.footerOuterContainer > span {
+  display: flex;
+  justify-content: center;
+  color: rgb(174, 174, 174);
+}
+
+
 .discordLogo {
   padding-right: 10px;
   height: 80px;
@@ -491,6 +503,13 @@ video {
   display: inline-flex;
   color: rgb(174, 174, 174);
   align-self: center;
+}
+
+.inspired {
+  display: inline-flex;
+  vertical-align: top;
+  text-align: center;
+  color: whitesmoke;
 }
 /*
 .won {
