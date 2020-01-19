@@ -129,7 +129,7 @@ app.get('/api/update', async (req, res) => {
           const liveStats = await getLiveStats(serverId)
           if (liveStats) {
           const liveStatsJson = JSONbig.parse(liveStats);
-          if (liveStatsJson.teams.length && game.players) {
+          if (liveStatsJson.teams && game.players && liveStatsJson.teams[0].players) {
           for (let i = 0; i <= 10; i++) {
             if (i < 5) {
               await merge(game.players[i], liveStatsJson.teams[0].players[i]);

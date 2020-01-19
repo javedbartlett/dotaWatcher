@@ -356,12 +356,6 @@ video {
   color: white;
 }
 
-.minimapIcon {
-  height: 35px;
-  width: auto;
-  padding-right: 7px;
-}
-
 .historyStats {
   /* display: flex; */
   display: inline-block;
@@ -497,4 +491,33 @@ video {
   display: inline-flex;
   color: rgb(174, 174, 174);
   align-self: center;
+}
+/*
+.won {
+  color: green;
+}
+
+.lost {
+  color: red;
+} */
+
+.minimapIconWin {
+  height: 35px;
+  width: auto;
+  /* padding-right: 7px; */
+  border: 2px solid #008C00;
+  border-radius: 22px;
+}
+.minimapIconLose {
+  height: 35px;
+  width: auto;
+  /* padding-right: 7px; */
+  border: 2px solid #B9220E;
+  border-radius: 22px;
+}
+
+.minimapIcon {
+  height: 35px;
+  width: auto;
+  /* padding-right: 7px; */
 }
