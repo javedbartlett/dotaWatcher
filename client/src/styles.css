@@ -511,14 +511,23 @@ video {
   text-align: center;
   color: whitesmoke;
 }
-/*
+
 .won {
-  color: green;
+  color: #658D8C;
+  font-weight: 700;
 }
 
 .lost {
-  color: red;
-} */
+  color: #658D8C;
+  font-weight: 700;
+}
+
+.against {
+  color: #658D8C;
+}
+.with {
+  color: #658D8C;
+}
 
 .minimapIconWin {
   height: 35px;

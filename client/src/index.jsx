@@ -92,8 +92,8 @@ const Player = (props) => {
             {" "}<div className="historyStats">
             <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +heroIdOfPlayer).account_id]}
               {winOrLose === "won" ? <span className="won"> {winOrLose}</span> : <span className="lost"> {winOrLose}</span> }
-            {playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span>
-            {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
+            {playedWith ? <span className="with"> with </span>:"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span>
+            {playedAgainst ? <span className="against"> against </span>:"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +heroIdOfPlayer).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
 
             <div className="historyDetails">{" "}
 
@@ -181,9 +181,9 @@ const Heroes = (props) => {
 
           {winOrLose === "won" ? <span className="won"> {winOrLose}</span> : <span className="lost"> {winOrLose}</span> }
 
-          {playedWith ? " with " :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span>
+          {playedWith ? <span className="with"> with </span> :"" }<span className="playedWith">{ playedWith ? game.players.filter(p => p.team === teamOfPro && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span>
 
-          {playedAgainst ? " against " :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
+          {playedAgainst ? <span className="against"> against </span> :"" }<span className="playedAgainst">{playedAgainst ? game.players.filter(p => p.team === otherTeam && props.players[p.account_id] && p.hero_id !== +id).map(p => props.players[p.account_id]).join(', '): ""}</span></div>
 
           <div className="historyDetails">{" "}
           <span className="playerDetailLink"><a href={`https://www.dotabuff.com/matches/${game.match_id}`}>Dotabuff</a></span>
