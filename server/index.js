@@ -19,6 +19,7 @@ const {
   removeOne,
   fetchHistory,
   fetchHeroHistory,
+  getDetails,
 } = require('../database/Games.js');
 const { saveImage, imageFetch } = require('../database/Images.js');
 const { getGames, getLiveStats, getMatchDetails } = require('../helpers/steam.js');
@@ -177,6 +178,7 @@ const update = async () => {
 }
 
 setInterval(update, 10000);
+setInterval(getDetails, 300000)
 
 const port = process.env.PORT || 3222;
 app.listen(port, () => console.log(`listening on port ${port}`));

@@ -82,7 +82,7 @@ const Player = (props) => {
           <span className="playerDetailLink"><a href={`https://www.opendota.com/matches/${game.match_id}`}>OpenDota</a></span>
           {" "}•{" "}
           <span className="playerDetailLink"><a href={`https://stratz.com/en-us/matches/${game.match_id}`}>Stratz</a></span>
-            {" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
+            {" "}•{" "}{timeSince2(game.createdAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
               </div></div>
               )})}
           </div>
@@ -148,7 +148,7 @@ const Heroes = (props) => {
           {" "}•{" "}
           <span className="playerDetailLink"><a href={`https://stratz.com/en-us/matches/${game.match_id}`}>Stratz</a></span>
 
-          {" "}•{" "}{timeSince2(game.updatedAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
+          {" "}•{" "}{timeSince2(game.createdAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
           </div> </div></div>
 
           )})}

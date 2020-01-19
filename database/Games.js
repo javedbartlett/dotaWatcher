@@ -84,9 +84,12 @@ const fetchHeroHistory = async (heroId) => {
 }
 
 const getDetails = async () => {
-  let allData = await Game.find().exec()
+  let allData = await Game.find(
+  {"createdAt":{$gt:new Date(Date.now() - 2*60*60 * 1000)}}).exec()
+  .catch(err => console.log(err))
   for (let i = 0; i < allData.length; i++) {
     let game = allData[i];
+    console.log(game.match_id)
     if (game.radiant_win === undefined) {
       // console.log(game.match_id)
       const radiant_win =  await getMatchDetails(game.match_id)
@@ -107,7 +110,6 @@ const getDetails = async () => {
     }
   }
 }
-getDetails();
 
 // const testFunc = async () => {
 //   let test = await Game.find({match_id: 5202279188}).exec();
@@ -163,3 +165,4 @@ module.exports.fetchHistory = fetchHistory;
 module.exports.fetchHeroHistory = fetchHeroHistory;
 module.exports.removeAll = removeAll;
 module.exports.removeOne = removeOne;
+module.exports.getDetails = getDetails;
