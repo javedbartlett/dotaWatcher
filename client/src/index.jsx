@@ -39,9 +39,9 @@ const Player = (props) => {
       const response2 = await axios(`/api/saveImage/${id}`)
       setPlayerData({ data: response1.data, image: response2.data });
     };
-
     fetchData();
   }, []);
+  console.log(id)
     return (
         <div className="historyContainer">
           <div className="historyHeaderContainer">
@@ -95,9 +95,9 @@ const Player = (props) => {
             {" "}<div className="historyStats">
             <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +heroIdOfPlayer).account_id]}
               {winOrLose === "won" ? <span className="won"> {winOrLose}</span> : <span className="lost"> {winOrLose}</span> }
-            {playedWith.join(',') ? <span className="with"> with </span>:"" }<span className="playedWith">{ playedWith ? playedWith: ""}</span>
+            {playedWith.join(',') ? <span className="with"> with </span>:"" }<span className="playedWith">{ playedWith ? playedWith.join(', '): ""}</span>
             {playedAgainst.join(',') ? <span className="against"> against </span>:"" }<span className="playedAgainst">{playedAgainst ?
-            playedAgainst.map(player => <span>{player} </span>)
+            playedAgainst.map(player => <Link key={Math.random()} to={"/players/" + id}><span> {player} </span></Link>)
             : ""}</span></div>
 
             <div className="historyDetails">{" "}
