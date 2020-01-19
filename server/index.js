@@ -60,7 +60,8 @@ app.get('/api/saveImage/:id', async (req, res) => {
   if (!imageData.length) {
     console.log('Scraping....')
     const playerName = playerIdList[id]
-    const resp = await axios.get(`https://liquipedia.net/dota2/${playerName}`)
+    const cleanPlayerName = playerName.replace(/\s+\d$/, '');
+    const resp = await axios.get(`https://liquipedia.net/dota2/${cleanPlayerName}`)
     const $ = cheerio.load(resp.data)
     const image = "https://liquipedia.net/" + $('.image img').attr('src')
     const imageResult = await saveImage(image, id)
