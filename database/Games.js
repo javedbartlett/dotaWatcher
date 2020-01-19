@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const db = require('./index.js')
 const { playerIdList } = require('../server/playerIdList.js');
+const { getMatchDetails } = require('../helpers/steam.js');
 
 const gameSchema = mongoose.Schema({
   // TODO: your schema here!
@@ -19,6 +20,7 @@ const gameSchema = mongoose.Schema({
   sort_score: Number,
   delay: Number,
   spectators: Number,
+  radiant_win: Boolean,
 
 }
 ,{timestamps: true }
@@ -81,6 +83,39 @@ const fetchHeroHistory = async (heroId) => {
   return games.reverse();
 }
 
+const getDetails = async () => {
+  let allData = await Game.find().exec()
+  for (let i = 0; i < allData.length; i++) {
+    let game = allData[i];
+    if (game.radiant_win === undefined) {
+      // console.log(game.match_id)
+      const radiant_win =  await getMatchDetails(game.match_id)
+      console.log(radiant_win)
+      if (radiant_win !== undefined) {
+        const { match_id } = game;
+        const data = { radiant_win: radiant_win }
+        await Game.findOneAndUpdate({ match_id }, data, {
+          upsert: true,
+          new: true,
+          setDefaultsOnInsert: true,
+          strict: false,
+        })
+      } else if (radiant_win === undefined) {
+          // console.log(game.match_id)
+          console.log('game not found')
+      }
+    }
+  }
+}
+getDetails();
+
+// const testFunc = async () => {
+//   let test = await Game.find({match_id: 5202279188}).exec();
+//   console.log(test[0].radiant_win)
+// }
+// testFunc()
+
+
 // get win/loss function (set interval 30 seconds)
 // fetchGames
  // iterate over games
@@ -90,6 +125,36 @@ const fetchHeroHistory = async (heroId) => {
    // Game.findOneAndUpdate{match_id, {radiant_win: moreDetails.radiant_win}}
 
 // maybe fetchGames lastupdated between 15 mins - 60 mins after first round.
+
+// result.radiant_win
+
+// {
+//   players: [
+//     [Object], [Object],
+//     [Object], [Object],
+//     [Object], [Object],
+//     [Object], [Object],
+//     [Object], [Object]
+//   ],
+//   _id: 5e1eb80a3d4e0c61516aa5f3,
+//   match_id: 5197552181,
+//   __v: 0,
+//   average_mmr: 7419,
+//   building_state: 4785955,
+//   createdAt: 2020-01-15T06:58:18.577Z,
+//   delay: 120,
+//   dire_score: 45,
+//   game_mode: 22,
+//   game_state: 5,
+//   game_time: 1475,
+//   last_update_time: 1579073280,
+//   radiant_lead: -18399,
+//   radiant_score: 22,
+//   server_steam_id: '90131888948971523',
+//   sort_score: 8031,
+//   spectators: 112,
+//   updatedAt: 2020-01-15T07:29:11.908Z
+// },
 
 module.exports.saveMatches = saveMatches;
 module.exports.savePlayers = savePlayers;

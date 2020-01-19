@@ -21,7 +21,7 @@ const {
   fetchHeroHistory,
 } = require('../database/Games.js');
 const { saveImage, imageFetch } = require('../database/Images.js');
-const { getGames, getLiveStats } = require('../helpers/steam.js');
+const { getGames, getLiveStats, getMatchDetails } = require('../helpers/steam.js');
 const { playerIdList } = require('./playerIdList.js');
 
 app.use(cors())
@@ -70,13 +70,10 @@ app.get('/api/saveImage/:id', async (req, res) => {
       res.send(err)
     })
     console.log('result',imageResult)
-    // const imageBase64 = imageResult[0].img.data.toString('base64').toString('base64');
     const imageBase64 = imageResult.img.data.toString('base64');
-    // console.log('image base64 here', imageBase64);
     res.send(imageBase64)
   } else {
     const imageBase64 = imageData[0].img.data.toString('base64');
-    // console.log('image here', imageBase64);
     res.send(imageBase64);
   }
 
@@ -178,12 +175,8 @@ const update = async () => {
   await rp(`http://localhost:${process.env.PORT||'3222'}/api/update`)
   .catch(err => console.log('error from rp /api/update'))
 }
-// setInterval(removeAll, 600000);
-setInterval(update, 10000);
 
-// app.get('/*', (req,res) =>{
-//   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
-// });
+setInterval(update, 10000);
 
 const port = process.env.PORT || 3222;
 app.listen(port, () => console.log(`listening on port ${port}`));
