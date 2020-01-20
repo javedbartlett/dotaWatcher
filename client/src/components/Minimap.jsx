@@ -7,7 +7,7 @@ const mapStyle = {
   backgroundImage: `url(${minimap})`,
   backgroundSize: "contain",
   height: "550px",
-  width: "580px",
+  width: "575px",
 }
 
 const Minimap = (props) => {
