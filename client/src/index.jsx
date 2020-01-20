@@ -35,10 +35,6 @@ const Player = (props) => {
   const [player, setPlayerData] = useState({ data: null, image: null });
 
   useEffect(() => {
-    console.log('count changed');
-}, [id])
-
-  useEffect(() => {
     const fetchData = async () => {
       const response1 = await axios(`/api/players/${id}`);
       const response2 = await axios(`/api/saveImage/${id}`)
@@ -47,8 +43,6 @@ const Player = (props) => {
     fetchData();
   }, [id]);
 
-
-  console.log('test')
     return (
         <div className="historyContainer">
           <div className="historyHeaderContainer">
@@ -93,22 +87,28 @@ const Player = (props) => {
             }
           }
           return (<div className="historyId" key={i}>
-              <div className="minimapIconDiv"><img className={
+              <div className="minimapIconDiv"><a href={"/heroes/" + heroIdOfPlayer }> <img className={
             winOrLose === "won" ? "minimapIconWin" :
             winOrLose === "lost" ? "minimapIconLose" : "minimapIcon"}
               src={ (game.players.find(player => player.account_id === +id).hero_id == 128 || game.players.find(player => player.account_id === +id).hero_id == 126) ?
-              newHeroes[game.players.find(player => player.account_id === +id).hero_id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/></div>
+              newHeroes[game.players.find(player => player.account_id === +id).hero_id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/> </a> </div>
 
             {" "}<div className="historyStats">
             <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +heroIdOfPlayer).account_id]}
               {winOrLose === "won" ? <span className="won"> {winOrLose}</span> : <span className="lost"> {winOrLose}</span> }
-            {playedWith.join(',') ? <span className="with"> with </span>:"" }<span className="playedWith">{ playedWith ? playedWith.join(', '): ""}</span>
-            {playedAgainst.join(',') ? <span className="against"> against </span>:"" }<span className="playedAgainst">{playedAgainst ?
-            playedAgainst.map((player, i) => <Link key={Math.random()}><span> {i < (playedAgainst.length - 1 )  ? `${player}, ` : player} </span></Link>)
-            : ""}</span></div>
+            {playedWith.join(',') ? <span className="with"> with </span>:"" }
 
+            <span className="playedWith">{playedWith ?
+            playedWith.map((player, i) => <a key={i} href={"/players/" + props.invertedPlayers[player]}><span> {i < (playedWith.length - 1 )  ? `${player}, ` : player} </span></a>)
+            : ""}</span>
+
+            {playedAgainst.join(',') ? <span className="against"> against </span>:"" }
+            <span className="playedAgainst">{playedAgainst ?
+            playedAgainst.map((player, i) => <a key={i} href={"/players/" + props.invertedPlayers[player]}><span> {i < (playedAgainst.length - 1 )  ? `${player}, ` : player} </span></a>)
+            : ""}</span>
+
+            </div>
             <div className="historyDetails">{" "}
-
             <span className="playerDetailLink"><a href={`https://www.dotabuff.com/matches/${game.match_id}`}>Dotabuff</a></span>
             {" "}•{" "}
           <span className="playerDetailLink"><a href={`https://www.opendota.com/matches/${game.match_id}`}>OpenDota</a></span>
@@ -187,7 +187,7 @@ const Heroes = (props) => {
           <div className="historyId" key={i}>
             {/* {setProOfHero(game.players.find(p => p.hero_id === +id).team)}
              */}
-          <div className="minimapIconDiv"><img className={
+          <div className="minimapIconDiv"> <img className={
             winOrLose === "won" ? "minimapIconWin" :
             winOrLose === "lost" ? "minimapIconLose" : "minimapIcon"}
           src={ (id == 128 || id == 126) ? newHeroes[id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_icon.png`}/>{"  "}
