@@ -150,7 +150,11 @@ img {
     font-weight: 700;
     color: rgb(52, 91, 91);
   }
-  #grid14 { grid-area: 1 / 3 / 2 / 4; }
+  #grid14 {
+    grid-area: 1 / 3 / 2 / 4;
+    /* text-align: center; */
+    /* padding-top: 3rem; */
+   }
   #grid15 { grid-area: 7 / 1 / 8 / 2;
   position: relative;
   /* white-space: nowrap; */
@@ -562,4 +566,29 @@ color: white;
 .nameAndAgainst a:hover {
   cursor: pointer;
   text-shadow: 0 0 2px white;
+}
+
+.realMinimapContainer {
+  position: absolute;
+  display: block;
+  z-index: 100;
+  justify-content: center;
+}
+
+.minimapImage {
+  padding-left: 10rem;
+  position: absolute;
+  display: block;
+  height: 600px;
+  width: auto;
+  z-index: 1000;
+  align-self: center;
+}
+
+.mapIcon {
+  height: 45px;
+  width: auto;
+  position: absolute;
+  /* left: 50px; */
+
 }

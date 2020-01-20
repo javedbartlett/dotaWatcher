@@ -1,11 +1,12 @@
-import React from 'react';
-import { heroesList, localizedList } from '../heroList.js';
+import React, { useState, useEffect } from 'react';
+import { heroesList, localizedList } from '../heroList';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 import _ from 'lodash';
 import escape from 'lodash.escape';
-import { timeSince } from '../timeSince.js';
+import { timeSince } from '../timeSince';
 import { Link } from 'react-router-dom';
+import Minimap from './Minimap'
 
 const colors = [
   'Blue',
@@ -21,7 +22,15 @@ const colors = [
 ];
 
 // localizedList[data.hero_id].replace("npc_dota_hero_", "")
-const GameListItem = props => (
+const GameListItem = props => {
+  const [isOpen, toggleOpen] = useState(false);
+
+  const clickHandler = () => {
+    toggleOpen(prevState => {
+      return !prevState
+    })
+  }
+return (
   <div className="feedContainer">
     <div className="feed">
       {/* {console.log(props.data.game_time)} */}
@@ -69,6 +78,7 @@ const GameListItem = props => (
       <div id="grid16">
       <div>watch_server</div>
       <div>{props.data.server_steam_id.toString()}</div>
+      <div onClick={() => clickHandler()}>Minimap</div>
       </div>
             <div id="grid12">
             <div>{!props.data.average_mmr
@@ -79,10 +89,12 @@ const GameListItem = props => (
               {/* {console.log(props.data.game_state)} */}
               </div>
       <span id="grid11">VS</span>
+
       <span id="grid15">Last Update: {timeSince(props.data.updatedAt)} </span>
     </div>
+              {isOpen ? <Minimap data={props} /> : ""}
   </div>
-);
+)}
 
 export default GameListItem;
 

@@ -29,7 +29,6 @@ history.listen(location => {
 	ReactGA.pageview(location.pathname)
 })
 
-
 const Player = (props) => {
   let { id } = useParams();
   const [player, setPlayerData] = useState({ data: null, image: null });
@@ -302,10 +301,16 @@ class App extends React.Component {
     this.state = {
       games: [],
       players: {},
+      isOpen: false,
     };
   }
 
 
+  clickHandler(){
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen
+    }))
+  }
 
   componentDidMount() {
     ReactGA.pageview(window.location.pathname)
