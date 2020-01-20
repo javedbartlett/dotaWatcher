@@ -590,5 +590,14 @@ color: white;
   width: auto;
   position: absolute;
   /* left: 50px; */
+}
 
+.minimapText {
+color: white;
+text-align: center;
+}
+
+.minimapText:hover {
+  cursor: pointer;
+  text-shadow: 0 0 2px white;
 }

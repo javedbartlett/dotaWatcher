@@ -76,9 +76,10 @@ return (
         <div className="scoreboard">{props.data.radiant_score} - {props.data.dire_score}</div>
       </div>
       <div id="grid16">
-      <div>watch_server</div>
+      {/* <div>watch_server</div> */}
       <div>{props.data.server_steam_id.toString()}</div>
-      <div onClick={() => clickHandler()}>Minimap</div>
+      {" "}
+      <div className="minimapText" onClick={() => clickHandler()}>Minimap</div>
       </div>
             <div id="grid12">
             <div>{!props.data.average_mmr
