@@ -79,7 +79,7 @@ return (
       {/* <div>watch_server</div> */}
       <div>{props.data.server_steam_id.toString()}</div>
       {" "}
-      <div className="minimapText" onClick={() => clickHandler()}>Minimap</div>
+      <div className="minimapText" onClick={() => clickHandler()}>View Minimap</div>
       </div>
             <div id="grid12">
             <div>{!props.data.average_mmr
