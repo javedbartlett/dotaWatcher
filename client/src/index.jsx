@@ -87,11 +87,11 @@ const Player = (props) => {
             }
           }
           return (<div className="historyId" key={i}>
-              <div className="minimapIconDiv"><a href={"/heroes/" + heroIdOfPlayer }> <img className={
+              <div className="minimapIconDiv"><Link to={"/heroes/" + heroIdOfPlayer }> <img className={
             winOrLose === "won" ? "minimapIconWin" :
             winOrLose === "lost" ? "minimapIconLose" : "minimapIcon"}
               src={ (game.players.find(player => player.account_id === +id).hero_id == 128 || game.players.find(player => player.account_id === +id).hero_id == 126) ?
-              newHeroes[game.players.find(player => player.account_id === +id).hero_id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/> </a> </div>
+              newHeroes[game.players.find(player => player.account_id === +id).hero_id] : `http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[game.players.find(player => player.account_id === +id).hero_id].replace('npc_dota_hero_', '')}_icon.png`}/> </Link> </div>
 
             {" "}<div className="historyStats">
             <div className="nameAndAgainst">{props.players[game.players.find(p => p.hero_id === +heroIdOfPlayer).account_id]}
