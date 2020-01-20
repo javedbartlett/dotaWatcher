@@ -1,12 +1,13 @@
 import React, { useCallback, useState } from 'react';
-import minimap from '../img/Minimap_7.23.jpg';
+// import minimap from '../img/Minimap_7.23.jpg';
+import minimap from '../img/Minimap_7.23_crop.jpg';
 import { localizedList, newHeroes } from '../heroList';
 
 const mapStyle = {
   backgroundImage: `url(${minimap})`,
   backgroundSize: "contain",
-  height: "600px",
-  width: "600px",
+  height: "550px",
+  width: "580px",
 }
 
 const Minimap = (props) => {
