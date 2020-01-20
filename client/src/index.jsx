@@ -33,6 +33,11 @@ history.listen(location => {
 const Player = (props) => {
   let { id } = useParams();
   const [player, setPlayerData] = useState({ data: null, image: null });
+
+  useEffect(() => {
+    console.log('count changed');
+}, [id])
+
   useEffect(() => {
     const fetchData = async () => {
       const response1 = await axios(`/api/players/${id}`);
@@ -40,8 +45,10 @@ const Player = (props) => {
       setPlayerData({ data: response1.data, image: response2.data });
     };
     fetchData();
-  }, []);
-  console.log(id)
+  }, [id]);
+
+
+  console.log('test')
     return (
         <div className="historyContainer">
           <div className="historyHeaderContainer">
@@ -97,7 +104,7 @@ const Player = (props) => {
               {winOrLose === "won" ? <span className="won"> {winOrLose}</span> : <span className="lost"> {winOrLose}</span> }
             {playedWith.join(',') ? <span className="with"> with </span>:"" }<span className="playedWith">{ playedWith ? playedWith.join(', '): ""}</span>
             {playedAgainst.join(',') ? <span className="against"> against </span>:"" }<span className="playedAgainst">{playedAgainst ?
-            playedAgainst.map(player => <Link key={Math.random()} to={"/players/" + id}><span> {player} </span></Link>)
+            playedAgainst.map((player, i) => <Link key={Math.random()}><span> {i < (playedAgainst.length - 1 )  ? `${player}, ` : player} </span></Link>)
             : ""}</span></div>
 
             <div className="historyDetails">{" "}
@@ -132,7 +139,7 @@ const Heroes = (props) => {
     );
     }
     fetchData();
-  }, []);
+  }, [id]);
 
     return (
         <div className="historyContainer">
@@ -191,11 +198,11 @@ const Heroes = (props) => {
 
           {playedWith.join(',') ? <span className="with"> with </span> :"" }
           <span className="playedWith">{playedWith ?
-            playedWith.map(player => <Link to={"/players/" + props.invertedPlayers[player]}><span>{player} </span></Link>)
+            playedWith.map((player, i) => <Link key={Math.random()} to={"/players/" + props.invertedPlayers[player]}><span> {i < (playedAgainst.length - 1 )  ? `${player}, ` : player} </span></Link>)
             : ""}</span>
 
           {playedAgainst.join(',') ? <span className="against"> against </span> :"" }<span className="playedAgainst">{playedAgainst ?
-            playedAgainst.map(player => <Link to={"/players/" + props.invertedPlayers[player]}><span>{player} </span></Link>)
+            playedAgainst.map((player, i) => <Link key={Math.random()} to={"/players/" + props.invertedPlayers[player]}><span> {i < (playedAgainst.length - 1 )  ? `${player}, ` : player} </span></Link>)
             : ""}</span></div>
 
           <div className="historyDetails">{" "}
