@@ -177,7 +177,7 @@ const update = async () => {
   .catch(err => console.log('error from rp /api/update'))
 }
 
-setInterval(update, 10000);
+setInterval(update, 5000);
 setInterval(getDetails, 300000)
 
 const port = process.env.PORT || 3222;

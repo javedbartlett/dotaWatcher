@@ -318,7 +318,7 @@ class App extends React.Component {
     this.loadPlayers();
     this.interval = setInterval(() => {
       this.loadGames();
-    }, 5000);
+    }, 2000);
 
   }
 

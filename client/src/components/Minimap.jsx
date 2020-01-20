@@ -22,7 +22,7 @@ const Minimap = (props) => {
         const y = (player.y*100) + 50;
         return (
           <img
-          style={{left: x + '%', top: y + '%' }}
+          style={{left: x + '%', bottom: y + '%' }}
           className="mapIcon" src={
             player.hero_id === 126 || player.hero_id === 128 ?
             newHeroes[player.hero_id] :
