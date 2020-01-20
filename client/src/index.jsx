@@ -10,7 +10,7 @@ import cheerio from 'cheerio';
 import _ from 'lodash';
 import '@babel/polyfill';
 import ReactGA from 'react-ga';
-import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory as createHistory } from "history";
 import Footer from './components/Footer.jsx';
 import {
   Router,
