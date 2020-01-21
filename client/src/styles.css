@@ -573,6 +573,7 @@ color: white;
   display: block;
   z-index: 100;
   justify-content: center;
+  top: 1px;
 }
 
 .minimapImage {

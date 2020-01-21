@@ -79,7 +79,9 @@ return (
       {/* <div>watch_server</div> */}
       <div>{props.data.server_steam_id.toString()}</div>
       {" "}
-      <div className="minimapText" onClick={() => clickHandler()}>View Minimap</div>
+      <div className="minimapText"
+      onClick={() => clickHandler()}>
+        View Minimap</div>
       </div>
             <div id="grid12">
             <div>{!props.data.average_mmr
@@ -93,7 +95,8 @@ return (
 
       <span id="grid15">Last Update: {timeSince(props.data.updatedAt)} </span>
     </div>
-              {isOpen ? <Minimap data={props} /> : ""}
+              {isOpen ? <Minimap onDoubleClick={() => console.log('double click')}
+              data={props} /> : ""}
   </div>
 )}
 
