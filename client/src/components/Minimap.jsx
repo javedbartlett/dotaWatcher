@@ -12,14 +12,14 @@ const mapStyle = {
 
 const Minimap = (props) => {
   const { players } = props.data.data
-
+  console.log(props.data.data)
 
   return (
       <div style={mapStyle} className="realMinimapContainer">
       {players.map(player => {
         const heroName = localizedList[player.hero_id].replace('npc_dota_hero_', '');
-        const x = (player.x*100) + 44;
-        const y = (player.y*100) + 46;
+        const x = (player.x*100) + 45.5;
+        const y = (player.y*100) + 46.5;
         return (
           <img
           style={{left: x + '%', bottom: y + '%' }}
