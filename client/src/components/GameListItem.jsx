@@ -6,7 +6,8 @@ import _ from 'lodash';
 import escape from 'lodash.escape';
 import { timeSince } from '../timeSince';
 import { Link } from 'react-router-dom';
-import Minimap from './Minimap'
+import Minimap from './Minimap';
+import { Spring } from 'react-spring/renderprops';
 
 const colors = [
   'Blue',
@@ -32,6 +33,14 @@ const GameListItem = props => {
     })
   }
 return (
+  <Spring
+  from={{opacity: 0, marginTop: -500 }}
+  to={{opacity: 1, marginTop: 0 }}
+  config={{ delay: 750, duration: 1250 }}
+  >
+    {props1 => (
+    <div style={props1}>
+
   <div className="feedContainer">
     {isOpen ? <Minimap
     rightClickHandler={clickHandler} data={props} /> : ""}
@@ -100,6 +109,9 @@ return (
     </div>
 
   </div>
+   </div>
+        )}
+         </Spring>
 )}
 
 export default GameListItem;
