@@ -589,6 +589,7 @@ color: white;
   height: 40px;
   width: auto;
   position: absolute;
+  z-index: 1500;
   /* left: 50px; */
 }
 
@@ -600,4 +601,11 @@ text-align: center;
 .minimapText:hover {
   cursor: pointer;
   text-shadow: 0 0 2px white;
+}
+
+.towerIcon {
+  height: 20px;
+  width: auto;
+  position: absolute;
+  /* left: 50px; */
 }

@@ -21,6 +21,7 @@ const gameSchema = mongoose.Schema({
   delay: Number,
   spectators: Number,
   radiant_win: Boolean,
+  buildings: [],
 
 }
 ,{timestamps: true }

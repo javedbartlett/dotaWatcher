@@ -2,12 +2,8 @@ const request = require('request');
 const rp = require('request-promise-native');
 const KEY = process.env.TOKEN || require('./config.js').KEY;
 
-const getGames = async () => {
-  try { return await rp(`https://api.steampowered.com/IDOTA2Match_570/GetTopLiveGame/v1?key=${KEY}&partner=0`)
-}
-  catch(err ) {
-    console.log('error at getGames rp');
-  }
+const getGames = () => {
+   return rp(`https://api.steampowered.com/IDOTA2Match_570/GetTopLiveGame/v1?key=${KEY}&partner=0`)
 }
 
 const getLiveStats = async (serverId) => {

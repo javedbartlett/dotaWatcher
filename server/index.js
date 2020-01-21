@@ -106,10 +106,14 @@ app.get('/api/heroes/:id', async (req, res) => {
 });
 
 app.get('/api/update', async (req, res) => {
-  const data = await getGames();
+  const data = await getGames()
+  .catch(err => console.log('Houston we got an err at getGames in index.js'))
+    if (!data) {
+      return;
+    }
   const dataJson = JSONbig.parse(data);
 
-  if (dataJson.game_list) {
+  if (dataJson.game_list && dataJson.game_list.length) {
     for (let i = 0; i < dataJson.game_list.length; i++) {
       const game = dataJson.game_list[i];
     if (game.average_mmr > 0 && game.players) {
@@ -156,6 +160,7 @@ app.get('/api/update', async (req, res) => {
             sort_score: game.sort_score,
             delay: game.delay,
             spectators: game.spectators,
+            buildings: liveStatsJson.buildings,
 
           });
         } else {
