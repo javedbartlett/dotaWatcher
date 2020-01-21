@@ -50,6 +50,9 @@ const Minimap = (props) => {
           }/> : ""
         )
       })}
+      <img className="closeButton"style={{height: '30px', width: 'auto', }}
+      onClick={rightClickHandler}
+      src="https://cdn1.iconfinder.com/data/icons/interface-elements/32/cancel-square-512.png"></img>
       </div>
       </Draggable>
   )
