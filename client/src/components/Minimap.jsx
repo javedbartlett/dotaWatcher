@@ -26,9 +26,11 @@ const Minimap = (props) => {
           <img key={i}
           style={{left: x + '%', bottom: y + '%' }}
           className="mapIcon" src={
+            player.hero_id ?
             player.hero_id === 126 || player.hero_id === 128 ?
             newHeroes[player.hero_id] :
             `http://cdn.dota2.com/apps/dota2/images/heroes/${heroName}_icon.png`
+            : `https://gamepedia.cursecdn.com/dota2_gamepedia/6/65/Thyg_the_Giftsnatch_Greevil_minimap_icon.png?version=086a0caa461835865d54be6d50396dc7`
       }></img>
         )
       })}
