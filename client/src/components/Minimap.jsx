@@ -14,12 +14,13 @@ const mapStyle = {
 }
 
 const Minimap = (props) => {
-  const { players } = props.data.data
-  const { buildings } = props.data.data
+  const { players } = props.data.data;
+  const { buildings } = props.data.data;
+  const { rightClickHandler } = props;
 
   return (
-    <Draggable>
-      <div style={mapStyle} className="realMinimapContainer">
+    <Draggable >
+      <div onContextMenu={rightClickHandler} style={mapStyle} className="realMinimapContainer">
       {players.map((player, i) => {
         const heroName = localizedList[player.hero_id].replace('npc_dota_hero_', '');
         const x = (player.x*100) + 47;

@@ -25,13 +25,16 @@ const colors = [
 const GameListItem = props => {
   const [isOpen, toggleOpen] = useState(false);
 
-  const clickHandler = () => {
+  const clickHandler = (e) => {
+    e.preventDefault();
     toggleOpen(prevState => {
       return !prevState
     })
   }
 return (
   <div className="feedContainer">
+    {isOpen ? <Minimap
+    rightClickHandler={clickHandler} data={props} /> : ""}
     <div className="feed">
       {/* {console.log(props.data.game_time)} */}
       {props.data.players.map((data, i) => (
@@ -80,7 +83,7 @@ return (
       <div>{props.data.server_steam_id.toString()}</div>
       {" "}
       <div className="minimapText"
-      onClick={() => clickHandler()}>
+      onClick={clickHandler}>
         View Minimap</div>
       </div>
             <div id="grid12">
@@ -95,8 +98,7 @@ return (
 
       <span id="grid15">Last Update: {timeSince(props.data.updatedAt)} </span>
     </div>
-              {isOpen ? <Minimap onDoubleClick={() => console.log('double click')}
-              data={props} /> : ""}
+
   </div>
 )}
 
