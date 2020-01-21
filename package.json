@@ -27,6 +27,7 @@
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^5.8.4",
+    "react-draggable": "^4.2.0",
     "react-ga": "^2.7.0",
     "react-router-dom": "^5.1.2",
     "request": "^2.88.0",

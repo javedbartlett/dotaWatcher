@@ -4,6 +4,7 @@ import minimap from '../img/Minimap_7.23.jpg';
 import rTower from '../img/redTower.jpg';
 import gTower from '../img/greenTower.jpg';
 import { localizedList, newHeroes } from '../heroList';
+import Draggable, {DraggableCore} from 'react-draggable';
 
 const mapStyle = {
   backgroundImage: `url(${minimap})`,
@@ -17,6 +18,7 @@ const Minimap = (props) => {
   const { buildings } = props.data.data
 
   return (
+    <Draggable>
       <div style={mapStyle} className="realMinimapContainer">
       {players.map((player, i) => {
         const heroName = localizedList[player.hero_id].replace('npc_dota_hero_', '');
@@ -48,6 +50,7 @@ const Minimap = (props) => {
         )
       })}
       </div>
+      </Draggable>
   )
 }
 
