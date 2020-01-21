@@ -15,7 +15,6 @@ const mapStyle = {
 const Minimap = (props) => {
   const { players } = props.data.data
   const { buildings } = props.data.data
-  console.log(buildings)
 
   return (
       <div style={mapStyle} className="realMinimapContainer">
