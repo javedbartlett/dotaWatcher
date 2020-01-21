@@ -89,6 +89,7 @@ img {
 
 .feedContainer {
   padding: 7px;
+  border-radius: 25px;
 }
 
 .feed {

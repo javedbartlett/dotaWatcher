@@ -16,13 +16,20 @@ const GameList = props => (
       <div className="liveGamesWithPros">LIVE GAMES WITH PROS</div>
       <div className="container">
         <div className="GameList">
-          {props.data.map((data, i) => (
+          { props.data.length ? props.data.map((data, i) => {
+          return (
             <GameListItem
               key={i}
               data={data}
               players={props.players}
             />
-          ))}
+          )}) :
+          <div>
+          <h1 style={{padding:'25px'}}>Looks Like Steam API is down :(</h1>
+          <h1>Waiting for Gabe to restart the server</h1>
+          <img src="https://cdn.betterttv.net/emote/59f27b3f4ebd8047f54dee29/3x" />
+          </div>
+          }
         </div>
       </div>
     </div>
