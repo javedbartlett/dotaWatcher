@@ -9,7 +9,7 @@ const GameList = props => (
   <div className="outerContainer">
     <div className="innerContainer">
       <Spring
-      from={{opacity: 0,  marginTop: -500}}
+      from={{opacity: 0,  marginTop: -50}}
       to={{opacity: 1,  marginTop: 0}}
       config={{ delay: 350, duration: 500 }}
       >
@@ -37,8 +37,8 @@ const GameList = props => (
             {props1 => (
               <div style={props1}>
           <div>
-          <h1 style={{padding:'25px'}}>Looks Like Steam API is down :(</h1>
-          <h1 style={{padding:'25px'}}>Waiting for Gabe to restart the server</h1>
+          <h1 style={{padding:'25px', color: "#658D8C"}}>Looks Like Steam API is down :(</h1>
+          <h1 style={{padding:'25px', color: "#658D8C"}}>Waiting for Gabe to restart the server</h1>
           <img src="https://cdn.betterttv.net/emote/59f27b3f4ebd8047f54dee29/3x" />
           </div>
           </div>
