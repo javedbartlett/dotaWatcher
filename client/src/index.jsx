@@ -377,7 +377,7 @@ class Search extends React.Component {
         {this.state.players.length ? <div className="dropDownTitle">Players
         {this.state.players.map((player, i) => (
           <Link key={i} to={`players/${playerSearchList[player]}`}>
-          <div className="dropDownContentHero">{player}</div>
+          <div className="dropDownContentPlayer">{player}</div>
           </Link>
         ))}</div> : null}
         </div>
