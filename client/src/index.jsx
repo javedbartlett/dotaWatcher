@@ -342,6 +342,7 @@ class Search extends React.Component {
     });
   }
 
+
   render() {
     // console.log(this.props.players)
     let playerSearchList = _.invert(this.props.players)
@@ -400,8 +401,12 @@ class App extends React.Component {
       players: {},
       isOpen: false,
     };
+    this.handleClickAway = this.handleClickAway.bind(this)
   }
 
+  handleClickAway(e) {
+    console.log(e.target)
+  }
 
   clickHandler(){
     this.setState(prevState => ({
