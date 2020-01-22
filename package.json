@@ -17,7 +17,6 @@
     "axios": "^0.19.1",
     "cheerio": "^1.0.0-rc.3",
     "cors": "^2.8.5",
-    "dota2": "^7.0.3",
     "express": "^4.17.1",
     "history": "^4.10.1",
     "image-downloader": "^3.5.0",
