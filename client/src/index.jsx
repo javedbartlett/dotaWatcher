@@ -346,6 +346,13 @@ class Search extends React.Component {
     // console.log(this.props.players)
     let playerSearchList = _.invert(this.props.players)
     return (
+      <Spring
+    from={{opacity: 0, marginLeft: -100 }}
+    to={{opacity: 1, marginLeft: 0 }}
+    config={{ delay: 200, duration: 500 }}
+    >
+    {props1 => (
+    <div style={props1}>
       <div className="mainInnerContainer">
       <div className="searchBoxContainer">
         <input
@@ -374,6 +381,9 @@ class Search extends React.Component {
         </div>
         </div>
       </div>
+      </div>
+          )}
+          </Spring>
     );
   }
 }
