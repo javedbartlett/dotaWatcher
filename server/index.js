@@ -105,6 +105,7 @@ app.get('/api/heroes/:id', async (req, res) => {
   res.send(gamesToSend);
 });
 
+
 app.get('/api/update', async (req, res) => {
   const data = await getGames()
   .catch(err => console.log('Houston we got an err at getGames in index.js'))
@@ -114,14 +115,12 @@ app.get('/api/update', async (req, res) => {
   const dataJson = JSONbig.parse(data);
 
   if (dataJson.game_list && dataJson.game_list.length) {
-    for (let i = 0; i < dataJson.game_list.length; i++) {
-      const game = dataJson.game_list[i];
+
+    dataJson.game_list.map(async (game, i) => {
     if (game.average_mmr > 0 && game.players) {
         const playersInTheGame = game.players
           .map(player => player.account_id)
           .filter(id => id);
-        // const keys = Object.keys(playerIdList).map(Number);
-        // console.log(keys);
         const proInTheGame =
           playersInTheGame.filter(player =>
             Object.keys(playerIdList)
@@ -136,15 +135,15 @@ app.get('/api/update', async (req, res) => {
           if (liveStatsJson.teams && game.players && liveStatsJson.teams[0].players) {
           for (let i = 0; i <= 10; i++) {
             if (i < 5) {
-              await merge(game.players[i], liveStatsJson.teams[0].players[i]);
+              merge(game.players[i], liveStatsJson.teams[0].players[i]);
             } else if (i >= 5) {
               let j = i - 5;
-              await merge(game.players[i], liveStatsJson.teams[1].players[j]);
+              merge(game.players[i], liveStatsJson.teams[1].players[j]);
             }
           }
-          console.log('pro in this game');
+          // console.log('pro in this game');
           // console.log(liveStatsJson.match);
-          await saveMatches({
+          saveMatches({
             server_steam_id: serverId,
             match_id: game.match_id,
             players: game.players,
@@ -162,7 +161,8 @@ app.get('/api/update', async (req, res) => {
             spectators: game.spectators,
             buildings: liveStatsJson.buildings,
 
-          });
+          })
+          // .then(result => console.log(result))
         } else {
           removeOne({"server_steam_id": serverId})
         }
@@ -170,7 +170,7 @@ app.get('/api/update', async (req, res) => {
         }
 
     }
-    }
+    })
     res.end();
   }
 });
@@ -178,11 +178,14 @@ app.get('/api/update', async (req, res) => {
 const update = async () => {
   console.log('updating')
   // await removeAll()
-  await rp(`http://localhost:${process.env.PORT||'3222'}/api/update`)
+  rp(`http://localhost:${process.env.PORT||'3222'}/api/update`)
   .catch(err => console.log('error from rp /api/update'))
+  // setTimeout(update, 2000)
 }
+update();
 
-setInterval(update, 5000);
+setInterval(update, 2000);
+// setInterval(update, 50000);
 setInterval(getDetails, 300000)
 
 const port = process.env.PORT || 3222;
