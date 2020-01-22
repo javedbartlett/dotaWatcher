@@ -103,7 +103,7 @@ return (
       </div>
       <div id="grid16">
       {/* <div>watch_server</div> */}
-      <div>{props.data.server_steam_id.toString()}</div>
+      <div id="serverId">{props.data.server_steam_id.toString()}</div>
       {" "}
       <div className="minimapText"
       onClick={clickHandler}>

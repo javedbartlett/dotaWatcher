@@ -13,6 +13,10 @@ const mapStyle = {
   width: "560px",
 }
 
+const imageStyle = {
+  draggable: 'false'
+}
+
 const Minimap = (props) => {
   const { players } = props.data.data;
   const { buildings } = props.data.data;
@@ -26,7 +30,7 @@ const Minimap = (props) => {
         const x = (player.x*100) + 47;
         const y = (player.y*100) + 48;
         return (
-          <img key={i}
+          <img draggable="false" key={i}
           style={{left: x + '%', bottom: y + '%' }}
           className="mapIcon" src={
             player.hero_id ?
@@ -50,7 +54,7 @@ const Minimap = (props) => {
           }/> : ""
         )
       })}
-      <img className="closeButton"style={{height: '30px', width: 'auto', }}
+      <img  className="closeButton"style={{height: '30px', width: 'auto', draggable: false}}
       onClick={rightClickHandler}
       src="https://cdn1.iconfinder.com/data/icons/interface-elements/32/cancel-square-512.png"></img>
       </div>
