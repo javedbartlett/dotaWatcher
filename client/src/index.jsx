@@ -45,9 +45,19 @@ const Player = (props) => {
 
     return (
         <div className="historyContainer">
+          <Spring
+            from={{opacity: 0,  marginLeft: -500}}
+            to={{opacity: 1,  marginLeft: 0}}
+            config={{ delay: 350, duration: 500 }}
+          >
+             {props1 => (
+            <div style={props1}>
           <div className="historyHeaderContainer">
           <h1 className="historyHeader">{props.players[id]}</h1>
           </div>
+          </div>
+             )}
+          </Spring>
           <Spring
             from={{opacity: 0,  marginRight: -500}}
             to={{opacity: 1,  marginRight: 0}}
@@ -65,13 +75,34 @@ const Player = (props) => {
           </div>
           )}
           </Spring>
+
+          <Spring
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}
+            config={{ delay: 350, duration: 500 }}
+            >
+            {props1 => (
+            <div style={props1}>
           <div className="siteLink" >
             <a href={`https://www.dotabuff.com/players/${id}`}>Dotabuff</a><span> • </span>
             <a href={`https://www.opendota.com/players/${id}`}>OpenDota</a> <span> • </span>
             <a href={`https://stratz.com/en-us/player/${id}`}>STRATZ </a>
             </div>
+            </div>
+            )}
+            </Spring>
           <div className="historyGamesContainer">
+          <Spring
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}
+            config={{ delay: 350, duration: 500 }}
+            >
+            {props1 => (
+            <div style={props1}>
             <div className="matchHistoryTitle">Match History</div>
+            </div>
+            )}
+            </Spring>
             <div className="minimapOuterContainer">
             <div className="minimapContainer">
           {player.data && player.data.map((game, i) => {
@@ -155,9 +186,19 @@ const Heroes = (props) => {
 
     return (
         <div className="historyContainer">
+            <Spring
+            from={{opacity: 0,  marginLeft: -500}}
+            to={{opacity: 1,  marginLeft: 0}}
+            config={{ delay: 350, duration: 500 }}
+          >
+             {props1 => (
+            <div style={props1}>
           <div className="historyHeaderContainer">
           <h1 className="historyHeader">{heroesList[id]}</h1>
           </div>
+          </div>
+             )}
+          </Spring>
           <Spring
             from={{opacity: 0,  marginRight: -500}}
             to={{opacity: 1,  marginRight: 0}}
@@ -171,14 +212,33 @@ const Heroes = (props) => {
           </div>
             )}
             </Spring>
+            <Spring
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}
+            config={{ delay: 350, duration: 500 }}
+            >
+            {props1 => (
+            <div style={props1}>
           <div className="siteLink" >
             <a href={`https://www.opendota.com/heroes/${id}`}>OpenDota</a> <span> • </span>
             <a href={`https://stratz.com/en-us/heroes/${id}`}>STRATZ </a>
             </div>
-            <div></div>
+            </div>
+            )}
+            </Spring>
           <div className="historyGamesContainer">
+          <Spring
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}
+            config={{ delay: 350, duration: 500 }}
+            >
+            {props1 => (
+            <div style={props1}>
             <div className="matchHistoryTitle">Match History</div>
             <div className="introMessage"> {heroesList[id]} has been picked by pros {games.data && games.data.length} times in the last 2 weeks</div>
+            </div>
+            )}
+            </Spring>
             <div className="minimapOuterContainer">
             <div className="minimapContainer">
           {games.data && games.data.map((game, i) => {
@@ -244,6 +304,7 @@ const Heroes = (props) => {
           </div>
           </div>
           </div>
+
         </div>
     );
 }
