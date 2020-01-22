@@ -32,11 +32,12 @@ const GameListItem = props => {
       return !prevState
     })
   }
+
 return (
   <Spring
   from={{opacity: 0, marginTop: -500 }}
   to={{opacity: 1, marginTop: 0 }}
-  config={{ delay: 100, duration: 500 }}
+  config={{ delay: Math.random() * (300 - 150) + 150, duration: Math.random() * (900 - 300) + 300 }}
   >
     {props1 => (
     <div style={props1}>
@@ -46,7 +47,7 @@ return (
     <Spring
     from={{opacity: 0 }}
     to={{opacity: 1 }}
-    config={{ delay: 150, duration: 500 }}
+    config={{ delay: 250, duration: 500 }}
     >
     {props1 => (
     <div style={props1}>
