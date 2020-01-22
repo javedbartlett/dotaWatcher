@@ -456,8 +456,11 @@ video {
   justify-content: center;
 }
 
-.dropDownContentPlayer:hover {background-color: #222C2C}
-.dropDownContentHero:hover {background-color: #222C2C}
+.dropDownContentPlayer:hover, .dropDownContentHero:hover {
+  background-color: #222C2C;
+  cursor: pointer;
+
+}
 
 .playedWith {
   color: green;
