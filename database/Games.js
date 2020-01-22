@@ -45,7 +45,7 @@ const removeOne = async (serverId) => {
 const saveMatches = async data => {
   const { match_id } = data;
 
-  await Game.findOneAndUpdate({ match_id }, data, {
+return await Game.findOneAndUpdate({ match_id }, data, {
     upsert: true,
     new: true,
     setDefaultsOnInsert: true,
@@ -90,7 +90,6 @@ const getDetails = async () => {
   .catch(err => console.log(err))
   for (let i = 0; i < allData.length; i++) {
     let game = allData[i];
-    console.log(game.match_id)
     if (game.radiant_win === undefined) {
       // console.log(game.match_id)
       const radiant_win =  await getMatchDetails(game.match_id)
