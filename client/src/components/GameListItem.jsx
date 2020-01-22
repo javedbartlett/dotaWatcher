@@ -37,7 +37,7 @@ return (
   <Spring
   from={{opacity: 0, marginTop: -500 }}
   to={{opacity: 1, marginTop: 0 }}
-  config={{ delay: Math.random() * (300 - 150) + 150, duration: Math.random() * (900 - 300) + 300 }}
+  config={{ delay: Math.random() * (300 - 150) + 150, duration: Math.random() * (400 - 200) + 200 }}
   >
     {props1 => (
     <div style={props1}>
