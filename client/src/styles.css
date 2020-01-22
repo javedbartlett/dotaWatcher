@@ -64,14 +64,14 @@ img {
   display: inline-block;
   width: 100px;
   height: auto;
-  z-index: 4;
+  /* z-index: 4; */
 }
 
 .direPortrait {
   display: inline-block;
   width: 100px;
   height: 115.73px;
-  z-index: 4;
+  /* z-index: 4; */
 }
 
 .direPortrait img {

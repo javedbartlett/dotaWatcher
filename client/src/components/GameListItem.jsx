@@ -36,14 +36,27 @@ return (
   <Spring
   from={{opacity: 0, marginTop: -500 }}
   to={{opacity: 1, marginTop: 0 }}
-  config={{ delay: 750, duration: 1250 }}
+  config={{ delay: 100, duration: 500 }}
   >
     {props1 => (
     <div style={props1}>
 
   <div className="feedContainer">
-    {isOpen ? <Minimap
-    rightClickHandler={clickHandler} data={props} /> : ""}
+    {isOpen ?
+    <Spring
+    from={{opacity: 0 }}
+    to={{opacity: 1 }}
+    config={{ delay: 150, duration: 500 }}
+    >
+    {props1 => (
+    <div style={props1}>
+
+    <Minimap
+    rightClickHandler={clickHandler} data={props} />
+    </div>
+    )}
+    </Spring>
+    : ""}
     <div className="feed">
       {/* {console.log(props.data.game_time)} */}
       {props.data.players.map((data, i) => (
