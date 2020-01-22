@@ -5,6 +5,7 @@ import Header from './components/Header';
 import { heroesList, localizedList, newHeroes, heroSearchList, heroSearchList2 } from './heroList.js';
 import './styles.css';
 import axios from 'axios';
+import { Spring } from 'react-spring/renderprops';
 import { timeSince2 } from './timeSince.js';
 import cheerio from 'cheerio';
 import _ from 'lodash';
@@ -47,11 +48,23 @@ const Player = (props) => {
           <div className="historyHeaderContainer">
           <h1 className="historyHeader">{props.players[id]}</h1>
           </div>
+          <Spring
+            from={{opacity: 0,  marginRight: -500}}
+            to={{opacity: 1,  marginRight: 0}}
+            config={{ delay: 350, duration: 500 }}
+            >
+            {props1 => (
+            <div style={props1}>
           <div className="playerImageContainer">
             {/* <img src={`${player.image}`}/> */}
-            {player.image ? <img src={`data:image/jpeg;base64,${player.image && player.image}`}/> : ""}
-            {/* {player.image && console.log(player.image[0].img.data.data)} */}
+            {player.image ?
+            <img src={`data:image/jpeg;base64,${player.image && player.image}
+            `}/>
+            : ""}
           </div>
+          </div>
+          )}
+          </Spring>
           <div className="siteLink" >
             <a href={`https://www.dotabuff.com/players/${id}`}>Dotabuff</a><span> • </span>
             <a href={`https://www.opendota.com/players/${id}`}>OpenDota</a> <span> • </span>
@@ -145,9 +158,19 @@ const Heroes = (props) => {
           <div className="historyHeaderContainer">
           <h1 className="historyHeader">{heroesList[id]}</h1>
           </div>
+          <Spring
+            from={{opacity: 0,  marginRight: -500}}
+            to={{opacity: 1,  marginRight: 0}}
+            config={{ delay: 350, duration: 500 }}
+            >
+            {props1 => (
+            <div style={props1}>
           <div className="heroImageContainer">
             <img src={`http://cdn.dota2.com/apps/dota2/images/heroes/${localizedList[id].replace('npc_dota_hero_', '')}_full.png`}/>
           </div>
+          </div>
+            )}
+            </Spring>
           <div className="siteLink" >
             <a href={`https://www.opendota.com/heroes/${id}`}>OpenDota</a> <span> • </span>
             <a href={`https://stratz.com/en-us/heroes/${id}`}>STRATZ </a>
