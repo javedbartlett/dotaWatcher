@@ -367,16 +367,19 @@ class Search extends React.Component {
       <div className="dropDownOutercontainer">
       <div className="dropDownContainer">
       <div className="dropDown">
-        {this.state.heroes && this.state.heroes.map((hero, i) => (
+        {this.state.heroes.length ? <div className="dropDownTitle">Heroes
+        {this.state.heroes.map((hero, i) => (
           <Link key={i} to={`heroes/${heroSearchList2[hero]}`}>
-          <span className="dropDownContentHero">{hero}</span>
+          <div className="dropDownContentHero">{hero}</div>
           </Link>
-        ))}
-        {this.state.players && this.state.players.map((player, i) => (
+        ))}</div> : null}
+
+        {this.state.players.length ? <div className="dropDownTitle">Players
+        {this.state.players.map((player, i) => (
           <Link key={i} to={`players/${playerSearchList[player]}`}>
-          <div className="dropDownContentPlayer">{player}</div>
+          <div className="dropDownContentHero">{player}</div>
           </Link>
-        ))}
+        ))}</div> : null}
         </div>
         </div>
         </div>
