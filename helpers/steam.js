@@ -3,7 +3,16 @@ const rp = require('request-promise-native');
 const KEY = process.env.TOKEN || require('./config.js').KEY;
 
 const getGames = () => {
-   return rp(`https://api.steampowered.com/IDOTA2Match_570/GetTopLiveGame/v1?key=${KEY}&partner=0`)
+
+  let options = {
+    uri: `https://api.steampowered.com/IDOTA2Match_570/GetTopLiveGame/v1?key=${KEY}&partner=0`,
+    headers: {
+      'User-Agent': 'Request-Promise'
+  },
+  timeout: 500
+  }
+
+  return rp(options)
 }
 
 const getLiveStats = async (serverId) => {
