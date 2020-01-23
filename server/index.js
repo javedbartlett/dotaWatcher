@@ -108,7 +108,7 @@ app.get('/api/heroes/:id', async (req, res) => {
 
 app.get('/api/update', async (req, res) => {
   const data = await getGames()
-  .catch(err => console.log('Houston we got an err at getGames in index.js'))
+  .catch(err => console.log('Houston we got an err at getGames in index.js',err))
     if (!data) {
       return;
     }
@@ -179,7 +179,7 @@ const update = async () => {
   console.log('updating')
   // await removeAll()
   rp(`http://localhost:${process.env.PORT||'3222'}/api/update`)
-  .catch(err => console.log('error from rp /api/update'))
+  .catch(err => console.log(err,'error from rp /api/update'))
   // setTimeout(update, 2000)
 }
 update();

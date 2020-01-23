@@ -152,12 +152,22 @@ const Player = (props) => {
 
             </div>
             <div className="historyDetails">{" "}
-            <span className="playerDetailLink"><a href={`https://www.dotabuff.com/matches/${game.match_id}`}>Dotabuff</a></span>
+
+            <span className="playerDetailLink">
+              {winOrLose !== "TBD" ?
+          <a href={`https://www.dotabuff.com/matches/${game.match_id}`}>Dotabuff</a> : <span className="unclickable">Dotabuff</span>}</span>
             {" "}•{" "}
-          <span className="playerDetailLink"><a href={`https://www.opendota.com/matches/${game.match_id}`}>OpenDota</a></span>
+
+          <span className="playerDetailLink">
+          {winOrLose !== "TBD" ?
+            <a href={`https://www.opendota.com/matches/${game.match_id}`}>OpenDota</a>: <span className="unclickable">OpenDota</span>}</span>
           {" "}•{" "}
-          <span className="playerDetailLink"><a href={`https://stratz.com/en-us/matches/${game.match_id}`}>Stratz</a></span>
+          <span className="playerDetailLink">
+          {winOrLose !== "TBD" ?
+            <a href={`https://stratz.com/en-us/matches/${game.match_id}`}>Stratz</a>: <span className="unclickable">Stratz</span>}</span>
             {" "}•{" "}{timeSince2(game.createdAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
+
+
               </div></div>
               )})}
           </div>
@@ -288,11 +298,17 @@ const Heroes = (props) => {
             : ""}</span></div>
 
           <div className="historyDetails">{" "}
-          <span className="playerDetailLink"><a href={`https://www.dotabuff.com/matches/${game.match_id}`}>Dotabuff</a></span>
+          <span className="playerDetailLink">
+          {winOrLose !== "TBD" ?
+            <a href={`https://www.dotabuff.com/matches/${game.match_id}`}>Dotabuff</a>: <span className="unclickable">Dotabuff</span>}</span>
           {" "}•{" "}
-          <span className="playerDetailLink"><a href={`https://www.opendota.com/matches/${game.match_id}`}>OpenDota</a></span>
+          <span className="playerDetailLink">
+          {winOrLose !== "TBD" ?
+            <a href={`https://www.opendota.com/matches/${game.match_id}`}>OpenDota</a>: <span className="unclickable">Dotabuff</span>}</span>
           {" "}•{" "}
-          <span className="playerDetailLink"><a href={`https://stratz.com/en-us/matches/${game.match_id}`}>Stratz</a></span>
+          <span className="playerDetailLink">
+            {winOrLose !== "TBD" ?
+            <a href={`https://stratz.com/en-us/matches/${game.match_id}`}>Stratz</a>: <span className="unclickable">Dotabuff</span>}</span>
 
           {" "}•{" "}{timeSince2(game.createdAt)}{" "}•{" "}{game.average_mmr} avg MMR</div>
           </div> </div></div>

@@ -645,4 +645,6 @@ text-align: center;
   user-select: text;
 }
 
-
+.unclickable {
+  text-decoration: line-through;
+}

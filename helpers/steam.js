@@ -1,5 +1,5 @@
 const request = require('request');
-const rp = require('request-promise-native');
+const rp = require('request-promise-native')
 const KEY = process.env.TOKEN || require('./config.js').KEY;
 
 const getGames = () => {
@@ -9,7 +9,8 @@ const getGames = () => {
     headers: {
       'User-Agent': 'Request-Promise'
   },
-  timeout: 500
+  family: 4,
+  timeout: 5000,
   }
 
   return rp(options)
