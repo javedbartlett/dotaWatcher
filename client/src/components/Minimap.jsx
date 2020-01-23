@@ -9,8 +9,8 @@ import Draggable, {DraggableCore} from 'react-draggable';
 const mapStyle = {
   backgroundImage: `url(${minimap})`,
   backgroundSize: "cover",
-  height: "1000px",
-  width: "1000px",
+  height: "550px",
+  width: "560px",
 }
 
 const imageStyle = {
