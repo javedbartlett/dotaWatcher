@@ -93,8 +93,8 @@ return (
                 : 'Picking Hero'} </span>
             <div className="liveMatchPlayerScore">
 
-              <FadeNumberWhite key={'a' + data.kill_count} value={data.kill_count} />/
-              <FadeNumberRed key={'a' + data.death_count} value={data.death_count} />/
+              <FadeNumberWhite key={'w' + data.accountid + data.kill_count} value={data.kill_count} />/
+              <FadeNumberRed key={'r' + data.accountid + data.death_count} value={data.death_count} />/
               {data.assists_count}
 
             </div>

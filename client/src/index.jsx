@@ -448,10 +448,10 @@ class App extends React.Component {
   async loadGames() {
     const response = await fetch('/api/games');
     const myJson = await response.json();
-    const sortedJson = myJson.sort((a, b) =>
-      a.spectators > b.spectators ? -1 : 1,
-    );
-    this.setState({ games: sortedJson });
+    // const sortedJson = myJson.sort((a, b) =>
+    //   a.spectators > b.spectators ? -1 : 1,
+    // );
+    this.setState({ games: myJson });
   }
 
   async loadPlayers() {
