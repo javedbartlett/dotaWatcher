@@ -649,7 +649,22 @@ text-align: center;
 }
 
 #serverId {
-  user-select: text;
+  /* user-select: text; */
+  /* box-shadow: 0 0 5px black inset; */
+  padding: 5px;
+}
+
+#serverId:hover {
+  /* user-select: none; */
+  cursor: context-menu;
+  /* text-shadow: 0 0 2px white; */
+  /* box-shadow: 0 0 5px black inset; */
+  text-decoration: underline;
+}
+
+#serverId:active {
+  color: green;
+  /* box-shadow: 0 0 5px #00FF00 inset; */
 }
 
 .unclickable {

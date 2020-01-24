@@ -35,6 +35,10 @@ const GameListItem = props => {
     })
   }
 
+  const copyHandler = (e) => {
+    navigator.clipboard.writeText(e.target.innerHTML)
+  }
+
   const props2 = useSpring({marginTop: 0, from: {marginTop: -300}})
 
 return (
@@ -64,7 +68,7 @@ return (
     : ""}
     <div className="feed">
       {/* {console.log(props.data.game_time)} */}
-      {props.data.players.map((data, i) => {
+      {props.data.players.length === 10 && props.data.players.map((data, i) => {
 
       return (
         <div key={i} className="liveMatch" id={`grid${i + 1}`}>
@@ -116,7 +120,7 @@ return (
       </div>
       <div id="grid16">
       {/* <div>watch_server</div> */}
-      <div id="serverId">{props.data.server_steam_id.toString()}</div>
+      <div id="serverId" onClick={copyHandler}>{props.data.server_steam_id.toString()}</div>
       {" "}
       <div className="minimapText"
       onClick={clickHandler}>
