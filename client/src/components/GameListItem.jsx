@@ -122,8 +122,8 @@ return (
       </div>
       <div id="grid16">
       {/* <div>watch_server</div> */}
-      <div id="serverId" onClick={copyHandler}
-      value={props.data.server_steam_id.toString()}>Copy Server ID</div>
+      {/* <div id="serverId" onClick={copyHandler}
+      value={props.data.server_steam_id.toString()}>Copy Server ID</div> */}
       {" "}
       <div className="minimapText"
       onClick={clickHandler}>
@@ -139,7 +139,13 @@ return (
               </div>
       {/* <span id="grid11">VS</span> */}
 
-      <span id="grid15">Last Update: {timeSince(props.data.updatedAt)} </span>
+      <span id="grid15">
+        Last Update: {timeSince(props.data.updatedAt)}
+        </span>
+        <span id="grid17">
+        <div id="serverId" onClick={copyHandler}
+      value={props.data.server_steam_id.toString()}>Click to Copy Server ID</div>
+        </span>
     </div>
 
   </div>

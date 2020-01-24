@@ -177,7 +177,15 @@ img {
     width: 100%;
     color: #658D8C;
   }
-  #grid17 { grid-area: 7 / 3 / 8 / 4; }
+  #grid17 { grid-area: 7 / 3 / 8 / 4;
+    display: flex;
+    margin-top: auto;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    /* color: #FFFFFF50; */
+    color: rgba(245, 245, 245, 0.433);
+    flex-direction: row-reverse;
+  }
 
 .radiantPortrait {
   vertical-align: top;
@@ -628,6 +636,7 @@ color: white;
 
 .minimapText {
 color: white;
+font-size: 20px;
 text-align: center;
 }
 
@@ -659,6 +668,8 @@ text-align: center;
   /* user-select: text; */
   /* box-shadow: 0 0 5px black inset; */
   padding: 5px;
+  display: block;
+  vertical-align: top;
 }
 
 #serverId:hover {
