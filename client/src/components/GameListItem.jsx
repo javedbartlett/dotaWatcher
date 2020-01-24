@@ -68,7 +68,7 @@ return (
     : ""}
     <div className="feed">
       {/* {console.log(props.data.game_time)} */}
-      {props.data.players.length === 10 && props.data.players.map((data, i) => {
+      {props.data.players.map((data, i) => {
 
       return (
         <div key={i} className="liveMatch" id={`grid${i + 1}`}>
