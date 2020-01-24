@@ -86,19 +86,21 @@ return (
               {props.players[data.account_id] ? (
                 <div className="proPlayer">
                   {' '}
-                  <Link to={'/players/'+ data.accountid}>{props.players[data.account_id]}</Link>
+                  <Link to={'/players/'+ data.accountid}>{props.players[data.account_id].substring(0, 14)}</Link>
                 </div>
               ) : (
                 <div className="normalPlayer" id={data.accountid}>{escape(data.name).substring(0, 12)} </div>
               )}
               <span className="heroName">
               {heroesList[data.hero_id]
-                ? heroesList[data.hero_id]
+                ? heroesList[data.hero_id].substring(0, 16)
                 : 'Picking Hero'} </span>
             <div className="liveMatchPlayerScore">
 
-              <FadeNumberWhite key={'w' + data.accountid + data.kill_count} value={data.kill_count} />/
-              <FadeNumberRed key={'r' + data.accountid + data.death_count} value={data.death_count} />/
+              <FadeNumberWhite skip={data.kill_count === 0}
+              key={'w' + data.accountid + data.kill_count} value={data.kill_count} />/
+              <FadeNumberRed skip={data.death_count === 0}
+              key={'r' + data.accountid + data.death_count} value={data.death_count} />/
               {data.assists_count}
 
             </div>
@@ -135,7 +137,7 @@ return (
 
               {/* {console.log(props.data.game_state)} */}
               </div>
-      <span id="grid11">VS</span>
+      {/* <span id="grid11">VS</span> */}
 
       <span id="grid15">Last Update: {timeSince(props.data.updatedAt)} </span>
     </div>

@@ -29,6 +29,9 @@ body {
   color: whitesmoke;
   font-weight: 700;
   width: min-content;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .proPlayer:hover {
@@ -147,7 +150,7 @@ img {
   #grid13 {
     grid-area: 1 / 2 / 2 / 3;
     margin: auto;
-    width: 50%;
+    width: 70%;
     padding: 10px;
     font-weight: 700;
     color: rgb(52, 91, 91);
@@ -200,7 +203,10 @@ div[name="dire"] {
 .liveMatchPlayerName {
   text-align: left;
   padding: 2px;
-  min-width: 161px;
+  min-width: 135px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
 div[name="dire"] .liveMatchPlayerName {
@@ -210,6 +216,7 @@ div[name="dire"] .liveMatchPlayerName {
 }
 .proPlayer > a {
   white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
   text-decoration: none;
@@ -231,7 +238,7 @@ div[name="dire"] .liveMatchPlayerName {
 
 }
 .scoreboard {
-  font-size: 20px;
+  font-size: 21px;
   text-align: center;
 }
 
