@@ -36,7 +36,7 @@ const GameListItem = props => {
   }
 
   const copyHandler = (e) => {
-    navigator.clipboard.writeText(e.target.innerHTML)
+    navigator.clipboard.writeText(e.target.getAttribute('value'))
   }
 
   const props2 = useSpring({marginTop: 0, from: {marginTop: -300}})
@@ -120,7 +120,8 @@ return (
       </div>
       <div id="grid16">
       {/* <div>watch_server</div> */}
-      <div id="serverId" onClick={copyHandler}>{props.data.server_steam_id.toString()}</div>
+      <div id="serverId" onClick={copyHandler}
+      value={props.data.server_steam_id.toString()}>Copy Server ID</div>
       {" "}
       <div className="minimapText"
       onClick={clickHandler}>
