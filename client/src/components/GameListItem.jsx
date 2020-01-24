@@ -8,6 +8,8 @@ import { timeSince } from '../timeSince';
 import { Link } from 'react-router-dom';
 import Minimap from './Minimap';
 import { Spring } from 'react-spring/renderprops';
+import { useSpring, animated, useTransition } from 'react-spring';
+import { FadeNumberWhite, FadeNumberRed } from './FadeNumber';
 
 const colors = [
   'Blue',
@@ -32,6 +34,8 @@ const GameListItem = props => {
       return !prevState
     })
   }
+
+  const props2 = useSpring({marginTop: 0, from: {marginTop: -300}})
 
 return (
   <Spring
@@ -60,7 +64,9 @@ return (
     : ""}
     <div className="feed">
       {/* {console.log(props.data.game_time)} */}
-      {props.data.players.map((data, i) => (
+      {props.data.players.map((data, i) => {
+
+      return (
         <div key={i} className="liveMatch" id={`grid${i + 1}`}>
           <div name={i < 5 ? 'radiant' : 'dire'}>
             <div className={i < 5 ? 'radiantPortrait' : 'direPortrait'}>
@@ -86,17 +92,24 @@ return (
                 ? heroesList[data.hero_id]
                 : 'Picking Hero'} </span>
             <div className="liveMatchPlayerScore">
-              {data.kill_count}/{data.death_count}/{data.assists_count}
+
+              <FadeNumberWhite key={'a' + data.kill_count} value={data.kill_count} />/
+              <FadeNumberRed key={'a' + data.death_count} value={data.death_count} />/
+              {data.assists_count}
+
             </div>
             <span className="liveMatchPlayerLevel"> Level {data.level}</span>
+
             <div>{data.net_worth > 1000
+
                       ? (data.net_worth / 1000).toFixed(1) + 'K'
+
                       : data.net_worth + 'g'} - CS {data.lh_count}/{data.denies_count}</div>
 
             </div>
           </div>
         </div>
-      ))}
+      )})}
       <div className="time" id="grid13">
         {moment.duration(props.data.game_time, 'seconds').format('mm:ss')}
         <div className="scoreboard">{props.data.radiant_score} - {props.data.dire_score}</div>
@@ -129,65 +142,3 @@ return (
 )}
 
 export default GameListItem;
-
-
-{/* <ul>
-      <li className="feed-list-item">
-        <div>
-          <span className="data">
-            {' '}
-            {!props.data.average_mmr
-              ? 'Tournament Game'
-              : `Avg MMR:  ${props.data.average_mmr}`}
-          </span>
-        </div>
-        <span className="data">
-          {props.data.radiant_score} - {props.data.dire_score} /{' '}
-          {moment.duration(props.data.game_time, 'seconds').format('mm:ss')}
-        </span>
-        <ul className="players">
-          {' '}
-          {props.data.players.map((data, i) => (
-            <li className="playerName" key={i}>
-              {i == 5 ? <div className="vs">VS</div> : ''}
-              {props.players[data.account_id] ? (
-                <span className="proPlayer">
-                  {' '}
-                  {props.players[data.account_id]}
-                </span>
-              ) : (
-                data.name.substring(0, 15)
-              )}
-              ,<span> </span>
-              {heroesList[data.hero_id]
-                ? heroesList[data.hero_id]
-                : 'Picking Hero'}{' '}
-              <ul>
-                <li>
-                  Level {data.level}{' '}
-                  <div>
-                    {data.net_worth > 1000
-                      ? (data.net_worth / 1000).toFixed(1) + 'K'
-                      : data.net_worth + 'g'}{' '}
-                    - {data.kill_count}/{data.death_count}/{data.assists_count}
-                  </div>
-                </li>
-              </ul>
-            </li>
-          ))}
-        </ul>
-        <div
-          className="steamId"
-          // onClick={props.blogClickHandler}
-        >
-          <div className="console">
-            <span className="data">
-              watch_server {props.data.server_steam_id.toString()}
-            </span>
-          </div>
-          <div className="spectators">
-            Spectators: <span className="data">{props.data.spectators}</span>
-          </div>
-        </div>
-      </li>
-    </ul> */}
