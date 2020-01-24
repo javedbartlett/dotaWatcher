@@ -7,12 +7,8 @@ const FadeNumberWhite = React.memo(({ value }) => {
     to: { color: "#658D8C", fontWeight: "normal", fontSize: "16px" },
     delay: 4000
   });
-  console.log('kill', value);
   return <animated.span style={style}>{value}</animated.span>;
 });
-
-
-
 
 
 const FadeNumberRed = React.memo(({ value }) => {
@@ -21,7 +17,6 @@ const FadeNumberRed = React.memo(({ value }) => {
     to: { color: "#658D8C", fontWeight: "normal", fontSize: "16px" },
     delay: 4000
   });
-  console.log('death', value);
   return <animated.span style={style}>{value}</animated.span>;
 });
 

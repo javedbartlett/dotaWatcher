@@ -10,7 +10,7 @@ const getGames = () => {
       'User-Agent': 'Request-Promise'
   },
   family: 4,
-  timeout: 5000,
+  timeout: 3000,
   }
 
   return rp(options)

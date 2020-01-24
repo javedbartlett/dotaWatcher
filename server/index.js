@@ -180,11 +180,11 @@ const update = async () => {
   // await removeAll()
   rp(`http://localhost:${process.env.PORT||'3222'}/api/update`)
   .catch(err => console.log(err,'error from rp /api/update'))
-  // setTimeout(update, 2000)
+  setTimeout(update, 2000)
 }
 update();
 
-setInterval(update, 2000);
+// setInterval(update, 2000);
 // setInterval(update, 50000);
 setInterval(getDetails, 300000)
 

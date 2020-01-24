@@ -158,11 +158,15 @@ img {
     /* padding-top: 3rem; */
    }
   #grid15 { grid-area: 7 / 1 / 8 / 2;
-  position: relative;
+  /* position: relative; */
   /* white-space: nowrap; */
   font-size: 12px;
-  position:absolute;
-  color: white;
+  /* position: absolute; */
+  display: flex;
+  margin-top: auto;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  color: #FFFFFF50;
 }
   #grid16 {
     grid-area: 7 / 2 / 8 / 3;
@@ -586,10 +590,10 @@ color: white;
 
 .realMinimapContainer {
   position: absolute;
+  /* padding: 0 5px; */
   display: block;
   z-index: 100;
   justify-content: center;
-
 }
 
 .realMinimapContainer:hover {
@@ -634,11 +638,14 @@ text-align: center;
 
 .closeButton {
   position: absolute;
-  right: 1px;
+  right: 6px;
+  color: rgba(245, 245, 245, 0.536);
+  font-size: 24px;
 }
 .closeButton:hover {
-  box-shadow: 0px 0px 1px 2px grey;
+  /* box-shadow: 0px 0px 1px 2px grey; */
   cursor: pointer;
+  color: red;
 }
 
 #serverId {

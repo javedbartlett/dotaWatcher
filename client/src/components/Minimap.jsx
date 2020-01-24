@@ -4,26 +4,64 @@ import minimap from '../img/Minimap_7.23.jpg';
 import rTower from '../img/redTower.jpg';
 import gTower from '../img/greenTower.jpg';
 import { localizedList, newHeroes } from '../heroList';
-import Draggable, {DraggableCore} from 'react-draggable';
+import { Rnd } from 'react-rnd';
 
-const mapStyle = {
-  backgroundImage: `url(${minimap})`,
-  backgroundSize: "cover",
-  height: "550px",
-  width: "560px",
-}
 
-const imageStyle = {
-  draggable: 'false'
-}
+const CustomHandle = props => (
+  <div
+    style={{
+      // background: "black",
+      borderRadius: "2px",
+      // border: "1px solid #ddd",
+      height: "20px",
+      width: "20px",
+      padding: 0,
+      color: "rgba(245, 245, 245, 0.536)",
+      fontSize: "30px",
+      marginLeft: "-12px",
+      marginTop: "-24px",
+      zIndex: 2000,
+      position: "absolute",
+    }}
+  >⇲</div>
+);
 
 const Minimap = (props) => {
   const { players } = props.data.data;
   const { buildings } = props.data.data;
   const { rightClickHandler } = props;
+  const [dimensions, setDimensions] = useState({ height: "550px", width: "560px" })
+
+  const mapStyle = {
+    backgroundImage: `url(${minimap})`,
+    backgroundSize: "cover",
+    height: dimensions.height,
+    width: dimensions.width,
+  }
+
+  const resizeCorner = {
+    width: "100px",
+    height: "100px"
+  }
+
+  const onResizeStop = (e, direction, ref, delta, position) => {
+    setDimensions({
+      width: ref.style.width,
+      height: ref.style.height,
+    });
+  }
 
   return (
-    <Draggable >
+    <Rnd
+    size={{ width: dimensions.width, height: dimensions.height }}
+    minWidth={560}
+    minHeight={550}
+    onResize={onResizeStop}
+    onResizeStop={onResizeStop}
+    lockAspectRatio={true}
+    resizeHandleComponent={{ bottomRight: <CustomHandle /> }}
+    >
+
       <div onContextMenu={rightClickHandler} style={mapStyle} className="realMinimapContainer">
       {players.map((player, i) => {
         const heroName = localizedList[player.hero_id].replace('npc_dota_hero_', '');
@@ -54,11 +92,11 @@ const Minimap = (props) => {
           }/> : ""
         )
       })}
-      <img  className="closeButton"style={{height: '30px', width: 'auto', draggable: false}}
+      <div className="closeButton"style={{height: '30px', width: 'auto', draggable: false}}
       onClick={rightClickHandler}
-      src="https://cdn1.iconfinder.com/data/icons/interface-elements/32/cancel-square-512.png"></img>
+      >✖</div>
       </div>
-      </Draggable>
+      </Rnd>
   )
 }
 
