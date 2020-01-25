@@ -86,7 +86,7 @@ return (
               {props.players[data.account_id] ? (
                 <div className="proPlayer">
                   {' '}
-                  <Link to={'/players/'+ data.accountid}>{props.players[data.account_id].substring(0, 14)}</Link>
+                  <Link to={'/players/'+ data.accountid}>{props.players[data.account_id]}</Link>
                 </div>
               ) : (
                 <div className="normalPlayer" id={data.accountid}>{escape(data.name).substring(0, 12)} </div>
