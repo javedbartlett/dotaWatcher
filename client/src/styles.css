@@ -28,7 +28,7 @@ body {
 .proPlayer {
   color: whitesmoke;
   font-weight: 700;
-  width: min-content;
+  /* width: min-content; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -226,7 +226,6 @@ div[name="dire"] .liveMatchPlayerName {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-decoration: none;
   text-decoration: none;
   color: white;
 }
