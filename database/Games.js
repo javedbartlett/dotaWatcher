@@ -93,6 +93,7 @@ const getDetails = async () => {
     if (game.radiant_win === undefined) {
       // console.log(game.match_id)
       const radiant_win =  await getMatchDetails(game.match_id)
+      .catch(err => console.log('error with getMatchDetails in Games.js'))
       console.log(radiant_win)
       if (radiant_win !== undefined) {
         const { match_id } = game;

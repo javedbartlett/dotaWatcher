@@ -130,6 +130,10 @@ app.get('/api/update', async (req, res) => {
         if (proInTheGame) {
           const serverId = game.server_steam_id.toString();
           const liveStats = await getLiveStats(serverId)
+          .catch(err => console.log('err at getLiveStats in index.js'))
+          if (!liveStats) {
+            return;
+          }
           if (liveStats) {
           const liveStatsJson = JSONbig.parse(liveStats);
           if (liveStatsJson.teams && game.players && liveStatsJson.teams[0].players) {
@@ -179,7 +183,7 @@ const update = async () => {
   console.log('updating')
   // await removeAll()
   rp(`http://localhost:${process.env.PORT||'3222'}/api/update`)
-  .catch(err => console.log(err,'error from rp /api/update'))
+  .catch(err => console.log('error from rp /api/update in index.js'))
   setTimeout(update, 2000)
 }
 update();
