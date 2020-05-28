@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const db = require('./index.js')
 const { playerIdList } = require('../server/playerIdList.js');
 const { getMatchDetails } = require('../helpers/steam.js');
-const { getLanes } = require('../helpers/stratz.js');
 
 const gameSchema = mongoose.Schema({
   // TODO: your schema here!
@@ -23,7 +22,6 @@ const gameSchema = mongoose.Schema({
   spectators: Number,
   radiant_win: Boolean,
   buildings: [],
-  areLanesUpdated: Boolean,
 
 }
 ,{timestamps: true }
@@ -86,84 +84,19 @@ const fetchHeroHistory = async (heroId) => {
   return games.reverse();
 }
 
-
-// const getMoreDetails = async () => {
-//   let allData = await Game.find().exec()
-//   .catch(err => console.log(err))
-//   console.log(allData.length)
-//   for (let i = 0; i < allData.length; i++) {
-//     let game = allData[i];
-//     const { match_id } = game;
-
-//     if (game.players === null) {
-//       await Game.findOneAndDelete({ match_id })
-//       console.log(`deleted ${match_id}, ${i}/${allData.length}`)
-
-//     } else if (game.radiant_win) {
-//       if (!game.players[0].lane && !game.players[0].lane === 0) {
-//       let laneDetails = await getLanes(game.match_id)
-//       .catch(err => console.log('error with stratz getLanes in Games.js'))
-//       let data = { players: laneDetails }
-//       await Game.findOneAndUpdate({ match_id }, data, {
-//         upsert: true,
-//         new: true,
-//         setDefaultsOnInsert: true,
-//         strict: false,
-//       })
-//       console.log(`added index: ${i}/${allData.length} `)
-//       await Game.findOneAndUpdate({ match_id }, { areLanesUpdated: true },  {
-//         upsert: true,
-//         new: true,
-//         setDefaultsOnInsert: true,
-//         strict: false,
-//       })
-//     }
-//     }
-//   }
-// }
-
-// getMoreDetails();
-
 const getDetails = async () => {
   let allData = await Game.find(
   {"createdAt":{$gt:new Date(Date.now() - 366*60*60 * 1000)}}).exec()
   .catch(err => console.log(err))
-  console.log(allData.length)
   for (let i = 0; i < allData.length; i++) {
     let game = allData[i];
-    const { match_id } = game;
-    // if (game.players === null) {
-    //   await Game.findOneAndDelete({ match_id })
-    //   console.log(`deleted ${match_id}, ${i}/${allData.length}`)
-
-    // } else
-    if (game.radiant_win !== null) {
-      if (game.players[0].lane == null) {
-      let laneDetails = await getLanes(game.match_id)
-      .catch(err => console.log('error with stratz getLanes in Games.js'))
-      let data = { players: laneDetails }
-      await Game.findOneAndUpdate({ match_id }, data, {
-        upsert: true,
-        new: true,
-        setDefaultsOnInsert: true,
-        strict: false,
-      })
-      console.log(`added index: ${i}/${allData.length} `)
-      await Game.findOneAndUpdate({ match_id }, { areLanesUpdated: true },  {
-        upsert: true,
-        new: true,
-        setDefaultsOnInsert: true,
-        strict: false,
-      })
-    }
-    }
-
     if (game.radiant_win === undefined) {
       // console.log(game.match_id)
       const radiant_win =  await getMatchDetails(game.match_id)
       .catch(err => console.log('error with getMatchDetails in Games.js'))
-      // console.log(radiant_win)
+      console.log(radiant_win)
       if (radiant_win !== undefined) {
+        const { match_id } = game;
         const data = { radiant_win: radiant_win }
         await Game.findOneAndUpdate({ match_id }, data, {
           upsert: true,
@@ -173,21 +106,57 @@ const getDetails = async () => {
         })
       } else if (radiant_win === undefined) {
           // console.log(game.match_id)
-          // console.log('game not found')
+          console.log('game not found')
       }
     }
   }
 }
+// const testFunc = async () => {
+//   let test = await Game.find({match_id: 5202279188}).exec();
+//   console.log(test[0].radiant_win)
+// }
+// testFunc()
 
-getDetails();
 
-const removeOldGames = () => {
+// get win/loss function (set interval 30 seconds)
+// fetchGames
+ // iterate over games
+ // if !game.radiant_win.length
+  // const moreDetails = GetMatchDetails(game.matchID)  -> Make getMatchDetails in helpers
+  // if (moreDetails.length)
+   // Game.findOneAndUpdate{match_id, {radiant_win: moreDetails.radiant_win}}
 
-}
+// maybe fetchGames lastupdated between 15 mins - 60 mins after first round.
 
-const removeOldTBDGames = () => {
+// result.radiant_win
 
-}
+// {
+//   players: [
+//     [Object], [Object],
+//     [Object], [Object],
+//     [Object], [Object],
+//     [Object], [Object],
+//     [Object], [Object]
+//   ],
+//   _id: 5e1eb80a3d4e0c61516aa5f3,
+//   match_id: 5197552181,
+//   __v: 0,
+//   average_mmr: 7419,
+//   building_state: 4785955,
+//   createdAt: 2020-01-15T06:58:18.577Z,
+//   delay: 120,
+//   dire_score: 45,
+//   game_mode: 22,
+//   game_state: 5,
+//   game_time: 1475,
+//   last_update_time: 1579073280,
+//   radiant_lead: -18399,
+//   radiant_score: 22,
+//   server_steam_id: '90131888948971523',
+//   sort_score: 8031,
+//   spectators: 112,
+//   updatedAt: 2020-01-15T07:29:11.908Z
+// },
 
 module.exports.saveMatches = saveMatches;
 module.exports.savePlayers = savePlayers;
