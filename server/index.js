@@ -116,8 +116,9 @@ app.get('/api/update', async (req, res) => {
 
   if (dataJson.game_list && dataJson.game_list.length) {
 
+    // if (game.average_mmr > 0 && game.players) {
     dataJson.game_list.map(async (game, i) => {
-    if (game.average_mmr > 0 && game.players) {
+    if (game.players) {
         const playersInTheGame = game.players
           .map(player => player.account_id)
           .filter(id => id);
@@ -184,13 +185,15 @@ const update = async () => {
   // await removeAll()
   rp(`http://localhost:${process.env.PORT||'3222'}/api/update`)
   .catch(err => console.log('error from rp /api/update in index.js'))
-  setTimeout(update, 2000)
+  // setTimeout(update, 2000)
 }
 update();
 
-// setInterval(update, 2000);
+setInterval(update, 2000);
 // setInterval(update, 50000);
-setInterval(getDetails, 300000)
+// setInterval(getDetails, 300000)
+
+// getDetails();
 
 const port = process.env.PORT || 3222;
 app.listen(port, () => console.log(`listening on port ${port}`));

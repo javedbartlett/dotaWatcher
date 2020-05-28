@@ -106,6 +106,7 @@ const Player = (props) => {
             <div className="minimapOuterContainer">
             <div className="minimapContainer">
           {player.data && player.data.map((game, i) => {
+          game.players[0].lane ? console.log(game.players[0].lane) : "";
           const heroIdOfPlayer = game.players.find(p => p.account_id === +id).hero_id;
           const teamOfPro = game.players.find(p => p.hero_id === +heroIdOfPlayer).team;
           const otherTeam = teamOfPro === 2 ? 3 : 2;
