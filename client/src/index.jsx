@@ -187,7 +187,7 @@ const Heroes = (props) => {
     async function fetchData() {
       const response = await axios(`/api/heroes/${id}`);
       await setGames(response);
-      games.sort((a, b) =>
+      _.sortBy(games, (a, b) =>
       a.createdAt > b.createdAt ? -1 : 1,
     );
     }
