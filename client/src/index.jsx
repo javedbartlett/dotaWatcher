@@ -188,7 +188,7 @@ const Heroes = (props) => {
       const response = await axios(`/api/heroes/${id}`);
       await setGames(response);
       games.sort((a, b) =>
-      a.updatedAt > b.updatedAt ? -1 : 1,
+      a.createdAt > b.createdAt ? -1 : 1,
     );
     }
     fetchData();
